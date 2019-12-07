@@ -5,9 +5,10 @@ const ideaCardSchema = new mongoose.Schema({
     description: String, 
     location: String, 
     image: String,
+    url: String,
     comments: [String], 
     contact: Number,
-    category: { type: String, enum: ['Accomodation','PlacesOfInterest','Transport']},
+    category: { type: String, enum: ['Accomodation','Places Of Interest','Transport']},
     trip: { type: Schema.Types.ObjectId, ref:"TripCards" }
 })
 
