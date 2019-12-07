@@ -1,0 +1,24 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": ">(PLACEHOLDER: Project Name) is an app we came up with for (PLACEHOLDER: Project Description)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adelinelim07/project3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adelinelim07/project3/issues"
+  },
+  "homepage": "https://github.com/adelinelim07/project3#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.14"
+  }
+}
