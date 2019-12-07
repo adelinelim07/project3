@@ -5,6 +5,8 @@ const tripCardSchema = new mongoose.Schema({
     description: String, 
     country: String,
     image: String,
+    startDate: Date,
+    endDate: Date
 })
 
 const TripCards = mongoose.model('trip', tripCardSchema);
