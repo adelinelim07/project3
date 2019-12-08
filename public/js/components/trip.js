@@ -5,16 +5,24 @@ class Trip extends React.Component {
     super(props);
     this.state = {
       title: "",
-      description: "",
-      location: "",
-      image: "",
-      url: "",
-      comments: [],
-      contact: 123456,
-      category: "",
+        description: "",
+        location: "",
+        image: "",
+        url: "",
+        comments: [],
+        contact: 123456,
+      //   category: "",
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
-      ideaCards: []
+      ideaCards: [],
+      displayAdd: false,
     };
+    this.displayAddFunction;
+  }
+
+  displayAddFunction = () => {
+      this.setState({
+          displayAdd: !this.state.displayAdd
+      })
   }
 
   updateIdeaCard = (ideaCard, index) => {
@@ -62,6 +70,7 @@ class Trip extends React.Component {
   };
 
   handleSubmit = event => {
+    console.log(this.state.title);
     event.preventDefault();
     fetch("/ideaCard", {
       body: JSON.stringify({
@@ -72,7 +81,7 @@ class Trip extends React.Component {
         url: this.state.url,
         comments: this.state.comments,
         contact: this.state.contact,
-        category: this.state.category
+        // category: this.state.category
       }),
       method: "POST",
       headers: {
@@ -81,19 +90,21 @@ class Trip extends React.Component {
       }
     })
       .then(createdIdeaCard => {
+        console.log(createdIdeaCard);
         return createdIdeaCard.json();
       })
       .then(jsonedIdeaCard => {
+        console.log(jsonedIdeaCard);
         // reset the form
         this.setState({
           title: "",
-          description: "",
-          location: "",
-          image: "",
-          url: "",
-          comments: [],
-          contact: 123456,
-          category: "",
+            description: "",
+            location: "",
+            image: "",
+            url: "",
+            comments: [],
+            contact: 123456,
+          //   category: "",
           // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
           ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
         });
@@ -166,7 +177,14 @@ class Trip extends React.Component {
             aria-labelledby="accomodation-tab"
           >
             Accomodation PAGE TEST
-            <Accomodation ideaCards={this.state.ideaCards} />
+            <Accomodation
+              ideaCards={this.state.ideaCards}
+              displayAdd = {this.state.displayAdd}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              componentDidMount={this.componentDidMount}
+              displayAddFunction ={this.displayAddFunction}
+            />
           </div>
           <div
             class="tab-pane fade"
@@ -191,12 +209,89 @@ class Trip extends React.Component {
 }
 
 class Accomodation extends React.Component {
+  componentDidMount() {
+    this.props.ideaca
+  }
   render() {
     return (
       <div>
-        <h2>Title</h2>
-        <p>{this.props.ideaCards[0]}</p> 
+        <button className="btn" onClick={()=>this.props.displayAddFunction()}>
+        +</button>
+        {this.props.displayAdd ? <AddCard
+          ideaCards={this.props.ideaCards}
+          handleSubmit={this.props.handleSubmit}
+          handleChange={this.props.handleChange}
+        /> : ""}
+
+        {console.log(this.props.ideaCards)}
+        {console.log(this.props.ideaCards[0])}
+
+        {/* <p>{this.props.ideaCards[0]}</p>  */}
       </div>
     );
   }
 }
+
+class AddCard extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>Add New Card</h2>
+        <form onSubmit={this.props.handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            value={this.props.title}
+            onChange={this.props.handleChange}
+            id="title"
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            value={this.props.description}
+            onChange={this.props.handleChange}
+            id="description"
+          />
+          <input
+            type="text"
+            placeholder="Location"
+            value={this.props.location}
+            onChange={this.props.handleChange}
+            id="location"
+          />
+          <input
+            type="text"
+            placeholder="Image"
+            value={this.props.image}
+            onChange={this.props.handleChange}
+            id="image"
+          />
+          <input
+            type="text"
+            placeholder="Website"
+            value={this.props.url}
+            onChange={this.props.handleChange}
+            id="url"
+          />
+          <input
+            type="text"
+            placeholder="Contact"
+            value={this.props.contact}
+            onChange={this.props.handleChange}
+            id="contact"
+          />
+          <input
+            type="text"
+            placeholder="Comments"
+            value={this.props.comments}
+            onChange={this.props.handleChange}
+            id="comments"
+          />
+          <input type="submit" value="Add" />
+        </form>
+      </div>
+    );
+  }
+}
+
+//qns: how to display the cards?
