@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = require('mongoose').Schema;
 
 const ideaCardSchema = new mongoose.Schema({
     title: String, 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const IdeaCards = require('../models/ideaCards.js');
+const IdeaCards = require('../models/ideaCard.js');
 
 router.get('/', (req, res) =>{
     IdeaCards.find({}, (err, foundIdeaCards) => {
