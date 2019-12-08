@@ -75,7 +75,7 @@ class Accomodation extends React.Component {
           >
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn btn-primary h-100"
               data-toggle="modal"
               data-target="#accomModal"
             >
@@ -398,14 +398,11 @@ class Trip extends React.Component {
             role="tabpanel"
             aria-labelledby="accomodation-tab"
           >
-            Accomodation PAGE TEST
             <Accomodation
               ideaCards={this.state.ideaCards}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               componentDidMount={this.componentDidMount}
-              showAdd={this.state.showAdd}
-              showAddFunction={this.showAddFunction}
             />
           </div>
           <div
