@@ -65,39 +65,51 @@ class Collaborators extends React.Component {
 //Accomodation Tab
 /////////////////////////////////////////////////
 class Accomodation extends React.Component {
+  addDefaultSrc(ev){
+    ev.target.src = 'https://icon-library.net/images/accommodation-icon/accommodation-icon-22.jpg'
+  }
+
   render() {
     return (
       <div>
-        <div class="card-deck">
-          <div
-            class="card text-center"
-            // onClick={() => this.props.showAddFunction()}
-          >
-            <button
-              type="button"
-              class="btn btn-primary h-100"
-              data-toggle="modal"
-              data-target="#accomModal"
-            >
-              <div class="card-body">
-                <h5 class="card-title">+</h5>
-                <p class="card-text">Click to add</p>
-              </div>
-            </button>
-          </div>
-
-          <div class="card">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/c/c4/PM5544_with_non-PAL_signals.png"
-              class="card-img-top"
-              alt="..."
-            ></img>
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Card text</p>
+        <div class="row">
+          <div class="col-sm-4 py-2">
+            <div class="card text-center h-100">
+              <button
+                type="button"
+                class="btn btn-primary h-100"
+                data-toggle="modal"
+                data-target="#accomModal"
+              >
+                <div class="card-body">
+                  <h5 class="card-title">+</h5>
+                  <p class="card-text">Click to add</p>
+                </div>
+              </button>
             </div>
           </div>
+
+          {this.props.ideaCards
+            ? this.props.ideaCards.map((ideaCard, index) => {
+                return (
+                  <div class="col-sm-4 py-2">
+                    <div class="card h-100">
+                      <img
+                        src={ideaCard.image}
+                        onError= {this.addDefaultSrc}
+                        class="card-img-top"
+                      ></img>
+                      <div class="card-body">
+                        <h5 class="card-title">{ideaCard.title}</h5>
+                        <p class="card-text">{ideaCard.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            : ""}
         </div>
+{/* POP UP MODAL WITH ADD FORM */}
         <div
           class="modal fade"
           id="accomModal"
@@ -122,7 +134,7 @@ class Accomodation extends React.Component {
                 </button>
               </div>
               <form onSubmit={this.props.handleSubmit}>
-              <div class="modal-body">
+                <div class="modal-body">
                   <input
                     type="text"
                     placeholder="Title"
@@ -172,29 +184,23 @@ class Accomodation extends React.Component {
                     onChange={this.props.handleChange}
                     id="comments"
                   />
-                
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="submit" class="btn btn-primary">
-                  Submit
-                </button>
-              </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Submit
+                  </button>
+                </div>
               </form>
             </div>
           </div>
         </div>
-
-        {console.log(this.props.ideaCards)}
-        {console.log(this.props.ideaCards[0])}
-
-        {/* <p>{this.props.ideaCards[0]}</p>  */}
       </div>
     );
   }
@@ -217,7 +223,7 @@ class Trip extends React.Component {
       contact: 123456,
       //   category: "",
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
-      ideaCards: [],
+      ideaCards: []
     };
   }
 
@@ -389,7 +395,6 @@ class Trip extends React.Component {
             role="tabpanel"
             aria-labelledby="collaborators-tab"
           >
-            Collaborators
             <Collaborators />
           </div>
           <div
