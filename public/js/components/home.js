@@ -1,3 +1,3 @@
-const Home = () => {
-    return <h1>Home</h1>;
-  };
+const Homee = () => {
+  return <h1>Home</h1>;
+};

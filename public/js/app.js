@@ -19,7 +19,7 @@ class App extends React.Component {
           <hr />
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Homee />
             </Route>
             <Route path="/login">
               <Login />
@@ -30,6 +30,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.querySelector(".container"));

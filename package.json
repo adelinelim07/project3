@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/adelinelim07/project3#readme",
   "dependencies": {
+    "@material-ui/core": "^4.7.1",
+    "@material-ui/icons": "^4.5.1",
     "express": "^4.17.1",
     "mongoose": "^5.7.14",
     "react-router-dom": "^5.1.2"
