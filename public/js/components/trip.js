@@ -62,11 +62,12 @@ class Collaborators extends React.Component {
 }
 
 /////////////////////////////////////////////////
-//Accomodation Tab
+//Accommodation Tab
 /////////////////////////////////////////////////
-class Accomodation extends React.Component {
-  addDefaultSrc(ev){
-    ev.target.src = 'https://icon-library.net/images/accommodation-icon/accommodation-icon-22.jpg'
+class Accommodation extends React.Component {
+  addDefaultSrc(ev) {
+    ev.target.src =
+      "https://icon-library.net/images/accommodation-icon/accommodation-icon-22.jpg";
   }
 
   render() {
@@ -89,27 +90,78 @@ class Accomodation extends React.Component {
             </div>
           </div>
 
+          {/* DISPLAY ALL CARDS */}
           {this.props.ideaCards
             ? this.props.ideaCards.map((ideaCard, index) => {
                 return (
                   <div class="col-sm-4 py-2">
-                    <div class="card h-100">
+                    <div class="card h-100" onClick={()=>this.props.showCardFunction(ideaCard,index)}>
+                      {/* <button
+                        type="button"
+                        class="btn bg-transparent h-100"
+                        data-toggle="modal"
+                        href='#ideaCardModal'
+                      > */}
                       <img
                         src={ideaCard.image}
-                        onError= {this.addDefaultSrc}
+                        onError={this.addDefaultSrc}
                         class="card-img-top"
                       ></img>
                       <div class="card-body">
                         <h5 class="card-title">{ideaCard.title}</h5>
-                        <p class="card-text">{ideaCard.description}</p>
+                        <p class="card-text">{ideaCard.showCard}</p>
                       </div>
+                      {/* </button> */}
                     </div>
+                    
+                    {/* <div
+                      class="modal fade"
+                      id='ideaCardModal'
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby='ideaCardModalLabel'
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id='ideaCardModalLabel'>
+                              {ideaCard.title}
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+
+
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div> */}
                   </div>
                 );
               })
             : ""}
         </div>
-{/* POP UP MODAL WITH ADD FORM */}
+
+        {/* POP UP MODAL WITH ADD FORM */}
+
         <div
           class="modal fade"
           id="accomModal"
@@ -184,6 +236,13 @@ class Accomodation extends React.Component {
                     onChange={this.props.handleChange}
                     id="comments"
                   />
+
+                  <input
+                    type="text"
+                    value={this.props.category}
+                    onChange={this.props.handleChange}
+                    id="category"
+                  />
                 </div>
                 <div class="modal-footer">
                   <button
@@ -221,11 +280,19 @@ class Trip extends React.Component {
       url: "",
       comments: [],
       contact: 123456,
-      //   category: "",
+      category: "",
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
+      showCard: false,
       ideaCards: []
     };
   }
+
+  showCardFunction = (ideaCard, index) => {
+    (ideaCard.showCard = !ideaCard.showCard);
+    console.log(ideaCard);
+    fetch("ideaCard/" + ideaCard._id)
+    .then(response => response.json())
+  };
 
   updateIdeaCard = (ideaCard, index) => {
     fetch("ideaCard/" + ideaCard._id, {
@@ -282,8 +349,9 @@ class Trip extends React.Component {
         image: this.state.image,
         url: this.state.url,
         comments: this.state.comments,
-        contact: this.state.contact
-        // category: this.state.category
+        contact: this.state.contact,
+        category: this.state.category,
+        showCard: this.state.showCard
       }),
       method: "POST",
       headers: {
@@ -306,7 +374,8 @@ class Trip extends React.Component {
           url: "",
           comments: [],
           contact: 123456,
-          //   category: "",
+          category: "",
+          showCard: false,
           // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
           ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
         });
@@ -339,17 +408,17 @@ class Trip extends React.Component {
           <li class="nav-item">
             <a
               class="nav-link"
-              id="accomodation-tab"
+              id="accommodation-tab"
               data-toggle="tab"
-              href="#accomodation"
+              href="#accommodation"
               role="tab"
-              aria-controls="accomodation"
+              aria-controls="accommodation"
               aria-selected="false"
             >
               <div>
                 <i class="material-icons">hotel</i>
                 <br></br>
-                Accomodation
+                Accommodation
               </div>
             </a>
           </li>
@@ -399,15 +468,17 @@ class Trip extends React.Component {
           </div>
           <div
             class="tab-pane fade"
-            id="accomodation"
+            id="accommodation"
             role="tabpanel"
-            aria-labelledby="accomodation-tab"
+            aria-labelledby="accommodation-tab"
           >
-            <Accomodation
+            <Accommodation
               ideaCards={this.state.ideaCards}
+              showCard={this.state.showCard}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               componentDidMount={this.componentDidMount}
+              showCardFunction={this.showCardFunction}
             />
           </div>
           <div
@@ -431,5 +502,3 @@ class Trip extends React.Component {
     );
   }
 }
-
-//qns: how to display the cards?

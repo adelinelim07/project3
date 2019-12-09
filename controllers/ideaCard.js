@@ -26,4 +26,10 @@ router.put('/:id', (req, res) => {
     })
 })
 
+router.get('/:id', (req,res) => {
+    IdeaCards.findById(req.params.id, (err, foundIdeaCard) =>{
+        res.json(foundIdeaCard);
+    });
+})
+
 module.exports = router;
