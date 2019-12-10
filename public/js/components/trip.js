@@ -96,12 +96,6 @@ class Accommodation extends React.Component {
                 return (
                   <div class="col-sm-4 py-2">
                     <div class="card h-100" onClick={()=>this.props.showCardFunction(ideaCard,index)}>
-                      {/* <button
-                        type="button"
-                        class="btn bg-transparent h-100"
-                        data-toggle="modal"
-                        href='#ideaCardModal'
-                      > */}
                       <img
                         src={ideaCard.image}
                         onError={this.addDefaultSrc}
@@ -109,50 +103,7 @@ class Accommodation extends React.Component {
                       ></img>
                       <div class="card-body">
                         <h5 class="card-title">{ideaCard.title}</h5>
-                        <p class="card-text">{ideaCard.showCard}</p>
-                      </div>
-                      {/* </button> */}
-                    </div>
-         
-                    {/* delete this if can toggle */}
-                    <div
-                      class="modal fade"
-                      id='ideaCardModal'
-                      tabindex="-1"
-                      role="dialog"
-                      aria-labelledby='ideaCardModalLabel'
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id='ideaCardModalLabel'>
-                              {ideaCard.title}
-                            </h5>
-                            <button
-                              type="button"
-                              class="close"
-                              data-dismiss="modal"
-                              aria-label="Close"
-                            >
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-
-                          <div class="modal-body">
-
-
-                          </div>
-                          <div class="modal-footer">
-                            <button
-                              type="button"
-                              class="btn btn-secondary"
-                              data-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                          </div>
-                        </div>
+                        <p class="card-text">{ideaCard.description}</p>
                       </div>
                     </div>
                   </div>
@@ -163,7 +114,11 @@ class Accommodation extends React.Component {
 
         <div>
         {this.props.ideaCards.map((ideaCard, index) => {
-          ideaCard.showCard? "true":"false" })}
+          return(
+            ideaCard.showCard?
+            <h1>{ideaCard.title}</h1> :""
+          )
+        })}
         </div>
 
         {/* POP UP MODAL WITH ADD FORM */}
@@ -294,8 +249,6 @@ class Trip extends React.Component {
   }
 
   showCardFunction = (ideaCard, index) => {
-    // console.log(ideaCard);
-    // (ideaCard.showCard = !ideaCard.showCard);
     console.log(ideaCard);
     fetch("ideaCard/" + ideaCard._id)
     .then(response => response.json())
@@ -304,7 +257,7 @@ class Trip extends React.Component {
         ideaCards: [
           ...this.state.ideaCards.slice(0,index),
           {...this.state.ideaCards[index],
-              showCard: true },
+              showCard: !this.state.ideaCards[index].showCard },
           ...this.state.ideaCards.slice(index+1)
         ]
       });
