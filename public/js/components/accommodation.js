@@ -48,7 +48,6 @@ class Accommodation extends React.Component {
                                 ideaCardClicked: ideaCard,
                                 indexClicked: index
                             })
-                            this.props.showCardFunction(ideaCard, index)
                           }}
                         >
                           <img
@@ -79,6 +78,7 @@ class Accommodation extends React.Component {
             comments={this.props.comments}
             contact={this.props.comments}
             category={this.props.category}
+            setCardCategory={this.props.setCardCategory}
             handleSubmit = {this.props.handleSubmit}
             handleChange={this.props.handleChange}
             />

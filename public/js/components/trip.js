@@ -196,6 +196,7 @@ class Trip extends React.Component {
           >
             <Accommodation
               ideaCards={this.state.ideaCards}
+              setCardCategory={this.setCardCategory}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
             />
