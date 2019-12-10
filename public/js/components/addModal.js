@@ -3,16 +3,16 @@ class AddModal extends React.Component {
         return(
             <div
               class="modal fade"
-              id="accomAddModal"
+              id="addModal"
               tabindex="-1"
               role="dialog"
-              aria-labelledby="accomAddModalLabel"
+              aria-labelledby="addModalLabel"
               aria-hidden="true"
             >
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="accomAddModalLabel">
+                    <h5 class="modal-title" id="addModalLabel">
                       Add accommodation ideas
                     </h5>
                     <button

@@ -22,7 +22,7 @@ class Accommodation extends React.Component {
                   type="button"
                   class="btn btn-primary h-100"
                   data-toggle="modal"
-                  data-target="#accomAddModal"
+                  data-target="#addModal"
                 >
                   <div class="card-body">
                     <h5 class="card-title">+</h5>
@@ -42,7 +42,7 @@ class Accommodation extends React.Component {
                           type="button"
                           class="btn bg-transparent h-100"
                           data-toggle="modal"
-                          data-target="#ideaCardModal"
+                          data-target="#clickedCardModal"
                           onClick={() => {
                             this.setState({
                                 ideaCardClicked: ideaCard,
