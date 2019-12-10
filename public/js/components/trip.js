@@ -96,12 +96,12 @@ class Accommodation extends React.Component {
                 return (
                   <div class="col-sm-4 py-2">
                     <div class="card h-100" onClick={()=>this.props.showCardFunction(ideaCard,index)}>
-                      <button
+                      {/* <button
                         type="button"
                         class="btn bg-transparent h-100"
                         data-toggle="modal"
                         href='#ideaCardModal'
-                      >
+                      > */}
                       <img
                         src={ideaCard.image}
                         onError={this.addDefaultSrc}
@@ -111,7 +111,7 @@ class Accommodation extends React.Component {
                         <h5 class="card-title">{ideaCard.title}</h5>
                         <p class="card-text">{ideaCard.showCard}</p>
                       </div>
-                      </button>
+                      {/* </button> */}
                     </div>
          
                     {/* delete this if can toggle */}
@@ -294,10 +294,21 @@ class Trip extends React.Component {
   }
 
   showCardFunction = (ideaCard, index) => {
-    (ideaCard.showCard = !ideaCard.showCard);
+    // console.log(ideaCard);
+    // (ideaCard.showCard = !ideaCard.showCard);
     console.log(ideaCard);
     fetch("ideaCard/" + ideaCard._id)
     .then(response => response.json())
+    .then(ideaCards => {
+      this.setState({ 
+        ideaCards: [
+          ...this.state.ideaCards.slice(0,index),
+          {...this.state.ideaCards[index],
+              showCard: true },
+          ...this.state.ideaCards.slice(index+1)
+        ]
+      });
+    });
   };
 
   updateIdeaCard = (ideaCard, index) => {
