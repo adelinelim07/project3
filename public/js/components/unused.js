@@ -1,4 +1,4 @@
-{/* <div
+                <div
                   class="modal fade"
                   id="ideaCardModal"
                   tabindex="-1"
@@ -45,4 +45,4 @@
                       </div>
                     </div>
                   </div>
-                </div> */}
+                </div>

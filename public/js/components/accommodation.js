@@ -1,110 +1,71 @@
-class AddModal extends React.Component {
+class ShowModal extends React.Component {
     render(){
         return(
+            // <div>{this.props.ideaCard.title}</div>
             <div
-              class="modal fade"
-              id="accomAddModal"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="accomAddModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="accomAddModalLabel">
-                      Add accommodation ideas
-                    </h5>
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                  class="modal fade"
+                  id="ideaCardModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="ideaCardLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="ideaCardLabel">
+                          {this.props.ideaCard.title}
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      showCard:{this.props.ideaCard.showCard}
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          onClick={() =>
+                            this.props.showCardFunction(this.props.ideaCard, this.props.index)
+                          }
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button 
+                          type="submit" 
+                          class="btn btn-primary"
+                          onClick={() =>
+                            this.props.showCardFunction(this.props.ideaCard, this.props.index)
+                          }
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <form onSubmit={this.props.handleSubmit}>
-                    <div class="modal-body">
-                      <input
-                        type="text"
-                        placeholder="Title"
-                        value={this.props.title}
-                        onChange={this.props.handleChange}
-                        id="title"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Description"
-                        value={this.props.description}
-                        onChange={this.props.handleChange}
-                        id="description"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Location"
-                        value={this.props.location}
-                        onChange={this.props.handleChange}
-                        id="location"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Image"
-                        value={this.props.image}
-                        onChange={this.props.handleChange}
-                        id="image"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Website"
-                        value={this.props.url}
-                        onChange={this.props.handleChange}
-                        id="url"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Contact"
-                        value={this.props.contact}
-                        onChange={this.props.handleChange}
-                        id="contact"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Comments"
-                        value={this.props.comments}
-                        onChange={this.props.handleChange}
-                        id="comments"
-                      />
-    
-                      <input
-                        type="text"
-                        value={this.props.category}
-                        onChange={this.props.handleChange}
-                        id="category"
-                      />
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button type="submit" class="btn btn-primary">
-                        Submit
-                      </button>
-                    </div>
-                  </form>
                 </div>
-              </div>
-            </div>
-
         )
-    }         
+    }
 }
 
+
 class Accommodation extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ideaCardClicked: {},
+            indexClicked: -1
+        }
+    }
+
     addDefaultSrc(ev) {
       ev.target.src =
         "https://icon-library.net/images/accommodation-icon/accommodation-icon-22.jpg";
@@ -141,10 +102,21 @@ class Accommodation extends React.Component {
                           class="btn bg-transparent h-100"
                           data-toggle="modal"
                           data-target="#ideaCardModal"
-                          onClick={() =>
+                          onClick={() => {
+                            this.setState({
+                                ideaCardClicked: ideaCard,
+                                indexClicked: index
+                            })
                             this.props.showCardFunction(ideaCard, index)
-                          }
+                          }}
                         >
+                        {/* {this.props.ideaCards[index].showCard ? 
+                        (<ShowModal
+                            showCardFunction={this.props.showCardFunction}
+                            ideaCard={ideaCard}
+                            index={index}
+                            /> )
+                            : ""} */}
                           <img
                             src={ideaCard.image}
                             onError={this.addDefaultSrc}
@@ -157,27 +129,31 @@ class Accommodation extends React.Component {
                         </button>
                       </div>
                     </div>
+
+
                   );
                 })
               : ""}
           </div>
   
           {/* Display details of cards */}
-          <div>
+          {/* <div>
             {this.props.ideaCards.map((ideaCard, index) => {
               return ideaCard.showCard ? (
-                <div>
+                  <ShowModal ideaCard={this.props.ideaCards[index]}/>
+                
+                  // <div>
                
-                <h1 onClick={() =>
-                  this.props.showCardFunction(ideaCard, index)
-                }>{ideaCard.title}</h1>
-                </div>
+                // <h1 onClick={() =>
+                //   this.props.showCardFunction(ideaCard, index)
+                // }>{ideaCard.title}</h1>
+                // </div>
   
               ) : (
                 ""
               );
             })}
-          </div>
+          </div> */}
 
           <AddModal  
             title={this.props.title} 
@@ -190,6 +166,11 @@ class Accommodation extends React.Component {
             category={this.props.category}
             handleSubmit = {this.props.handleSubmit}
             handleChange={this.props.handleChange}
+            />
+           <ShowModal
+            showCardFunction={this.props.showCardFunction}
+            ideaCard={this.state.ideaCardClicked}
+            index={this.state.indexClicked}
             />
 
         </div>

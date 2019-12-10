@@ -20,9 +20,7 @@ class Trip extends React.Component {
   }
 
   showCardFunction = (ideaCard, index) => {
-    fetch("ideaCard/" + ideaCard._id)
-      .then(response => response.json())
-      .then(ideaCards => {
+    
         this.setState({
           ideaCards: [
             ...this.state.ideaCards.slice(0, index),
@@ -33,7 +31,7 @@ class Trip extends React.Component {
             ...this.state.ideaCards.slice(index + 1)
           ]
         });
-      });
+
       console.log(ideaCard);
   };
 
