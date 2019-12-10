@@ -95,16 +95,28 @@ class Accommodation extends React.Component {
             ? this.props.ideaCards.map((ideaCard, index) => {
                 return (
                   <div class="col-sm-4 py-2">
-                    <div class="card h-100" onClick={()=>this.props.showCardFunction(ideaCard,index)}>
-                      <img
-                        src={ideaCard.image}
-                        onError={this.addDefaultSrc}
-                        class="card-img-top"
-                      ></img>
-                      <div class="card-body">
-                        <h5 class="card-title">{ideaCard.title}</h5>
-                        <p class="card-text">{ideaCard.description}</p>
-                      </div>
+                    <div
+                      class="card h-100"
+                      onClick={() =>
+                        this.props.showCardFunction(ideaCard, index)
+                      }
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-primary h-100"
+                        data-toggle="modal"
+                        data-target="#ideaCardModal"
+                      >
+                        <img
+                          src={ideaCard.image}
+                          onError={this.addDefaultSrc}
+                          class="card-img-top"
+                        ></img>
+                        <div class="card-body">
+                          <h5 class="card-title">{ideaCard.title}</h5>
+                          <p class="card-text">{ideaCard.description}</p>
+                        </div>
+                      </button>
                     </div>
                   </div>
                 );
@@ -112,17 +124,56 @@ class Accommodation extends React.Component {
             : ""}
         </div>
 
+        {/* Display details of cards */}
         <div>
-        {this.props.ideaCards.map((ideaCard, index) => {
-          return(
-            ideaCard.showCard?
-            <h1>{ideaCard.title}</h1> :""
-          )
-        })}
+          {this.props.ideaCards.map((ideaCard, index) => {
+            return ideaCard.showCard ? (
+              <div
+                class="modal fade"
+                id="ideaCardModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="ideaCardLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ideaCardLabel">
+                        {ideaCard.title}
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            );
+          })}
         </div>
 
         {/* POP UP MODAL WITH ADD FORM */}
-
         <div
           class="modal fade"
           id="accomModal"
@@ -251,17 +302,19 @@ class Trip extends React.Component {
   showCardFunction = (ideaCard, index) => {
     console.log(ideaCard);
     fetch("ideaCard/" + ideaCard._id)
-    .then(response => response.json())
-    .then(ideaCards => {
-      this.setState({ 
-        ideaCards: [
-          ...this.state.ideaCards.slice(0,index),
-          {...this.state.ideaCards[index],
-              showCard: !this.state.ideaCards[index].showCard },
-          ...this.state.ideaCards.slice(index+1)
-        ]
+      .then(response => response.json())
+      .then(ideaCards => {
+        this.setState({
+          ideaCards: [
+            ...this.state.ideaCards.slice(0, index),
+            {
+              ...this.state.ideaCards[index],
+              showCard: !this.state.ideaCards[index].showCard
+            },
+            ...this.state.ideaCards.slice(index + 1)
+          ]
+        });
       });
-    });
   };
 
   updateIdeaCard = (ideaCard, index) => {
