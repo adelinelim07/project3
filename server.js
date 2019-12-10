@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const db = mongoose.connection;
+const passport = require("passport");
 
 // Environment Variables
 const mongoURI =
@@ -23,9 +24,13 @@ app.use(express.json()); // returns middleware that only parses JSON
 
 app.use(express.static("public"));
 
+// Controllers
+const usersController = require("./controllers/users.js");
+app.use("/", usersController);
+
 //test route
-app.get('/', (req, res) =>{
-    res.send('Hello World');
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
 // Routes

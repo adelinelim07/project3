@@ -19,10 +19,13 @@ class App extends React.Component {
           <hr />
           <Switch>
             <Route exact path="/">
-              <Homee />
+              <Home />
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/maindashboard">
+              <Main />
             </Route>
           </Switch>
         </div>
