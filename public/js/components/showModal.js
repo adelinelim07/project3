@@ -1,7 +1,6 @@
 class ShowModal extends React.Component {
     render(){
         return(
-            // <div>{this.props.ideaCard.title}</div>
             <div
                   class="modal fade"
                   id="ideaCardModal"
@@ -26,15 +25,12 @@ class ShowModal extends React.Component {
                         </button>
                       </div>
                       <div class="modal-body">
-                      showCard:{this.props.ideaCard.showCard}
+                      Description:{this.props.ideaCard.description}
                       </div>
                       <div class="modal-footer">
                         <button
                           type="button"
                           class="btn btn-secondary"
-                          onClick={() =>
-                            this.props.showCardFunction(this.props.ideaCard, this.props.index)
-                          }
                           data-dismiss="modal"
                         >
                           Close
@@ -42,9 +38,6 @@ class ShowModal extends React.Component {
                         <button 
                           type="submit" 
                           class="btn btn-primary"
-                          onClick={() =>
-                            this.props.showCardFunction(this.props.ideaCard, this.props.index)
-                          }
                         >
                           Submit
                         </button>

@@ -14,26 +14,9 @@ class Trip extends React.Component {
       contact: 123456,
       category: "",
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
-      showCard: false,
       ideaCards: []
     };
   }
-
-  showCardFunction = (ideaCard, index) => {
-    
-        this.setState({
-          ideaCards: [
-            ...this.state.ideaCards.slice(0, index),
-            {
-              ...this.state.ideaCards[index],
-              showCard: !this.state.ideaCards[index].showCard
-            },
-            ...this.state.ideaCards.slice(index + 1)
-          ]
-        });
-
-      console.log(ideaCard);
-  };
 
   updateIdeaCard = (ideaCard, index) => {
     fetch("ideaCard/" + ideaCard._id, {
@@ -92,7 +75,6 @@ class Trip extends React.Component {
         comments: this.state.comments,
         contact: this.state.contact,
         category: this.state.category,
-        showCard: this.state.showCard
       }),
       method: "POST",
       headers: {
@@ -116,7 +98,6 @@ class Trip extends React.Component {
           comments: [],
           contact: 123456,
           category: "",
-          showCard: false,
           // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
           ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
         });
@@ -215,11 +196,8 @@ class Trip extends React.Component {
           >
             <Accommodation
               ideaCards={this.state.ideaCards}
-              showCard={this.state.showCard}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
-              componentDidMount={this.componentDidMount}
-              showCardFunction={this.showCardFunction}
             />
           </div>
           <div

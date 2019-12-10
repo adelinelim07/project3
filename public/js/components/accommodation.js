@@ -51,13 +51,6 @@ class Accommodation extends React.Component {
                             this.props.showCardFunction(ideaCard, index)
                           }}
                         >
-                        {/* {this.props.ideaCards[index].showCard ? 
-                        (<ShowModal
-                            showCardFunction={this.props.showCardFunction}
-                            ideaCard={ideaCard}
-                            index={index}
-                            /> )
-                            : ""} */}
                           <img
                             src={ideaCard.image}
                             onError={this.addDefaultSrc}
@@ -77,25 +70,6 @@ class Accommodation extends React.Component {
               : ""}
           </div>
   
-          {/* Display details of cards */}
-          {/* <div>
-            {this.props.ideaCards.map((ideaCard, index) => {
-              return ideaCard.showCard ? (
-                  <ShowModal ideaCard={this.props.ideaCards[index]}/>
-                
-                  // <div>
-               
-                // <h1 onClick={() =>
-                //   this.props.showCardFunction(ideaCard, index)
-                // }>{ideaCard.title}</h1>
-                // </div>
-  
-              ) : (
-                ""
-              );
-            })}
-          </div> */}
-
           <AddModal  
             title={this.props.title} 
             description={this.props.description}
@@ -108,8 +82,8 @@ class Accommodation extends React.Component {
             handleSubmit = {this.props.handleSubmit}
             handleChange={this.props.handleChange}
             />
+
            <ShowModal
-            showCardFunction={this.props.showCardFunction}
             ideaCard={this.state.ideaCardClicked}
             index={this.state.indexClicked}
             />
