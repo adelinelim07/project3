@@ -2,6 +2,7 @@ class Accommodation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            category: "Acccommodation",
             ideaCardClicked: {},
             indexClicked: -1
         }
@@ -70,15 +71,7 @@ class Accommodation extends React.Component {
           </div>
   
           <AddModal  
-            title={this.props.title} 
-            description={this.props.description}
-            location={this.props.location}
-            image={this.props.image}
-            url={this.props.url}
-            comments={this.props.comments}
-            contact={this.props.comments}
-            category={this.props.category}
-            setCardCategory={this.props.setCardCategory}
+            category={this.state.category}
             handleSubmit = {this.props.handleSubmit}
             handleChange={this.props.handleChange}
             />

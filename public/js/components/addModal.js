@@ -13,7 +13,7 @@ class AddModal extends React.Component {
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="addModalLabel">
-                      Add accommodation ideas
+                      Add {this.props.category} ideas
                     </h5>
                     <button
                       type="button"
@@ -74,13 +74,6 @@ class AddModal extends React.Component {
                         value={this.props.comments}
                         onChange={this.props.handleChange}
                         id="comments"
-                      />
-    
-                      <input
-                        type="text"
-                        value={this.props.category}
-                        onChange={this.props.handleChange}
-                        id="category"
                       />
 
                     </div>

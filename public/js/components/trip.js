@@ -10,12 +10,18 @@ class Trip extends React.Component {
       location: "",
       image: "",
       url: "",
-      comments: [],
+      comments: [""],
       contact: 123456,
-      category: "",
+      category: "Accommodation",
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
       ideaCards: []
     };
+  }
+
+  setCardCategory = () => {
+    this.setState({
+      category: "Accommodation"
+    })
   }
 
   updateIdeaCard = (ideaCard, index) => {
@@ -95,9 +101,9 @@ class Trip extends React.Component {
           location: "",
           image: "",
           url: "",
-          comments: [],
+          comments: [""],
           contact: 123456,
-          category: "",
+          category: "Accommodation",
           // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
           ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
         });
@@ -196,7 +202,6 @@ class Trip extends React.Component {
           >
             <Accommodation
               ideaCards={this.state.ideaCards}
-              setCardCategory={this.setCardCategory}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
             />
