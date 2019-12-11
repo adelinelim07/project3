@@ -25,6 +25,15 @@ class Trip extends React.Component {
   //   })
   // }
 
+  dataRefresh=()=> {
+    fetch("/ideaCard")
+    .then(response => response.json())
+    .then(ideaCards => {
+      this.setState({ ideaCards: ideaCards });
+    });
+    console.log("Data Refreshed");
+  };
+
   addComments = (ideaCard, newComment) => {
     const getCircularReplacer = () => {
       const seen = new WeakSet();
@@ -54,9 +63,9 @@ class Trip extends React.Component {
         "Content-Type": "application/json"
       }
     })
-      .then(response=>response.json())
       .then(response => console.log(response))
-      
+      .then(response=>response.json())
+      .then(this.dataRefresh())
       //how to clear addComment of child?
   };
 
@@ -73,12 +82,8 @@ class Trip extends React.Component {
     });
   };
 
-  componentDidMount() {
-    fetch("/ideaCard")
-      .then(response => response.json())
-      .then(ideaCards => {
-        this.setState({ ideaCards: ideaCards });
-      });
+  componentDidMount=()=> {
+    this.dataRefresh();
   }
 
   handleChange = event => {
