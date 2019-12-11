@@ -26,19 +26,32 @@ class ShowModal extends React.Component {
             </div>
             <div class="modal-body">
               <ul class="list-unstyled">
-                <li>Description:{this.props.ideaCard.description}</li>
-                <li>Location: {this.props.ideaCard.location}</li>
-                <li>
-                  Image: <img src={this.props.ideaCard.image}></img>
-                </li>
-                <li>
-                  URL:{" "}
-                  <a href={this.props.ideaCard.url}>
-                    {this.props.ideaCard.url}
-                  </a>
-                </li>
-                <li>Contact: {this.props.ideaCard.contact}</li>
-                <span>Comments <button>+</button></span>
+                <table class="table table-borderless">
+                  <tr>
+                    <td>Description</td>
+                    <td>{this.props.ideaCard.description}</td>
+                  </tr>
+                  <tr>
+                    <td>Location</td>
+                    <td>{this.props.ideaCard.location}</td>
+                  </tr>
+                  <tr>
+                    <td>Image</td>
+                    <td><img src={this.props.ideaCard.image}></img></td>
+                  </tr>
+                  <tr>
+                    <td>URL</td>
+                    <td><a href={this.props.ideaCard.url}>{this.props.ideaCard.url}</a></td>
+                  </tr>
+                  <tr>
+                    <td>Contact</td>
+                    <td>{this.props.ideaCard.contact}</td>
+                  </tr>
+                  <tr>
+                    <td> <span>Comments <button>+</button></span></td>
+                  </tr>
+                  </table>
+               
                 <ul class="list-group list-group-flush">
                   {(this.props.ideaCard.comments || []).map(comment=> 
                        <li class="list-group-item py-0">{comment}</li>
