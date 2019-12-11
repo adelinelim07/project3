@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const app = express();
 const db = mongoose.connection;
 const passport = require("passport");
+const session = require("express-session");
+const bodyParser = require("body-parser");
 
 // Environment Variables
 const mongoURI =
@@ -22,11 +24,15 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 // Middleware
 app.use(express.json()); // returns middleware that only parses JSON
 
+//Middleware for passport JS
 app.use(express.static("public"));
+app.use(session({ secret: "cats" }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Controllers
 const usersController = require("./controllers/users.js");
-app.use("/", usersController);
 
 //test route
 app.get("/", (req, res) => {

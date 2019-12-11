@@ -28,8 +28,15 @@ router.post(
   passport.authenticate("local", {
     successRedirect: "/maindashboard",
     failureRedirect: "/login",
-    failureFlash: true
+    failureFlash: "Invalid username or password.",
+    successFlash: "Welcome!"
   })
 );
+
+router.post("/users", (req, res) => {
+  User.create(req.body, (err, createdUser) => {
+    res.json(createdUser);
+  });
+});
 
 module.exports = router;
