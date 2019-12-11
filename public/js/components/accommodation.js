@@ -2,7 +2,7 @@ class Accommodation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: "Acccommodation",
+            category: "Accommodation",
             ideaCardClicked: {},
             indexClicked: -1
         }
@@ -71,14 +71,16 @@ class Accommodation extends React.Component {
           </div>
   
           <AddModal  
-            category={this.state.category}
             handleSubmit = {this.props.handleSubmit}
             handleChange={this.props.handleChange}
+            category={this.state.category}
             />
 
            <ShowModal
+            ideaCards={this.state.ideaCards}
             ideaCard={this.state.ideaCardClicked}
             index={this.state.indexClicked}
+            addComments= {this.props.addComments}
             />
 
         </div>

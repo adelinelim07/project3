@@ -1,5 +1,6 @@
 // Dependencies
 const express = require("express");
+const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const app = express();
 const db = mongoose.connection;
@@ -19,6 +20,8 @@ db.on("error", err => console.log(err.message + " is Mongod not running?"));
 db.on("disconnected", () => console.log("mongo disconnected"));
 
 // Middleware
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.json()); // returns middleware that only parses JSON
 
 app.use(express.static("public"));

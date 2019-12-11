@@ -1,4 +1,30 @@
 class ShowModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addCommentState: false,
+      newComment: ""
+    };
+  }
+
+  toggleAddCommentState = () => {
+    this.setState({
+      addCommentState: !this.state.addCommentState
+    });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.addComments(this.props.ideaCard, this.state.newComment);
+    this.setState({
+      newComment: ""
+    });
+  };
+
+  handleChange = event => {
+    this.setState({ newComment: event.target.value });
+  };
+
   render() {
     return (
       <div
@@ -26,39 +52,69 @@ class ShowModal extends React.Component {
             </div>
             <div class="modal-body">
               <ul class="list-unstyled">
-                <table class="table table-borderless">
+                <table class="table table-sm table-borderless">
                   <tr>
-                    <td>Description</td>
+                    <td class="font-weight-light">Description</td>
                     <td>{this.props.ideaCard.description}</td>
                   </tr>
                   <tr>
-                    <td>Location</td>
+                    <td class="font-weight-light">Location</td>
                     <td>{this.props.ideaCard.location}</td>
                   </tr>
                   <tr>
-                    <td>Image</td>
-                    <td><img src={this.props.ideaCard.image}></img></td>
+                    <td colspan="2">
+                      <img src={this.props.ideaCard.image} width="100%"></img>
+                    </td>
                   </tr>
                   <tr>
-                    <td>URL</td>
-                    <td><a href={this.props.ideaCard.url}>{this.props.ideaCard.url}</a></td>
+                    <td class="font-weight-light">URL</td>
+                    <td>
+                      <a href={this.props.ideaCard.url}>
+                        {this.props.ideaCard.url}
+                      </a>
+                    </td>
                   </tr>
                   <tr>
-                    <td>Contact</td>
+                    <td class="font-weight-light">Contact</td>
                     <td>{this.props.ideaCard.contact}</td>
                   </tr>
                   <tr>
-                    <td> <span>Comments <button>+</button></span></td>
+                    <td class="font-weight-light">
+                      <span>
+                        Comments{" "}
+                        <button onClick={() => this.toggleAddCommentState()}>
+                          +
+                        </button>
+                      </span>
+                    </td>
                   </tr>
-                  </table>
-               
-                <ul class="list-group list-group-flush">
-                  {(this.props.ideaCard.comments || []).map(comment=> 
-                       <li class="list-group-item py-0">{comment}</li>
-                       )}
-                </ul>
+                </table>
+
+                <ul class="list-group list-group-flush"></ul>
+
+                {this.state.addCommentState ? (
+                  <li class="list-group-item py-0 bg-light">
+                    <form onSubmit={this.handleSubmit}>
+                      <input
+                        class="w-75 bg-transparent border-0"
+                        type="text"
+                        value={this.state.newComment}
+                        id="newComment"
+                        onChange={this.handleChange}
+                      ></input>
+                      <button type="submit">+</button>
+                    </form>
+                  </li>
+                ) : (
+                  ""
+                )}
+
+                {(this.props.ideaCard.comments || []).map(comment => (
+                  <li class="list-group-item py-0">{comment}</li>
+                ))}
               </ul>
             </div>
+
             <div class="modal-footer">
               <button
                 type="button"
@@ -66,9 +122,6 @@ class ShowModal extends React.Component {
                 data-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="submit" class="btn btn-primary">
-                Submit
               </button>
             </div>
           </div>

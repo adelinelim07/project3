@@ -76,6 +76,14 @@ class AddModal extends React.Component {
                         id="comments"
                       />
 
+                      <input
+                        type="text"
+                        placeholder="Category"
+                        value={this.props.category}
+                        onChange={this.props.handleChange}
+                        id="category"
+                      />
+
                     </div>
                     <div class="modal-footer">
                       <button

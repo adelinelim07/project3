@@ -12,35 +12,52 @@ class Trip extends React.Component {
       url: "",
       comments: [""],
       contact: 123456,
-      category: "Accommodation",
+      category: "",
+      editing: false,
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
       ideaCards: []
     };
   }
 
-  setCardCategory = () => {
-    this.setState({
-      category: "Accommodation"
-    })
-  }
+  // setCardCategory = () => {
+  //   this.setState({
+  //     category: "Accommodation"
+  //   })
+  // }
 
-  updateIdeaCard = (ideaCard, index) => {
+  addComments = (ideaCard, newComment) => {
+    const getCircularReplacer = () => {
+      const seen = new WeakSet();
+      return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) {
+            return;
+          }
+          seen.add(value);
+        }
+        return value;
+      };
+    };
     fetch("ideaCard/" + ideaCard._id, {
-      body: JSON.stringify(ideaCard),
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        location: location,
+        image: image,
+        url: url,
+        comments: [...comments,newComment],
+        contact: contact,
+        category: category,
+      }, getCircularReplacer() ),
       method: "PUT",
-      headers: {
-        Accept: "application/json, text/plain, */*",
+      headers: { 
         "Content-Type": "application/json"
       }
     })
-      .then(updatedIdeaCard => updatedIdeaCard.json())
-      .then(jsonedIdeaCard => {
-        fetch("/ideaCards")
-          .then(response => response.json())
-          .then(ideaCards => {
-            this.setState({ ideaCards: ideaCards });
-          });
-      });
+      .then(response=>response.json())
+      .then(response => console.log(response))
+      
+      //how to clear addComment of child?
   };
 
   deleteIdeaCard = (id, index) => {
@@ -103,7 +120,7 @@ class Trip extends React.Component {
           url: "",
           comments: [""],
           contact: 123456,
-          category: "Accommodation",
+          category: "",
           // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
           ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
         });
@@ -204,6 +221,7 @@ class Trip extends React.Component {
               ideaCards={this.state.ideaCards}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
+              addComments={this.addComments}
             />
           </div>
           <div
