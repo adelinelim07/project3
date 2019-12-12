@@ -1,11 +1,30 @@
+class DisplayComments extends React.Component {
+  render(){
+    return(
+      (this.props.ideaCard.comments || []).map(comment => (
+        <li class="list-group-item py-0">{comment}</li>
+      ))
+    )
+  }
+}
+
+
 class ShowModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       ideaCard: this.props.ideaCard,
       addCommentState: false,
-      newComment: ""
+      newComment: "",
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.ideaCard !== prevProps.ideaCard) {
+      this.setState({
+        ideaCard: this.props.ideaCard
+      })
+    }
   }
 
   toggleAddCommentState = () => {
@@ -105,16 +124,17 @@ class ShowModal extends React.Component {
                         id="newComment"
                         onChange={this.handleChange}
                       ></input>
-                      <button class="bg-transparent border-0 text-muted" type="submit">Post</button>
+                      <button 
+                      class="bg-transparent border-0 text-muted" type="submit">Post</button>
                     </form>
                   </li>
                 ) : (
                   ""
                 )}
 
-                {(this.state.ideaCard.comments || []).map(comment => (
-                  <li class="list-group-item py-0">{comment}</li>
-                ))}
+                <DisplayComments ideaCard={this.state.ideaCard} id={this.state.ideaCard._id}/>
+
+
               </ul>
             </div>
 

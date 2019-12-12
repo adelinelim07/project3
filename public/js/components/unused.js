@@ -24,3 +24,8 @@ this.setState({
       comments: [...this.state.ideaCards[index].comments, newComment]
     },
     ...this.state.ideaCards.slice(index +1)
+
+
+
+
+    this.props.ideaCards.filter(ideaCard=>ideaCard.category.includes("Accommodation")).map((ideaCard, index) => {

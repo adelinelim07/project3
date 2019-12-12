@@ -2,7 +2,7 @@ class Accommodation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: "Accommodation",
+            category: "",
             ideaCardClicked: {},
             indexClicked: -1
         }
@@ -24,6 +24,11 @@ class Accommodation extends React.Component {
                   class="btn btn-primary h-100"
                   data-toggle="modal"
                   data-target="#addModal"
+                  onClick={() => {
+                    this.setState({
+                        category: "Accommodation"
+                    })
+                  }}
                 >
                   <div class="card-body">
                     <h5 class="card-title">+</h5>
@@ -35,7 +40,7 @@ class Accommodation extends React.Component {
   
             {/* DISPLAY ALL CARDS */}
             {this.props.ideaCards
-              ? this.props.ideaCards.map((ideaCard, index) => {
+              ? this.props.ideaCards.filter(ideaCard=>ideaCard.category.includes("Accommodation")).map((ideaCard, index) => {
                   return (
                     <div class="col-sm-4 py-2">
                       <div class="card h-100">

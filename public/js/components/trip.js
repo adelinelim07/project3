@@ -19,12 +19,6 @@ class Trip extends React.Component {
     };
   }
 
-  // setCardCategory = () => {
-  //   this.setState({
-  //     category: "Accommodation"
-  //   })
-  // }
-
   dataRefresh=()=> {
     fetch("/ideaCard")
     .then(response => response.json())
@@ -234,7 +228,12 @@ class Trip extends React.Component {
             role="tabpanel"
             aria-labelledby="transport-tab"
           >
-            Transport PAGE TEST
+            <Transport
+              ideaCards={this.state.ideaCards}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              addComments={this.addComments}
+            />
           </div>
         </div>
       </div>
