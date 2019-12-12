@@ -1,11 +1,25 @@
 const { BrowserRouter, Link, Switch, Route, browserHistory } = ReactRouterDOM;
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: ""
+    };
+  }
+  userState = user => {
+    this.setState(
+      {
+        currentUser: user
+      },
+      () => {
+        console.log("user logged in");
+      }
+    );
+  };
+
   render() {
     return (
-      // <React.Fragment>
-      //   <h1>Hello World</h1>
-      // </React.Fragment>
       <BrowserRouter>
         <div>
           <ul>
@@ -18,6 +32,9 @@ class App extends React.Component {
             <li>
               <Link to="/signup">Sign Up</Link>
             </li>
+            <li>
+              <Link to="/maindashboard">Trip Dashboard</Link>
+            </li>
           </ul>
           <hr />
           <Switch>
@@ -25,7 +42,11 @@ class App extends React.Component {
               <Home />
             </Route>
             <Route path="/login">
-              <Login />
+              {this.state.currentUser ? (
+                <Redirect to="/maindashboard" />
+              ) : (
+                <Login userState={this.userState} />
+              )}
             </Route>
             <Route path="/maindashboard">
               <Main />
