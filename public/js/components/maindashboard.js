@@ -88,8 +88,11 @@ class MainTrip extends React.Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form>
-                <div class="modal-body"> </div>
+              <form onSubmit={this.handleSubmit}>
+                <div class="modal-body">
+                  <label htmlFor="title">Title</label>
+                  <input type="text" onChange={this.handleChange} id="title" />
+                </div>
                 <div class="modal-footer">
                   <button
                     type="button"
@@ -98,7 +101,7 @@ class MainTrip extends React.Component {
                   >
                     Close
                   </button>
-                  <button type="button" class="btn btn-primary">
+                  <button type="submit" class="btn btn-primary">
                     Save changes
                   </button>
                 </div>

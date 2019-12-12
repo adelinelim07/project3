@@ -1,4 +1,11 @@
-const { BrowserRouter, Link, Switch, Route, browserHistory } = ReactRouterDOM;
+const {
+  BrowserRouter,
+  Link,
+  Switch,
+  Route,
+  browserHistory,
+  Redirect
+} = ReactRouterDOM;
 
 class App extends React.Component {
   constructor(props) {
