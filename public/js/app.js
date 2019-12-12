@@ -49,7 +49,7 @@ class App extends React.Component {
               )}
             </Route>
             <Route path="/maindashboard">
-              <Main />
+              <MainTrip />
             </Route>
             <Route path="/signup">
               <Signup />

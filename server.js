@@ -29,6 +29,9 @@ app.use("/users", usersController);
 const sessionsController = require("./controllers/sessions.js");
 app.use("/sessions", sessionsController);
 
+const mainTripController = require("./controllers/tripCard.js");
+app.use("/maindashboard", mainTripController);
+
 // this will catch any route that doesn't exist
 app.get("*", (req, res) => {
   res.status(404).json("Sorry, page not found");

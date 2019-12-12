@@ -1,4 +1,4 @@
-class Main extends React.Component {
+class MainTrip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -7,9 +7,50 @@ class Main extends React.Component {
       country: "",
       image: "",
       startDate: "",
-      endDate: ""
+      endDate: "",
+      mainTrips: []
     };
   }
+  handleChange = event => {
+    this.setState({ [event.target.id]: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    fetch("/maindashboard", {
+      body: JSON.stringify({
+        title: this.state.title,
+        description: this.state.description,
+        country: this.state.country,
+        image: this.state.image,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
+      }),
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(createdMainTrip => {
+        return createdMainTrip.json();
+      })
+      .then(jsonedMainTrip => {
+        // reset the form
+        // add person to list
+        this.setState({
+          title: "",
+          description: "",
+          country: "",
+          image: "",
+          startDate: "",
+          endDate: "",
+          todos: [jsonedMainTrip, ...this.state.mainTrips]
+        });
+        console.log(jsonedMainTrip);
+      })
+      .catch(error => console.log(error));
+  };
 
   render() {
     return (
@@ -36,7 +77,7 @@ class Main extends React.Component {
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Modal title
+                  Add New Trip
                 </h5>
                 <button
                   type="button"
@@ -47,19 +88,21 @@ class Main extends React.Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">...</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
+              <form>
+                <div class="modal-body"> </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
