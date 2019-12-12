@@ -1,14 +1,20 @@
 const express = require("express");
-const router = express.Router();
 const User = require("../models/users.js");
+const users = express.Router();
+const bcrypt = require("bcrypt");
 
-router.post("/users", (req, res) => {
+users.post("/", (req, res) => {
+  req.body.password = bcrypt.hashSync(
+    req.body.password,
+    bcrypt.genSaltSync(10)
+  );
+  console.log("controller", req.body);
   User.create(req.body, (err, createdUser) => {
-    res.json(createdUser);
+    res.json(createdUser); //.json() will send proper headers in response so client knows it's json coming back
   });
 });
 
-module.exports = router;
+module.exports = users;
 
 // const passport = require("passport"),
 //   LocalStrategy = require("passport-local").Strategy;

@@ -2,18 +2,18 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: String,
-      password: String,
-      firstName: String,
-      lastName: String,
-      image: String,
-      email: String,
+      username: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      image: "",
+      email: "",
       users: []
     };
   }
 
   handleChange = event => {
-    this.setState({ [event.target.id]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = event => {

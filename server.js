@@ -22,14 +22,12 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 app.use(express.json()); // returns middleware that only parses JSON
 app.use(express.static("public"));
 
-//test route
-// app.get("/", (req, res) => {
-//   res.send("Hello World");
-// });
-
 // Routes
 const usersController = require("./controllers/users.js");
-app.use("/", usersController);
+app.use("/users", usersController);
+
+const sessionsController = require("./controllers/sessions.js");
+app.use("/sessions", sessionsController);
 
 // this will catch any route that doesn't exist
 app.get("*", (req, res) => {
