@@ -39,12 +39,12 @@ class Signup extends React.Component {
       })
       .then(jsonedUser => {
         this.setState({
-          username: String,
-          password: String,
-          firstName: String,
-          lastName: String,
-          image: String,
-          email: String,
+          username: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+          image: "",
+          email: "",
           users: [jsonedUser, ...this.state.users]
         });
         console.log(jsonedUser);
@@ -58,44 +58,19 @@ class Signup extends React.Component {
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
           <label for="firstName">First Name:</label>
-          <input
-            type="text"
-            value={this.state.firstName}
-            onChange={this.handleChange}
-            name="firstName"
-          />
+          <input type="text" onChange={this.handleChange} name="firstName" />
           <br />
           <label for="lastName">Last Name:</label>
-          <input
-            type="text"
-            value={this.state.lastName}
-            onChange={this.handleChange}
-            name="lastName"
-          />
+          <input type="text" onChange={this.handleChange} name="lastName" />
           <br />
           <label for="email">Email:</label>
-          <input
-            type="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            name="email"
-          />
+          <input type="email" onChange={this.handleChange} name="email" />
           <br />
           <label for="username">Username:</label>
-          <input
-            type="text"
-            value={this.state.username}
-            onChange={this.handleChange}
-            name="username"
-          />
+          <input type="text" onChange={this.handleChange} name="username" />
           <br />
           <label for="password">Password:</label>
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            name="password"
-          />
+          <input type="password" onChange={this.handleChange} name="password" />
           <br />
 
           <input type="submit" value="Sign Up!" />
