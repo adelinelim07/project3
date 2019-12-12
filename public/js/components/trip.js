@@ -35,38 +35,29 @@ class Trip extends React.Component {
   };
 
   addComments = (ideaCard, newComment) => {
-    const getCircularReplacer = () => {
-      const seen = new WeakSet();
-      return (key, value) => {
-        if (typeof value === "object" && value !== null) {
-          if (seen.has(value)) {
-            return;
-          }
-          seen.add(value);
-        }
-        return value;
-      };
-    };
+    console.log(newComment)
+    console.log(ideaCard)
     fetch("ideaCard/" + ideaCard._id, {
       body: JSON.stringify({
-        title: title,
-        description: description,
-        location: location,
-        image: image,
-        url: url,
-        comments: [...comments,newComment],
-        contact: contact,
-        category: category,
-      }, getCircularReplacer() ),
+        title: ideaCard.title,
+        description: ideaCard.description,
+        location: ideaCard.location,
+        image: ideaCard.image,
+        url: ideaCard.url,
+        comments: [...ideaCard.comments,newComment],
+        contact: ideaCard.contact,
+        category: ideaCard.category,
+      }),
       method: "PUT",
       headers: { 
         "Content-Type": "application/json"
       }
     })
-      .then(response => console.log(response))
       .then(response=>response.json())
-      .then(this.dataRefresh())
-      //how to clear addComment of child?
+      .then(responseJson => this.dataRefresh())
+      .catch((error) => {
+        console.log(error)
+       });
   };
 
   deleteIdeaCard = (id, index) => {
