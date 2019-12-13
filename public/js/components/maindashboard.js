@@ -12,6 +12,19 @@ class MainTrip extends React.Component {
     };
   }
 
+  deleteMainTrip = (id, index) => {
+    fetch("/maindashboard/" + id, {
+      method: "DELETE"
+    }).then(date => {
+      this.setState({
+        mainTrips: [
+          ...this.state.mainTrips.slice(0, index),
+          ...this.state.mainTrips.slice(index + 1)
+        ]
+      });
+    });
+  };
+
   componentDidMount() {
     fetch("/maindashboard")
       .then(response => response.json())
@@ -75,7 +88,16 @@ class MainTrip extends React.Component {
         >
           Add New Trip
         </button>
-
+        {/* bootstrap card not working */}
+        {/* <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+          </div>
+        </div> */}
         <table class="table table-striped">
           <thead>
             <tr>
@@ -85,12 +107,20 @@ class MainTrip extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.mainTrips.map(mainTrips => {
+            {this.state.mainTrips.map((mainTrips, index) => {
               return (
                 <tr>
                   <td>{mainTrips.title}</td>
                   <td>UPDATE</td>
-                  <td>DELETE</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onClick={() => this.deleteMainTrip(mainTrips._id, index)}
+                    >
+                      DELETE
+                    </button>
+                  </td>
                 </tr>
               );
             })}
