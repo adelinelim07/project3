@@ -58,9 +58,18 @@ class ShowModal extends React.Component {
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="clickedCardLabel">
-                {this.state.ideaCard.title}
-              </h5>
+                <table>
+                  <tr> 
+                    <td><h5 class="modal-title" id="clickedCardLabel">
+                    {this.state.ideaCard.title}</h5></td>
+                    <td>
+                      <button>
+                      <i class="material-icons md-18">favorite</i>
+                      </button>
+                      {this.state.ideaCard.likeClicks}
+                    </td>
+                  </tr>
+                </table>
               <button
                 type="button"
                 class="close"
@@ -129,10 +138,7 @@ class ShowModal extends React.Component {
                 ) : (
                   ""
                 )}
-
                 <DisplayComments ideaCard={this.state.ideaCard} id={this.state.ideaCard._id}/>
-
-
               </ul>
             </div>
 

@@ -27,6 +27,18 @@ class Trip extends React.Component {
     console.log("Data Refreshed");
   };
 
+  incrementLikes=()=> {
+    this.setState({
+      likeClicks: this.state.likeClicks + 1
+    })
+  }
+
+  decreaseLikes=()=>{
+    this.setState({
+      likeClicks: this.state.likeClicks -1
+    })
+  }
+
   addComments = (ideaCard, newComment) => {
     console.log(newComment);
     console.log(ideaCard);
@@ -75,7 +87,6 @@ class Trip extends React.Component {
   };
 
   handleSubmit = event => {
-    console.log(this.state.title);
     event.preventDefault();
     fetch("/ideaCard", {
       body: JSON.stringify({
@@ -86,7 +97,8 @@ class Trip extends React.Component {
         url: this.state.url,
         comments: this.state.comments,
         contact: this.state.contact,
-        category: this.state.category
+        category: this.state.category,
+        likeClicks: 0,
       }),
       method: "POST",
       headers: {

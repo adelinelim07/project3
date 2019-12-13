@@ -61,9 +61,12 @@ class Accommodation extends React.Component {
                             onError={this.addDefaultSrc}
                             class="card-img-top"
                           ></img>
-                          <div class="card-body">
+                          <div class="card-body py-2">
                             <h5 class="card-title">{ideaCard.title}</h5>
-                            <p class="card-text">{ideaCard.description}</p>
+                            <p class="card-text">{ideaCard.description}</p>  
+                          </div>
+                          <div class="card-footer border-0 bg-transparent mb-0 p-0 text-left">
+                            <p><i class="material-icons md-18">favorite</i>{ideaCard.likeClicks}</p>
                           </div>
                         </button>
                       </div>

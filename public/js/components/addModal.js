@@ -82,6 +82,7 @@ class AddModal extends React.Component {
                   onChange={this.props.handleChange}
                   id="category"
                 />
+
               </div>
               <div class="modal-footer">
                 <button
