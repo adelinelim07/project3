@@ -1,5 +1,4 @@
-//TABS ref from bootstrap: https://getbootstrap.com/docs/4.4/components/navs/
-//ICONS ref https://material.io/resources/icons/?style=baseline
+const { BrowserRouter, Link, Switch, Route, browserHistory } = ReactRouterDOM;
 
 class Trip extends React.Component {
   constructor(props) {
@@ -19,18 +18,18 @@ class Trip extends React.Component {
     };
   }
 
-  dataRefresh=()=> {
+  dataRefresh = () => {
     fetch("/ideaCard")
-    .then(response => response.json())
-    .then(ideaCards => {
-      this.setState({ ideaCards: ideaCards });
-    });
+      .then(response => response.json())
+      .then(ideaCards => {
+        this.setState({ ideaCards: ideaCards });
+      });
     console.log("Data Refreshed");
   };
 
   addComments = (ideaCard, newComment) => {
-    console.log(newComment)
-    console.log(ideaCard)
+    console.log(newComment);
+    console.log(ideaCard);
     fetch("ideaCard/" + ideaCard._id, {
       body: JSON.stringify({
         title: ideaCard.title,
@@ -38,20 +37,20 @@ class Trip extends React.Component {
         location: ideaCard.location,
         image: ideaCard.image,
         url: ideaCard.url,
-        comments: [...ideaCard.comments,newComment],
+        comments: [...ideaCard.comments, newComment],
         contact: ideaCard.contact,
-        category: ideaCard.category,
+        category: ideaCard.category
       }),
       method: "PUT",
-      headers: { 
+      headers: {
         "Content-Type": "application/json"
       }
     })
-      .then(response=>response.json())
+      .then(response => response.json())
       .then(responseJson => this.dataRefresh())
-      .catch((error) => {
-        console.log(error)
-       });
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   deleteIdeaCard = (id, index) => {
@@ -67,9 +66,9 @@ class Trip extends React.Component {
     });
   };
 
-  componentDidMount=()=> {
+  componentDidMount = () => {
     this.dataRefresh();
-  }
+  };
 
   handleChange = event => {
     this.setState({ [event.target.id]: event.target.value });
@@ -87,7 +86,7 @@ class Trip extends React.Component {
         url: this.state.url,
         comments: this.state.comments,
         contact: this.state.contact,
-        category: this.state.category,
+        category: this.state.category
       }),
       method: "POST",
       headers: {
@@ -121,122 +120,78 @@ class Trip extends React.Component {
 
   render() {
     return (
-      <div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              id="collaborators-tab"
-              data-toggle="tab"
-              href="#collaborators"
-              role="tab"
-              aria-controls="collaborators"
-              aria-selected="true"
-            >
-              <div>
-                <i class="material-icons">people</i>
-                <br></br>
-                Collaborators
-              </div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="accommodation-tab"
-              data-toggle="tab"
-              href="#accommodation"
-              role="tab"
-              aria-controls="accommodation"
-              aria-selected="false"
-            >
-              <div>
-                <i class="material-icons">hotel</i>
-                <br></br>
-                Accommodation
-              </div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="placesOfInterest-tab"
-              data-toggle="tab"
-              href="#placesOfInterest"
-              role="tab"
-              aria-controls="placesOfInterest"
-              aria-selected="false"
-            >
-              <div class="icon-container">
-                <i class="material-icons">beenhere</i>
-                <br></br>
-                <span></span>Places Of Interest
-              </div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="transport-tab"
-              data-toggle="tab"
-              href="#transport"
-              role="tab"
-              aria-controls="transport"
-              aria-selected="false"
-            >
-              <div>
-                <i class="material-icons">directions_bus</i>
-                <br></br>
-                Transport
-              </div>
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div
-            class="tab-pane fade show active"
-            id="collaborators"
-            role="tabpanel"
-            aria-labelledby="collaborators-tab"
-          >
-            <Collaborators />
-          </div>
-          <div
-            class="tab-pane fade"
-            id="accommodation"
-            role="tabpanel"
-            aria-labelledby="accommodation-tab"
-          >
-            <Accommodation
-              ideaCards={this.state.ideaCards}
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              addComments={this.addComments}
-            />
-          </div>
-          <div
-            class="tab-pane fade"
-            id="placesOfInterest"
-            role="tabpanel"
-            aria-labelledby="placesOfInterest-tab"
-          >
-            Places of interest page test
-          </div>
-          <div
-            class="tab-pane fade"
-            id="transport"
-            role="tabpanel"
-            aria-labelledby="transport-tab"
-          >
-            <Transport
-              ideaCards={this.state.ideaCards}
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              addComments={this.addComments}
-            />
-          </div>
+      <BrowserRouter>
+        <div id="navBar">
+          <ul class="nav nav-tabs">
+            <li class="nav-item active">
+              <a class="nav-link">
+                <Link to="/collaborators">
+                  <i class="material-icons">people</i>
+                  <br></br>
+                  Collaborators
+                </Link>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <Link to="/accommodation">
+                  <i class="material-icons">hotel</i>
+                  <br></br>
+                  Accommodation
+                </Link>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <Link to="/transport">
+                  <i class="material-icons">directions_bus</i>
+                  <br></br>
+                  Transport
+                </Link>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <Link to="/placesOfInterest">
+                  <i class="material-icons">beenhere</i>
+                  <br></br>
+                  <span></span>Places Of Interest
+                </Link>
+              </a>
+            </li>
+          </ul>
+          <hr />
+          <Switch>
+            <Route exact path="/collaborators">
+              <Collaborators />
+            </Route>
+            <Route exact path="/accommodation">
+              <Accommodation
+                ideaCards={this.state.ideaCards}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                addComments={this.addComments}
+              />
+            </Route>
+            <Route path="/transport">
+              <Transport
+                ideaCards={this.state.ideaCards}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                addComments={this.addComments}
+              />
+            </Route>
+            <Route path="/placesOfInterest">
+              <PlacesOfInterest
+                ideaCards={this.state.ideaCards}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                addComments={this.addComments}
+              />
+            </Route>
+          </Switch>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }

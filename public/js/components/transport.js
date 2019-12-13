@@ -82,7 +82,7 @@ render() {
         />
 
        <ShowModal
-        ideaCards={this.state.ideaCards}
+        ideaCards={this.props.ideaCards}
         ideaCard={this.state.ideaCardClicked}
         index={this.state.indexClicked}
         addComments= {this.props.addComments}
