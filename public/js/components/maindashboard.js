@@ -25,6 +25,24 @@ class MainTrip extends React.Component {
     });
   };
 
+  updateMainTrip = (mainTrips, index) => {
+    fetch("maindashboard/" + mainTrips._id, {
+      body: JSON.stringify(mainTrips),
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(updatedMainTrip => updatedMainTrip.json())
+      .then(jsonedMainTrip => {
+        fetch("/maindashboard")
+          .then(response => response.json())
+          .then(mainTrips => {
+            this.setState({ mainTrips: mainTrips });
+          });
+      });
+  };
+
   componentDidMount() {
     fetch("/maindashboard")
       .then(response => response.json())
@@ -84,7 +102,7 @@ class MainTrip extends React.Component {
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
-          data-target="#exampleModal"
+          data-target="#newTripModal"
         >
           Add New Trip
         </button>
@@ -111,10 +129,18 @@ class MainTrip extends React.Component {
               return (
                 <tr>
                   <td>{mainTrips.title}</td>
-                  <td>UPDATE</td>
                   <td>
                     <button
                       type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#updateTripModal"
+                    >
+                      UPDATE
+                    </button>
+                  </td>
+                  <td>
+                    <button
                       class="btn btn-primary"
                       onClick={() => this.deleteMainTrip(mainTrips._id, index)}
                     >
@@ -126,9 +152,11 @@ class MainTrip extends React.Component {
             })}
           </tbody>
         </table>
+
+        {/* NEW TRIP MODAL */}
         <div
           class="modal fade"
-          id="exampleModal"
+          id="newTripModal"
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalLabel"
@@ -163,7 +191,53 @@ class MainTrip extends React.Component {
                     Close
                   </button>
                   <button type="submit" class="btn btn-primary">
-                    Add New Post
+                    Add New Trip
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {/* UPDATE TRIP MODAL */}
+        <div
+          class="modal fade"
+          id="updateTripModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="updateTripModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="updateTripModalLabel">
+                  Update Trip
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form>
+                <div class="modal-body">
+                  <label htmlFor="title">Title</label>
+                  <input type="text" onChange={this.handleChange} id="title" />
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Update
                   </button>
                 </div>
               </form>
