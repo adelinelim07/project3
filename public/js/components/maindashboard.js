@@ -11,6 +11,17 @@ class MainTrip extends React.Component {
       mainTrips: []
     };
   }
+
+  componentDidMount() {
+    fetch("/maindashboard")
+      .then(response => response.json())
+      .then(mainTrips => {
+        this.setState({
+          mainTrips: mainTrips
+        });
+      });
+  }
+
   handleChange = event => {
     this.setState({ [event.target.id]: event.target.value });
   };
@@ -65,6 +76,26 @@ class MainTrip extends React.Component {
           Add New Trip
         </button>
 
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Trip Title</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.mainTrips.map(mainTrips => {
+              return (
+                <tr>
+                  <td>{mainTrips.title}</td>
+                  <td>UPDATE</td>
+                  <td>DELETE</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
         <div
           class="modal fade"
           id="exampleModal"
