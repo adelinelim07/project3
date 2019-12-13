@@ -12,7 +12,7 @@ class Trip extends React.Component {
       comments: [""],
       contact: 123456,
       category: "",
-      editing: false,
+      likeClicks: 0,
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
       ideaCards: []
     };

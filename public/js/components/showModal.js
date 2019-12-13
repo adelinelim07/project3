@@ -8,7 +8,6 @@ class DisplayComments extends React.Component {
   }
 }
 
-
 class ShowModal extends React.Component {
   constructor(props) {
     super(props);
@@ -102,12 +101,11 @@ class ShowModal extends React.Component {
                   </tr>
                   <tr>
                     <td class="font-weight-light">
-                      <span>
                         Comments{" "}
-                        <button onClick={() => this.toggleAddCommentState()}>
-                          +
+                        <button onClick={() => this.toggleAddCommentState()}
+                        class="border-0 bg-transparent">
+                        <i class="material-icons">add_comment</i>
                         </button>
-                      </span>
                     </td>
                   </tr>
                 </table>
