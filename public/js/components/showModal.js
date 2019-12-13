@@ -15,10 +15,12 @@ class ShowModal extends React.Component {
       ideaCard: this.props.ideaCard,
       addCommentState: false,
       newComment: "",
+      likeClickState: false,
+      likeClicks: this.props.ideaCard.likeClicks
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate=(prevProps)=> {
     if(this.props.ideaCard !== prevProps.ideaCard) {
       this.setState({
         ideaCard: this.props.ideaCard
@@ -31,6 +33,12 @@ class ShowModal extends React.Component {
       addCommentState: !this.state.addCommentState
     });
   };
+
+  toggleLikeClickState = () =>{
+    this.setState({
+      likeClickState: !this.state.likeClickState
+    })
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -63,10 +71,14 @@ class ShowModal extends React.Component {
                     <td><h5 class="modal-title" id="clickedCardLabel">
                     {this.state.ideaCard.title}</h5></td>
                     <td>
-                      <button>
-                      <i class="material-icons md-18">favorite</i>
+                      <button 
+                        class="border-0 bg-transparent"
+                        onClick={()=>{this.toggleLikeClickState();this.props.incrementLikes(this.state.ideaCard);} }>
+                        {this.state.likeClickState? 
+                        <i class="material-icons md-18">favorite</i>
+                         : 
+                        <i class="material-icons md-18">favorite_border</i>}
                       </button>
-                      {this.state.ideaCard.likeClicks}
                     </td>
                   </tr>
                 </table>

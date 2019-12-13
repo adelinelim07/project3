@@ -76,12 +76,12 @@ class AddModal extends React.Component {
                   id="comments"
                 />
 
-                <input
+                {/* <input
                   type="text"
                   placeholder="Category"
                   onChange={this.props.handleChange}
                   id="category"
-                />
+                /> */}
 
               </div>
               <div class="modal-footer">

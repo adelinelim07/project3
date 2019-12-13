@@ -27,17 +27,30 @@ class Trip extends React.Component {
     console.log("Data Refreshed");
   };
 
-  incrementLikes=()=> {
-    this.setState({
-      likeClicks: this.state.likeClicks + 1
+  incrementLikes=(ideaCard)=> {
+    fetch("ideaCard/" + ideaCard._id, {
+      body: JSON.stringify({
+        title: ideaCard.title,
+        description: ideaCard.description,
+        location: ideaCard.location,
+        image: ideaCard.image,
+        url: ideaCard.url,
+        comments: ideaCard.comments,
+        contact: ideaCard.contact,
+        category: ideaCard.category,
+        likeClicks: ideaCard.likeClicks +1
+      }),
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
-  }
-
-  decreaseLikes=()=>{
-    this.setState({
-      likeClicks: this.state.likeClicks -1
-    })
-  }
+      .then(response => response.json())
+      .then(responseJson => this.dataRefresh())
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   addComments = (ideaCard, newComment) => {
     console.log(newComment);
@@ -183,6 +196,7 @@ class Trip extends React.Component {
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
                 addComments={this.addComments}
+                incrementLikes={this.incrementLikes}
               />
             </Route>
             <Route path="/transport">

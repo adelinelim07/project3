@@ -89,6 +89,7 @@ class Accommodation extends React.Component {
             ideaCard={this.state.ideaCardClicked}
             index={this.state.indexClicked}
             addComments= {this.props.addComments}
+            incrementLikes= {this.props.incrementLikes}
             />
 
         </div>
