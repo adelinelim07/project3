@@ -102,7 +102,7 @@ class MainTrip extends React.Component {
                     Close
                   </button>
                   <button type="submit" class="btn btn-primary">
-                    Save changes
+                    Add New Post
                   </button>
                 </div>
               </form>
