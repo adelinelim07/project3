@@ -159,9 +159,9 @@ class ShowModal extends React.Component {
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
-                onClick={() => this.toggleAddCommentState()}
+                onClick={() => this.props.deleteIdeaCard(this.state.ideaCard._id,this.props.index)}
               >
-                Close
+                <i class="material-icons md-18">delete</i>
               </button>
             </div>
           </div>

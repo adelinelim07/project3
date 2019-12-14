@@ -196,6 +196,7 @@ class Trip extends React.Component {
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
                 addComments={this.addComments}
+                deleteIdeaCard={this.deleteIdeaCard}
                 incrementLikes={this.incrementLikes}
               />
             </Route>
