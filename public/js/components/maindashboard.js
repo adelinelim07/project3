@@ -10,7 +10,17 @@ class MainTrip extends React.Component {
       endDate: "",
       mainTrips: []
     };
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  dataRefresh = () => {
+    fetch("/maindashboard")
+      .then(response => response.json())
+      .then(mainTrips => {
+        this.setState({ mainTrips: mainTrips });
+      });
+    console.log("Data Refreshed");
+  };
 
   deleteMainTrip = (id, index) => {
     fetch("/maindashboard/" + id, {
@@ -27,7 +37,14 @@ class MainTrip extends React.Component {
 
   updateMainTrip = (mainTrips, index) => {
     fetch("maindashboard/" + mainTrips._id, {
-      body: JSON.stringify(mainTrips),
+      body: JSON.stringify({
+        title: this.state.title
+        // description: this.state.description,
+        // country: this.state.country,
+        // image: this.state.image,
+        // startDate: this.state.startDate,
+        // endDate: this.state.endDate
+      }),
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -54,7 +71,13 @@ class MainTrip extends React.Component {
   }
 
   handleChange = event => {
+    console.log(event.target.id, event.target.value);
     this.setState({ [event.target.id]: event.target.value });
+    console.log(this.state);
+  };
+
+  changeState = (key, value) => {
+    this.setState({ [key]: value });
   };
 
   handleSubmit = event => {
@@ -95,6 +118,7 @@ class MainTrip extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         <h1>Main Dashboard</h1>
@@ -130,18 +154,16 @@ class MainTrip extends React.Component {
                 <tr>
                   <td>{mainTrips.title}</td>
                   <td>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      data-toggle="modal"
-                      data-target="#updateTripModal"
-                    >
-                      UPDATE
-                    </button>
+                    <ButtonModal
+                      trip={mainTrips}
+                      index={index}
+                      handleChange={this.handleChange}
+                      changeState={this.changeState}
+                    />
                   </td>
                   <td>
                     <button
-                      class="btn btn-primary"
+                      class="btn btn-danger"
                       onClick={() => this.deleteMainTrip(mainTrips._id, index)}
                     >
                       DELETE
@@ -192,52 +214,6 @@ class MainTrip extends React.Component {
                   </button>
                   <button type="submit" class="btn btn-primary">
                     Add New Trip
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* UPDATE TRIP MODAL */}
-        <div
-          class="modal fade"
-          id="updateTripModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="updateTripModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="updateTripModalLabel">
-                  Update Trip
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form>
-                <div class="modal-body">
-                  <label htmlFor="title">Title</label>
-                  <input type="text" onChange={this.handleChange} id="title" />
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="submit" class="btn btn-primary">
-                    Update
                   </button>
                 </div>
               </form>
