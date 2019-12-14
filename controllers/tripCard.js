@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const TripCards = require('../models/tripCards.js');
+const TripCards = require('../models/tripCard.js');
 
 router.get('/', (req, res) =>{
     TripCards.find({}, (err, foundTripCards) => {

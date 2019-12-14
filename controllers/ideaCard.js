@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const IdeaCards = require('../models/ideaCards.js');
+const IdeaCards = require('../models/ideaCard.js');
 
 router.get('/', (req, res) =>{
     IdeaCards.find({}, (err, foundIdeaCards) => {
@@ -24,6 +24,12 @@ router.put('/:id', (req, res) => {
     IdeaCards.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedIdeaCards) => {
         res.json(updatedIdeaCards)
     })
+})
+
+router.get('/:id', (req,res) => {
+    IdeaCards.findById(req.params.id, (err, foundIdeaCard) =>{
+        res.json(foundIdeaCard);
+    });
 })
 
 module.exports = router;
