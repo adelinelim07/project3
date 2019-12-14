@@ -88,7 +88,8 @@ class Trip extends React.Component {
           ...this.state.ideaCards.slice(index + 1)
         ]
       });
-    });
+    })
+    .then(responseJson => this.dataRefresh())
   };
 
   componentDidMount = () => {
@@ -210,18 +211,38 @@ class Trip extends React.Component {
             </Route>
             <Route path="/transport">
               <Transport
+                title={this.state.title} 
+                description={this.state.description}
+                location={this.state.location}
+                image={this.state.image}
+                url={this.state.url}
+                comments={this.state.comments}
+                contact={this.state.contact}
+                category={this.state.category}
                 ideaCards={this.state.ideaCards}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
                 addComments={this.addComments}
+                deleteIdeaCard={this.deleteIdeaCard}
+                incrementLikes={this.incrementLikes}
               />
             </Route>
             <Route path="/placesOfInterest">
               <PlacesOfInterest
+                title={this.state.title} 
+                description={this.state.description}
+                location={this.state.location}
+                image={this.state.image}
+                url={this.state.url}
+                comments={this.state.comments}
+                contact={this.state.contact}
+                category={this.state.category}
                 ideaCards={this.state.ideaCards}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
                 addComments={this.addComments}
+                deleteIdeaCard={this.deleteIdeaCard}
+                incrementLikes={this.incrementLikes}
               />
             </Route>
           </Switch>
