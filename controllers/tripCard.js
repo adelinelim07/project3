@@ -1,6 +1,23 @@
 const express = require("express");
 const mainTrip = express.Router();
 const TripCards = require("../models/tripCard.js");
+const Users = require("../models/users.js")
+
+mainTrip.get("/:userId", async (req, res) => {
+  const user = await TripCards
+    // .findOne({ _id: req.params.userId })
+    .populate("trip")
+    .exec((err, story) => {
+      if (err) console.error(err);
+      console.log(story);
+    });
+  res.json(user);
+});
+
+Employee.findById(req.params.id, (err, foundEmployee) => {
+  Leave.find({ employeeId: req.params.id })
+    .populate("employeeId")
+    .exec(function(err, foundLeave) {
 
 mainTrip.get("/", (req, res) => {
   TripCards.find({}, (err, foundTripCards) => {

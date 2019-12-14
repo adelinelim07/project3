@@ -3,6 +3,11 @@ const User = require("../models/users.js");
 const users = express.Router();
 const bcrypt = require("bcrypt");
 
+users.get("/", async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
 users.post("/", (req, res) => {
   req.body.password = bcrypt.hashSync(
     req.body.password,
