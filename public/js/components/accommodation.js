@@ -2,10 +2,14 @@ class Accommodation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: "",
             ideaCardClicked: {},
-            indexClicked: -1
+            indexClicked: -1,
+            comments: [],
         }
+    }
+
+    updateIdeaCard=()=>{
+
     }
 
     addDefaultSrc(ev) {
@@ -24,11 +28,6 @@ class Accommodation extends React.Component {
                   class="btn btn-primary h-100"
                   data-toggle="modal"
                   data-target="#addModal"
-                  onClick={() => {
-                    this.setState({
-                        category: "Accommodation"
-                    })
-                  }}
                 >
                   <div class="card-body">
                     <h5 class="card-title">+</h5>
@@ -52,7 +51,8 @@ class Accommodation extends React.Component {
                           onClick={() => {
                             this.setState({
                                 ideaCardClicked: ideaCard,
-                                indexClicked: index
+                                indexClicked: index,
+                                comments: ideaCard.comments
                             })
                           }}
                         >
@@ -85,14 +85,14 @@ class Accommodation extends React.Component {
             image={this.props.image}
             url={this.props.url}
             comments={this.props.comments}
-            contact={this.props.contact}
             handleSubmit = {this.props.handleSubmit}
             handleChange={this.props.handleChange}
-            category={this.state.category}
+            category={this.props.category}
             />
 
            <ShowModal
             ideaCards={this.props.ideaCards}
+            comments={this.state.comments}
             ideaCard={this.state.ideaCardClicked}
             index={this.state.indexClicked}
             addComments= {this.props.addComments}

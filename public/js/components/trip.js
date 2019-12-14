@@ -10,7 +10,7 @@ class Trip extends React.Component {
       image: "",
       url: "",
       comments: [""],
-      contact: 123456,
+      contact: "",
       category: "",
       likeClicks: 0,
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
