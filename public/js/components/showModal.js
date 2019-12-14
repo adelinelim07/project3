@@ -1,7 +1,7 @@
 class DisplayComments extends React.Component {
   render(){
     return(
-      (this.props.ideaCard.comments || []).map(comment => (
+      (this.props.comments || []).map(comment => (
         <li class="list-group-item py-0">{comment}</li>
       ))
     )
@@ -12,18 +12,21 @@ class ShowModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      comments: this.props.comments,
       ideaCard: this.props.ideaCard,
       addCommentState: false,
       newComment: "",
       likeClickState: false,
-      likeClicks: this.props.ideaCard.likeClicks
+      likeClicks: this.props.ideaCard.likeClicks,
     };
   }
 
   componentDidUpdate=(prevProps)=> {
+    console.log("SHOWMODEL - componentDidUpdate:",prevProps)
     if(this.props.ideaCard !== prevProps.ideaCard) {
       this.setState({
-        ideaCard: this.props.ideaCard
+        ideaCard: this.props.ideaCard,
+        comments: this.props.comments
       })
     }
   }
@@ -43,9 +46,12 @@ class ShowModal extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.addComments(this.state.ideaCard, this.state.newComment);
+    let newComments= [this.state.newComment, ...this.state.comments];
+
     this.setState({
       ideaCard: this.state.ideaCard,
-      newComment: ""
+      newComment: "",
+      comments: newComments
     });
   };
 
@@ -150,14 +156,14 @@ class ShowModal extends React.Component {
                 ) : (
                   ""
                 )}
-                <DisplayComments ideaCard={this.state.ideaCard} id={this.state.ideaCard._id}/>
+                <DisplayComments comments={this.state.comments} ideaCard={this.state.ideaCard} id={this.state.ideaCard._id}/>
               </ul>
             </div>
 
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="close"
                 data-dismiss="modal"
                 onClick={() => this.props.deleteIdeaCard(this.state.ideaCard._id,this.props.index)}
               >
