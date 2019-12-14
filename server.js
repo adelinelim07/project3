@@ -24,8 +24,8 @@ app.use(express.json()); // returns middleware that only parses JSON
 app.use(express.static("public"));
 
 //test route
-app.get('/', (req, res) =>{
-    res.send('Hello World');
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
 // Routes
@@ -34,9 +34,9 @@ app.use("/ideaCard", ideaCardController);
 
 // this will catch any route that doesn't exist
 app.get("*", (req, res) => {
-  res.status(404).json("Sorry, page not found");
+  res.status(404).json("Sorry, page not found"); // to be replaced with a nicer looking 404 page.
 });
 
 app.listen(PORT, () => {
-  console.log("Let's get things done on port", PORT);
+  console.log("Let's get things done on port ", PORT);
 });

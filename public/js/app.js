@@ -16,6 +16,9 @@ class App extends React.Component {
             <li>
               <Link to="/login">Login</Link>
             </li>
+            <li>
+              <Link to="/itinerary">Itinerary</Link>
+            </li>
           </ul>
           <hr />
           <Switch>
@@ -24,6 +27,9 @@ class App extends React.Component {
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/itinerary">
+              <Itinerary />
             </Route>
           </Switch>
         </div>
@@ -38,6 +44,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.querySelector(".container"));
