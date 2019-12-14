@@ -1,11 +1,11 @@
 class PlacesOfInterest extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-          category: "",
-          ideaCardClicked: {},
-          indexClicked: -1
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+        ideaCardClicked: {},
+        indexClicked: -1,
+        comments: [],
+    }
   }
   
   addDefaultSrc(ev) {
@@ -24,11 +24,6 @@ class PlacesOfInterest extends React.Component {
                 class="btn btn-primary h-100"
                 data-toggle="modal"
                 data-target="#addModal"
-                onClick={() => {
-                  this.setState({
-                      category: "Places Of Interest"
-                  })
-                }}
               >
                 <div class="card-body">
                   <h5 class="card-title">+</h5>
@@ -52,7 +47,8 @@ class PlacesOfInterest extends React.Component {
                         onClick={() => {
                           this.setState({
                               ideaCardClicked: ideaCard,
-                              indexClicked: index
+                              indexClicked: index,
+                              comments: ideaCard.comments
                           })
                         }}
                       >
@@ -61,9 +57,12 @@ class PlacesOfInterest extends React.Component {
                           onError={this.addDefaultSrc}
                           class="card-img-top"
                         ></img>
-                        <div class="card-body">
+                        <div class="card-body py-2">
                           <h5 class="card-title">{ideaCard.title}</h5>
-                          <p class="card-text">{ideaCard.description}</p>
+                          <p class="card-text">{ideaCard.description}</p>  
+                        </div>
+                        <div class="card-footer border-0 bg-transparent mb-0 p-0 text-left">
+                          <p><i class="material-icons md-18">favorite</i>{ideaCard.likeClicks}</p>
                         </div>
                       </button>
                     </div>
@@ -76,16 +75,25 @@ class PlacesOfInterest extends React.Component {
         </div>
   
         <AddModal  
+          title={this.props.title} 
+          description={this.props.description}
+          location={this.props.location}
+          image={this.props.image}
+          url={this.props.url}
+          comments={this.props.comments}
           handleSubmit = {this.props.handleSubmit}
           handleChange={this.props.handleChange}
-          category={this.state.category}
+          category={this.props.category}
           />
   
          <ShowModal
           ideaCards={this.props.ideaCards}
+          comments={this.state.comments}
           ideaCard={this.state.ideaCardClicked}
           index={this.state.indexClicked}
           addComments= {this.props.addComments}
+          deleteIdeaCard= {this.props.deleteIdeaCard}
+          incrementLikes= {this.props.incrementLikes}
           />
   
       </div>
