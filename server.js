@@ -40,12 +40,20 @@ app.use("/sessions", sessionsController);
 
 const mainTripController = require("./controllers/tripCard.js");
 app.use("/maindashboard", mainTripController);
+//test route
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+// Routes
+const ideaCardController = require("./controllers/ideaCard.js");
+app.use("/ideaCard", ideaCardController);
 
 // this will catch any route that doesn't exist
 app.get("*", (req, res) => {
-  res.status(404).json("Sorry, page not found");
+  res.status(404).json("Sorry, page not found"); // to be replaced with a nicer looking 404 page.
 });
 
 app.listen(PORT, () => {
-  console.log("Let's get things done on port", PORT);
+  console.log("Let's get things done on port ", PORT);
 });
