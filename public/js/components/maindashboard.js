@@ -14,14 +14,15 @@ class MainTrip extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  dataRefresh = () => {
-    fetch("/maindashboard")
-      .then(response => response.json())
-      .then(mainTrips => {
-        this.setState({ mainTrips: mainTrips });
-      });
-    console.log("Data Refreshed");
-  };
+  // dataRefresh = () => {
+  //   fetch("/maindashboard/" + this.props.currentUserId)
+  //     .then(response => response.json())
+  //     .then(mainTrips => {
+  //       this.setState({ mainTrips: mainTrips });
+  //     });
+  //   console.log("Data Refreshed");
+  //   console.log("HEEREEEEE" + this.props.currentUserId);
+  // };
 
   deleteMainTrip = (id, index) => {
     fetch("/maindashboard/" + id, {
@@ -60,7 +61,7 @@ class MainTrip extends React.Component {
   }
 
   fetchTrips = () => {
-    fetch("/maindashboard")
+    fetch("/maindashboard/" + this.props.currentUserId)
       .then(response => response.json())
       .then(mainTrips => {
         console.log("IM FETCHING", mainTrips);
