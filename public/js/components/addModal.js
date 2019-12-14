@@ -79,6 +79,7 @@ class AddModal extends React.Component {
                 <input
                   type="text"
                   placeholder="Category"
+                  value={this.props.category}
                   onChange={this.props.handleChange}
                   id="category"
                 />
