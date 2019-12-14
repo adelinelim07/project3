@@ -34,13 +34,13 @@ class App extends React.Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
               <Link to="/signup">Sign Up</Link>
             </li>
             <li>
-              <Link to="/maindashboard">Trip Dashboard</Link>
+              <Link to="/maindashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/tripdetails">Trip Details</Link>
             </li>
             <li>
               <Link to="/itinerary">Itinerary</Link>
@@ -49,9 +49,6 @@ class App extends React.Component {
           <hr />
           <Switch>
             <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/login">
               {this.state.currentUser ? (
                 <Redirect to="/maindashboard" />
               ) : (
@@ -63,6 +60,9 @@ class App extends React.Component {
             </Route>
             <Route path="/signup">
               <Signup />
+            </Route>
+            <Route path="/tripdetails">
+              <Trip />
             </Route>
             <Route path="/itinerary">
               <Itinerary />

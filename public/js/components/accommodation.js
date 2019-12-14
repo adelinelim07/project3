@@ -8,10 +8,6 @@ class Accommodation extends React.Component {
         }
     }
 
-    updateIdeaCard=()=>{
-
-    }
-
     addDefaultSrc(ev) {
       ev.target.src =
         "https://icon-library.net/images/accommodation-icon/accommodation-icon-22.jpg";
