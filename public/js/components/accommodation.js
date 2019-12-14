@@ -79,6 +79,13 @@ class Accommodation extends React.Component {
           </div>
   
           <AddModal  
+            title={this.props.title} 
+            description={this.props.description}
+            location={this.props.location}
+            image={this.props.image}
+            url={this.props.url}
+            comments={this.props.comments}
+            contact={this.props.contact}
             handleSubmit = {this.props.handleSubmit}
             handleChange={this.props.handleChange}
             category={this.state.category}

@@ -138,7 +138,7 @@ class Trip extends React.Component {
           // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
           ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
         });
-        console.log(jsonedIdeaCard);
+        console.log(this.state);
       })
       .catch(error => console.log(error));
   };
@@ -192,6 +192,14 @@ class Trip extends React.Component {
             </Route>
             <Route exact path="/accommodation">
               <Accommodation
+                title={this.state.title} 
+                description={this.state.description}
+                location={this.state.location}
+                image={this.state.image}
+                url={this.state.url}
+                comments={this.state.comments}
+                contact={this.state.contact}
+                category={this.state.category}
                 ideaCards={this.state.ideaCards}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
