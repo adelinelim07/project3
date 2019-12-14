@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const session = require("express-session");
 const db = mongoose.connection;
 
 // Environment Variables
@@ -20,9 +21,25 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 
 // Middleware
 app.use(express.json()); // returns middleware that only parses JSON
-
 app.use(express.static("public"));
 
+app.use(
+  session({
+    secret: "mutusamy chen",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+// Routes
+const usersController = require("./controllers/users.js");
+app.use("/users", usersController);
+
+const sessionsController = require("./controllers/sessions.js");
+app.use("/sessions", sessionsController);
+
+const mainTripController = require("./controllers/tripCard.js");
+app.use("/maindashboard", mainTripController);
 //test route
 app.get("/", (req, res) => {
   res.send("Hello World");
