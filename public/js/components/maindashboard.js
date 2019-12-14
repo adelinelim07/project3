@@ -8,6 +8,7 @@ class MainTrip extends React.Component {
       image: "",
       startDate: "",
       endDate: "",
+      _id: "",
       mainTrips: []
     };
     this.handleChange = this.handleChange.bind(this);
@@ -35,8 +36,8 @@ class MainTrip extends React.Component {
     });
   };
 
-  updateMainTrip = (mainTrips, index) => {
-    fetch("maindashboard/" + mainTrips._id, {
+  submitUpdatedMainTrip = () => {
+    fetch("maindashboard/" + this.state._id, {
       body: JSON.stringify({
         title: this.state.title
         // description: this.state.description,
@@ -49,31 +50,28 @@ class MainTrip extends React.Component {
       headers: {
         "Content-Type": "application/json"
       }
-    })
-      .then(updatedMainTrip => updatedMainTrip.json())
-      .then(jsonedMainTrip => {
-        fetch("/maindashboard")
-          .then(response => response.json())
-          .then(mainTrips => {
-            this.setState({ mainTrips: mainTrips });
-          });
-      });
+    }).then(this.fetchTrips);
+
+    console.log("hihi, running async");
   };
 
   componentDidMount() {
+    this.fetchTrips();
+  }
+
+  fetchTrips = () => {
     fetch("/maindashboard")
       .then(response => response.json())
       .then(mainTrips => {
+        console.log("IM FETCHING", mainTrips);
         this.setState({
           mainTrips: mainTrips
         });
       });
-  }
+  };
 
   handleChange = event => {
-    console.log(event.target.id, event.target.value);
     this.setState({ [event.target.id]: event.target.value });
-    console.log(this.state);
   };
 
   changeState = (key, value) => {
@@ -118,7 +116,6 @@ class MainTrip extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         <h1>Main Dashboard</h1>
@@ -159,6 +156,7 @@ class MainTrip extends React.Component {
                       index={index}
                       handleChange={this.handleChange}
                       changeState={this.changeState}
+                      submitUpdatedMainTrip={this.submitUpdatedMainTrip}
                     />
                   </td>
                   <td>
