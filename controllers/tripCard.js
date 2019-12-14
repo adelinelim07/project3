@@ -8,6 +8,8 @@ mainTrip.get("/", (req, res) => {
   });
 });
 
+mainTrip.get("/userId", (req, res) => {});
+
 mainTrip.delete("/:id", (req, res) => {
   TripCards.findByIdAndRemove(req.params.id, (err, deletedTripCards) => {
     res.json(deletedTripCards);
@@ -26,6 +28,7 @@ mainTrip.put("/:id", (req, res) => {
     req.body,
     { new: true },
     (err, updatedTripCards) => {
+      // res.redirect("/dashboard");
       res.json(updatedTripCards);
     }
   );

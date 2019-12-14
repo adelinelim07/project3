@@ -12,7 +12,13 @@ class ButtonModal extends React.Component {
   updateTrip() {
     console.log(this.props);
     this.props.changeState("title", this.props.trip.title);
+    this.props.changeState("_id", this.props.trip._id);
   }
+
+  submitUpdatedMainTrip = event => {
+    event.preventDefault();
+    this.props.submitUpdatedMainTrip();
+  };
 
   render() {
     // console.log(this.props.title);
@@ -71,7 +77,12 @@ class ButtonModal extends React.Component {
                   >
                     Close
                   </button>
-                  <button type="submit" class="btn btn-primary">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    onClick={this.submitUpdatedMainTrip}
+                    data-dismiss="modal"
+                  >
                     Update
                   </button>
                 </div>
