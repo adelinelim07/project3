@@ -29,8 +29,8 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-// const bookmarksController = require("./controllers/bookmarks.js");
-// app.use("/bookmarks", bookmarksController);
+const ideaCardController = require("./controllers/ideaCard.js");
+app.use("/ideaCard", ideaCardController);
 
 // this will catch any route that doesn't exist
 app.get("*", (req, res) => {

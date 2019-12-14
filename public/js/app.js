@@ -1,5 +1,6 @@
 const { BrowserRouter, Link, Switch, Route, browserHistory } = ReactRouterDOM;
 
+
 class App extends React.Component {
   render() {
     return (
@@ -32,7 +33,14 @@ class App extends React.Component {
             </Route>
           </Switch>
         </div>
+
+        {/* <Trip/> */}
+
+
       </BrowserRouter>
+
+      
+
     );
   }
 }
