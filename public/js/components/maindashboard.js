@@ -14,16 +14,23 @@ class MainTrip extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // dataRefresh = () => {
-  //   fetch("/maindashboard/" + this.props.currentUserId)
-  //     .then(response => response.json())
-  //     .then(mainTrips => {
-  //       this.setState({ mainTrips: mainTrips });
-  //     });
-  //   console.log("Data Refreshed");
-  //   console.log("HEEREEEEE" + this.props.currentUserId);
-  // };
+  componentDidMount() {
+    this.fetchTrips();
+  }
 
+  //fetching tripData filtered by User
+  fetchTrips = () => {
+    fetch("/maindashboard/" + this.props.currentUserId)
+      .then(response => response.json())
+      .then(mainTrips => {
+        console.log("IM FETCHING", mainTrips);
+        this.setState({
+          mainTrips: mainTrips
+        });
+      });
+  };
+
+  //delete tripData entry
   deleteMainTrip = (id, index) => {
     fetch("/maindashboard/" + id, {
       method: "DELETE"
@@ -37,6 +44,7 @@ class MainTrip extends React.Component {
     });
   };
 
+  //send in updated tripData to database
   submitUpdatedMainTrip = () => {
     fetch("maindashboard/" + this.state._id, {
       body: JSON.stringify({
@@ -56,21 +64,6 @@ class MainTrip extends React.Component {
     console.log("hihi, running async");
   };
 
-  componentDidMount() {
-    this.fetchTrips();
-  }
-
-  fetchTrips = () => {
-    fetch("/maindashboard/" + this.props.currentUserId)
-      .then(response => response.json())
-      .then(mainTrips => {
-        console.log("IM FETCHING", mainTrips);
-        this.setState({
-          mainTrips: mainTrips
-        });
-      });
-  };
-
   handleChange = event => {
     this.setState({ [event.target.id]: event.target.value });
   };
@@ -79,6 +72,7 @@ class MainTrip extends React.Component {
     this.setState({ [key]: value });
   };
 
+  //create new tripData entry
   handleSubmit = event => {
     event.preventDefault();
     fetch("/maindashboard", {
@@ -109,7 +103,7 @@ class MainTrip extends React.Component {
           image: "",
           startDate: "",
           endDate: "",
-          todos: [jsonedMainTrip, ...this.state.mainTrips]
+          mainTrips: [...this.state.mainTrips, jsonedMainTrip]
         });
         console.log(jsonedMainTrip);
       })
