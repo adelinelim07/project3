@@ -9,6 +9,7 @@ class MainTrip extends React.Component {
       startDate: "",
       endDate: "",
       _id: "",
+      userId: this.props.currentUserId,
       mainTrips: []
     };
     this.handleChange = this.handleChange.bind(this);
@@ -82,7 +83,8 @@ class MainTrip extends React.Component {
         country: this.state.country,
         image: this.state.image,
         startDate: this.state.startDate,
-        endDate: this.state.endDate
+        endDate: this.state.endDate,
+        userId: this.props.currentUserId
       }),
       method: "POST",
       headers: {
