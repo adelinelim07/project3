@@ -12,7 +12,8 @@ const ideaCardSchema = new mongoose.Schema({
     category: String,
     likeClicks: Number,
     // category: { type: String, enum: ['Accommodation','Places Of Interest','Transport']},
-    trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
+    trip: String,
+    // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
 })
 
 const IdeaCards = mongoose.model('idea', ideaCardSchema);

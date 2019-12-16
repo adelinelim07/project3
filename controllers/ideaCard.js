@@ -1,12 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const IdeaCards = require('../models/ideaCard.js');
+const TripCards = require('../models/tripCard.js');
 
 router.get('/', (req, res) =>{
     IdeaCards.find({}, (err, foundIdeaCards) => {
         res.json(foundIdeaCards);
     })
 });
+
+// router.get('/',(req,res) => {
+//     IdeaCards.find()
+//     .populate("trip")
+//     .exec((error,allTrips)=>{
+//         if(error) console.error(err.message);
+
+//         if(allTrips){
+//             TripCards.find({},(err,allTrips)=>{
+//                 res.json()
+//             })
+//         }
+//     })
+// })
 
 router.delete('/:id', (req, res) => {
     IdeaCards.findByIdAndRemove(req.params.id, (err, deletedIdeaCards) => {

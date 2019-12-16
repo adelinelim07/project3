@@ -13,6 +13,8 @@ class Trip extends React.Component {
       contact: "",
       category: "",
       likeClicks: 0,
+      trip: this.props.trip,
+      tripTitle: this.props.tripTitle,
       // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
       ideaCards: []
     };
@@ -113,6 +115,7 @@ class Trip extends React.Component {
         contact: this.state.contact,
         category: this.state.category,
         likeClicks: 0,
+        trip: this.state.trip
       }),
       method: "POST",
       headers: {
@@ -147,6 +150,12 @@ class Trip extends React.Component {
   render() {
     return (
       <BrowserRouter>
+      <div class="container">
+        <div class="row">
+          <div class="col-8"><h1>{this.state.tripTitle}</h1></div>
+          <div class="col-md-auto"><button type="button" class="btn btn-secondary btn-sm" onClick={()=>this.props.toggleView()}>Return to trips dashboard</button></div>
+        </div>
+      </div>
         <div id="navBar">
           <ul class="nav nav-tabs">
             <li class="nav-item active">
@@ -201,6 +210,7 @@ class Trip extends React.Component {
                 comments={this.state.comments}
                 contact={this.state.contact}
                 category={this.state.category}
+                trip={this.state.trip}
                 ideaCards={this.state.ideaCards}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
@@ -219,6 +229,7 @@ class Trip extends React.Component {
                 comments={this.state.comments}
                 contact={this.state.contact}
                 category={this.state.category}
+                trip={this.state.trip}
                 ideaCards={this.state.ideaCards}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
@@ -237,6 +248,7 @@ class Trip extends React.Component {
                 comments={this.state.comments}
                 contact={this.state.contact}
                 category={this.state.category}
+                trip={this.state.trip}
                 ideaCards={this.state.ideaCards}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
