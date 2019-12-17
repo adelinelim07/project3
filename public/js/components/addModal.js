@@ -1,10 +1,5 @@
 class AddModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        category: this.props.category,
-    }
-}
+
   render() {
     return (
       <div
@@ -82,13 +77,22 @@ class AddModal extends React.Component {
                   id="comments"
                 />
 
+                <select id="category"
+                onChange={this.props.handleChange}
+                >
+                  <option value="Pick One">Pick One</option>
+                  <option value="Accommodation">Accommodation</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Places Of Interest">Places Of Interest</option>
+                </select>
+{/* 
                 <input
                   type="text"
                   placeholder="Category"
                   value={this.props.category}
                   onChange={this.props.handleChange}
                   id="category"
-                />
+                /> */}
 
               </div>
               <div class="modal-footer">

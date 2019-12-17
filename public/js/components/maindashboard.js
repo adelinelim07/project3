@@ -129,7 +129,7 @@ class MainTrip extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>My Trips</h1>
+        
         {this.state.showTrips && (
           <Trip
             toggleView={this.toggleView}
@@ -139,6 +139,7 @@ class MainTrip extends React.Component {
         )}
         {this.state.showDashboard && (
           <div>
+            <h1>My Trips</h1>
             <button
               type="button"
               class="btn btn-primary"
