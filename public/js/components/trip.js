@@ -29,7 +29,7 @@ class Trip extends React.Component {
     console.log("Data Refreshed");
   };
 
-  incrementLikes=(ideaCard)=> {
+  incrementLikes = ideaCard => {
     fetch("ideaCard/" + ideaCard._id, {
       body: JSON.stringify({
         title: ideaCard.title,
@@ -40,7 +40,7 @@ class Trip extends React.Component {
         comments: ideaCard.comments,
         contact: ideaCard.contact,
         category: ideaCard.category,
-        likeClicks: ideaCard.likeClicks +1
+        likeClicks: ideaCard.likeClicks + 1
       }),
       method: "PUT",
       headers: {
@@ -83,15 +83,16 @@ class Trip extends React.Component {
   deleteIdeaCard = (id, index) => {
     fetch("ideaCard/" + id, {
       method: "DELETE"
-    }).then(data => {
-      this.setState({
-        ideaCards: [
-          ...this.state.ideaCards.slice(0, index),
-          ...this.state.ideaCards.slice(index + 1)
-        ]
-      });
     })
-    .then(responseJson => this.dataRefresh())
+      .then(data => {
+        this.setState({
+          ideaCards: [
+            ...this.state.ideaCards.slice(0, index),
+            ...this.state.ideaCards.slice(index + 1)
+          ]
+        });
+      })
+      .then(responseJson => this.dataRefresh());
   };
 
   componentDidMount = () => {
@@ -150,16 +151,29 @@ class Trip extends React.Component {
   render() {
     return (
       <BrowserRouter>
-      <div class="container">
-        <div class="row">
-          <div class="col-8"><h1>{this.state.tripTitle}</h1></div>
-          <div class="col-md-auto"><button type="button" class="btn btn-secondary btn-sm" onClick={()=>this.props.toggleView()}>Return to trips dashboard</button></div>
+        <head>
+          <link rel="stylesheet" type="text/css" href="../../css/navbar.css" />
+        </head>
+        <div class="container">
+          <div class="row">
+            <div class="col-8">
+              <h1>{this.state.tripTitle}</h1>
+            </div>
+            <div class="col-md-auto">
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                onClick={() => this.props.toggleView()}
+              >
+                Return to trips dashboard
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-        <div id="navBar">
-          <ul class="nav nav-tabs">
-            <li class="nav-item active">
-              <a class="nav-link">
+        <div id="cssmenu">
+          <ul>
+            <li>
+              <a class="text-center">
                 <Link to="/collaborators">
                   <i class="material-icons">people</i>
                   <br></br>
@@ -167,8 +181,8 @@ class Trip extends React.Component {
                 </Link>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link">
+            <li>
+              <a class="text-center">
                 <Link to="/accommodation">
                   <i class="material-icons">hotel</i>
                   <br></br>
@@ -176,8 +190,8 @@ class Trip extends React.Component {
                 </Link>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link">
+            <li>
+              <a class="text-center">
                 <Link to="/transport">
                   <i class="material-icons">directions_bus</i>
                   <br></br>
@@ -185,8 +199,8 @@ class Trip extends React.Component {
                 </Link>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link">
+            <li>
+              <a class="text-center">
                 <Link to="/placesOfInterest">
                   <i class="material-icons">beenhere</i>
                   <br></br>
@@ -195,14 +209,14 @@ class Trip extends React.Component {
               </a>
             </li>
           </ul>
-          <hr />
+          </div>
           <Switch>
             <Route exact path="/collaborators">
               <Collaborators />
             </Route>
             <Route exact path="/accommodation">
               <Accommodation
-                title={this.state.title} 
+                title={this.state.title}
                 description={this.state.description}
                 location={this.state.location}
                 image={this.state.image}
@@ -221,7 +235,7 @@ class Trip extends React.Component {
             </Route>
             <Route path="/transport">
               <Transport
-                title={this.state.title} 
+                title={this.state.title}
                 description={this.state.description}
                 location={this.state.location}
                 image={this.state.image}
@@ -240,7 +254,7 @@ class Trip extends React.Component {
             </Route>
             <Route path="/placesOfInterest">
               <PlacesOfInterest
-                title={this.state.title} 
+                title={this.state.title}
                 description={this.state.description}
                 location={this.state.location}
                 image={this.state.image}
@@ -258,7 +272,6 @@ class Trip extends React.Component {
               />
             </Route>
           </Switch>
-        </div>
       </BrowserRouter>
     );
   }
