@@ -49,12 +49,12 @@ class MainTrip extends React.Component {
   submitUpdatedMainTrip = () => {
     fetch("maindashboard/" + this.state._id, {
       body: JSON.stringify({
-        title: this.state.title
-        // description: this.state.description,
-        // country: this.state.country,
-        // image: this.state.image,
-        // startDate: this.state.startDate,
-        // endDate: this.state.endDate
+        title: this.state.title,
+        description: this.state.description,
+        country: this.state.country,
+        image: this.state.image,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
       }),
       method: "PUT",
       headers: {
@@ -115,7 +115,7 @@ class MainTrip extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Main Dashboard</h1>
+        <h1>My Trips</h1>
         <button
           type="button"
           class="btn btn-primary"
@@ -138,6 +138,10 @@ class MainTrip extends React.Component {
           <thead>
             <tr>
               <th scope="col">Trip Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Country</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
@@ -147,6 +151,10 @@ class MainTrip extends React.Component {
               return (
                 <tr>
                   <td>{mainTrips.title}</td>
+                  <td>{mainTrips.description}</td>
+                  <td>{mainTrips.country}</td>
+                  <td>{mainTrips.startDate}</td>
+                  <td>{mainTrips.endDate}</td>
                   <td>
                     <ButtonModal
                       trip={mainTrips}
@@ -195,9 +203,49 @@ class MainTrip extends React.Component {
                 </button>
               </div>
               <form onSubmit={this.handleSubmit}>
-                <div class="modal-body">
-                  <label htmlFor="title">Title</label>
-                  <input type="text" onChange={this.handleChange} id="title" />
+                <div class="modal-body form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Title"
+                    onChange={this.handleChange}
+                    id="title"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Description"
+                    onChange={this.handleChange}
+                    id="description"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Country"
+                    onChange={this.handleChange}
+                    id="country"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Image URL"
+                    onChange={this.handleChange}
+                    id="image"
+                  />
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="Start Date"
+                    onChange={this.handleChange}
+                    id="startDate"
+                  />
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="End Date"
+                    onChange={this.handleChange}
+                    id="endDate"
+                  />
                 </div>
                 <div class="modal-footer">
                   <button

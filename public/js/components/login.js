@@ -50,13 +50,7 @@ class Login extends React.Component {
         </head>
 
         <div class="text-center">
-          <img
-            class="mb-4"
-            src="/images/futureprintlogo.jpg"
-            alt=""
-            width="50%"
-            height="50%"
-          />
+          <img class="mb-4" alt="" width="50%" height="50%" />
           <h1 class="h3 mb-3 font-weight-normal">Login Page</h1>
           <div class="tab-content" id="myTabContent">
             <div

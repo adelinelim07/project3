@@ -60,13 +60,38 @@ class ButtonModal extends React.Component {
                 </button>
               </div>
               <form>
-                <div class="modal-body">
-                  <label htmlFor="title">Title</label>
+                <div class="modal-body form-group">
                   <input
                     type="text"
+                    class="form-control"
                     defaultValue={this.props.trip.title}
                     onChange={this.changeInput}
+                    placeholder="Title"
                     id="title"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    defaultValue={this.props.trip.description}
+                    onChange={this.changeInput}
+                    placeholder="Description"
+                    id="description"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    defaultValue={this.props.trip.country}
+                    onChange={this.changeInput}
+                    placeholder="Country"
+                    id="country"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    defaultValue={this.props.trip.image}
+                    onChange={this.changeInput}
+                    placeholder="Image URL"
+                    id="image"
                   />
                 </div>
                 <div class="modal-footer">
