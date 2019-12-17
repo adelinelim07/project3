@@ -40,9 +40,6 @@ class App extends React.Component {
               <Link to="/maindashboard">Dashboard</Link>
             </li>
             <li>
-              <Link to="/tripdetails">Trip Details</Link>
-            </li>
-            <li>
               <Link to="/itinerary">Itinerary</Link>
             </li>
           </ul>
@@ -60,9 +57,6 @@ class App extends React.Component {
             </Route>
             <Route path="/signup">
               <Signup />
-            </Route>
-            <Route path="/tripdetails">
-              <Trip />
             </Route>
             <Route path="/itinerary">
               <Itinerary />

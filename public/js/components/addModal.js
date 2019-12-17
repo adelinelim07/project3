@@ -1,4 +1,10 @@
 class AddModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        category: this.props.category,
+    }
+}
   render() {
     return (
       <div
