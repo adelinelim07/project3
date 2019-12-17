@@ -4,7 +4,8 @@ class Login extends React.Component {
     this.state = {
       username: "",
       password: "",
-      currentUser: ""
+      currentUser: "",
+      message: ""
     };
   }
 
@@ -27,10 +28,21 @@ class Login extends React.Component {
         return loggedInUser.json();
       })
       .then(jsonedUser => {
-        this.setState({
-          currentUser: jsonedUser
-        });
-        console.log("Current User is:", this.state.currentUser);
+        if (jsonedUser.message === null) {
+          this.setState({
+            message: "User cannot be found"
+          });
+        } else if (jsonedUser.message === false) {
+          this.setState({
+            message: "Wrong Password"
+          });
+        } else {
+          console.log(jsonedUser);
+          this.setState({
+            currentUser: jsonedUser
+          });
+          console.log("Current User is:", this.state.currentUser);
+        }
       })
       .then(() => {
         this.props.userState(this.state.currentUser);
@@ -87,6 +99,7 @@ class Login extends React.Component {
                   onChange={this.handleChange}
                   required
                 />
+                <p>{this.state.message}</p>
                 <button class="btn btn-lg btn-danger btn-block" type="submit">
                   Sign in
                 </button>
