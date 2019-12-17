@@ -139,7 +139,6 @@ class MainTrip extends React.Component {
         )}
         {this.state.showDashboard && (
           <div>
-            <h1>Main Dashboard</h1>
             <button
               type="button"
               class="btn btn-primary"
