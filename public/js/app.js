@@ -47,13 +47,13 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/">
               {this.state.currentUser ? (
-                <Redirect to="/maindashboard" />
+                <Redirect to={"/maindashboard/" + this.state.currentUser._id} />
               ) : (
                 <Login userState={this.userState} />
               )}
             </Route>
             <Route path="/maindashboard">
-              <MainTrip />
+              <MainTrip currentUserId={this.state.currentUser._id} />
             </Route>
             <Route path="/signup">
               <Signup />

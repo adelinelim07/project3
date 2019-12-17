@@ -11,6 +11,7 @@ class MainTrip extends React.Component {
       startDate: "",
       endDate: "",
       _id: "",
+      userId: this.props.currentUserId,
       showDashboard: true,
       showTrips: false,
       mainTrips: []
@@ -18,26 +19,33 @@ class MainTrip extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  dataRefresh = () => {
-    fetch("/maindashboard")
+  componentDidMount() {
+    this.fetchTrips();
+  }
+
+  //fetching tripData filtered by User
+  fetchTrips = () => {
+    fetch("/maindashboard/" + this.props.currentUserId)
       .then(response => response.json())
       .then(mainTrips => {
-        this.setState({ mainTrips: mainTrips });
+        console.log("IM FETCHING", mainTrips);
+        this.setState({
+          mainTrips: mainTrips
+        });
       });
-    console.log("Data Refreshed");
   };
 
-  toggleView =(tripID,tripTitle)=>{
+  toggleView = (tripID, tripTitle) => {
     this.setState({
       showDashboard: !this.state.showDashboard,
       showTrips: !this.state.showTrips,
       _id: tripID,
       title: tripTitle
-    })
+    });
     console.log(tripID);
-  }
-  
+  };
 
+  //delete tripData entry
   deleteMainTrip = (id, index) => {
     fetch("/maindashboard/" + id, {
       method: "DELETE"
@@ -51,15 +59,16 @@ class MainTrip extends React.Component {
     });
   };
 
+  //send in updated tripData to database
   submitUpdatedMainTrip = () => {
-    fetch("maindashboard/" + this.state._id, {
+    fetch("/maindashboard/" + this.state._id, {
       body: JSON.stringify({
-        title: this.state.title
-        // description: this.state.description,
-        // country: this.state.country,
-        // image: this.state.image,
-        // startDate: this.state.startDate,
-        // endDate: this.state.endDate
+        title: this.state.title,
+        description: this.state.description,
+        country: this.state.country,
+        image: this.state.image,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
       }),
       method: "PUT",
       headers: {
@@ -70,21 +79,6 @@ class MainTrip extends React.Component {
     console.log("hihi, running async");
   };
 
-  componentDidMount() {
-    this.fetchTrips();
-  }
-
-  fetchTrips = () => {
-    fetch("/maindashboard")
-      .then(response => response.json())
-      .then(mainTrips => {
-        console.log("IM FETCHING", mainTrips);
-        this.setState({
-          mainTrips: mainTrips
-        });
-      });
-  };
-
   handleChange = event => {
     this.setState({ [event.target.id]: event.target.value });
   };
@@ -93,6 +87,7 @@ class MainTrip extends React.Component {
     this.setState({ [key]: value });
   };
 
+  //create new tripData entry
   handleSubmit = event => {
     event.preventDefault();
     fetch("/maindashboard", {
@@ -102,7 +97,8 @@ class MainTrip extends React.Component {
         country: this.state.country,
         image: this.state.image,
         startDate: this.state.startDate,
-        endDate: this.state.endDate
+        endDate: this.state.endDate,
+        userId: this.props.currentUserId
       }),
       method: "POST",
       headers: {
@@ -123,7 +119,7 @@ class MainTrip extends React.Component {
           image: "",
           startDate: "",
           endDate: "",
-          todos: [jsonedMainTrip, ...this.state.mainTrips]
+          mainTrips: [...this.state.mainTrips, jsonedMainTrip]
         });
         console.log(jsonedMainTrip);
       })
@@ -133,20 +129,26 @@ class MainTrip extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.showTrips && <Trip toggleView={this.toggleView} trip={this.state._id} tripTitle={this.state.title}/>}
-        {this.state.showDashboard && 
-        <div>
-        <h1>Main Dashboard</h1>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#newTripModal"
-        >
-          Add New Trip
-        </button>
-        
-        {/* <div class="card" style="width: 18rem;">
+        <h1>My Trips</h1>
+        {this.state.showTrips && (
+          <Trip
+            toggleView={this.toggleView}
+            trip={this.state._id}
+            tripTitle={this.state.title}
+          />
+        )}
+        {this.state.showDashboard && (
+          <div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#newTripModal"
+            >
+              Add New Trip
+            </button>
+
+            {/* <div class="card" style="width: 18rem;">
           <img src="..." class="card-img-top" alt="..." />
           <div class="card-body">
             <p class="card-text">
@@ -155,95 +157,150 @@ class MainTrip extends React.Component {
             </p>
           </div>
         </div> */}
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Trip Title</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.mainTrips.map((mainTrips, index) => {
-              return (
+            <table class="table table-striped">
+              <thead>
                 <tr>
-                  <td><button 
-                    class="bg-transparent border-0"
-                    onClick={()=>this.toggleView(mainTrips._id,mainTrips.title)}
-                  >
-                    {mainTrips.title}</button></td>
-                  <td>
-                    <ButtonModal
-                      trip={mainTrips}
-                      index={index}
-                      handleChange={this.handleChange}
-                      changeState={this.changeState}
-                      submitUpdatedMainTrip={this.submitUpdatedMainTrip}
-                    />
-                  </td>
-                  <td>
-                    <button
-                      class="btn btn-danger"
-                      onClick={() => this.deleteMainTrip(mainTrips._id, index)}
-                    >
-                      DELETE
-                    </button>
-                  </td>
+                  <th scope="col">Trip Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Country</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        
-        
+              </thead>
+              <tbody>
+                {this.state.mainTrips.map((mainTrips, index) => {
+                  return (
+                    <tr>
+                      <td>
+                        {" "}
+                        <button
+                          class="bg-transparent border-0"
+                          onClick={() =>
+                            this.toggleView(mainTrips._id, mainTrips.title)
+                          }
+                        >
+                          {mainTrips.title}
+                        </button>
+                      </td>
+                      <td>{mainTrips.description}</td>
+                      <td>{mainTrips.country}</td>
+                      <td>{mainTrips.startDate}</td>
+                      <td>{mainTrips.endDate}</td>
+                      <td></td>
+                      <td>
+                        <ButtonModal
+                          trip={mainTrips}
+                          index={index}
+                          handleChange={this.handleChange}
+                          changeState={this.changeState}
+                          submitUpdatedMainTrip={this.submitUpdatedMainTrip}
+                        />
+                      </td>
+                      <td>
+                        <button
+                          class="btn btn-danger"
+                          onClick={() =>
+                            this.deleteMainTrip(mainTrips._id, index)
+                          }
+                        >
+                          DELETE
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
 
-        {/* NEW TRIP MODAL */}
-        <div
-          class="modal fade"
-          id="newTripModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Add New Trip
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+            {/* NEW TRIP MODAL */}
+            <div
+              class="modal fade"
+              id="newTripModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Add New Trip
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form onSubmit={this.handleSubmit}>
+                    <div class="modal-body form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Title"
+                        onChange={this.handleChange}
+                        id="title"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Description"
+                        onChange={this.handleChange}
+                        id="description"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Country"
+                        onChange={this.handleChange}
+                        id="country"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Image URL"
+                        onChange={this.handleChange}
+                        id="image"
+                      />
+                      <input
+                        type="date"
+                        class="form-control"
+                        placeholder="Start Date"
+                        onChange={this.handleChange}
+                        id="startDate"
+                      />
+                      <input
+                        type="date"
+                        class="form-control"
+                        placeholder="End Date"
+                        onChange={this.handleChange}
+                        id="endDate"
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Add New Trip
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
-              <form onSubmit={this.handleSubmit}>
-                <div class="modal-body">
-                  <label htmlFor="title">Title</label>
-                  <input type="text" onChange={this.handleChange} id="title" />
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="submit" class="btn btn-primary">
-                    Add New Trip
-                  </button>
-                </div>
-              </form>
             </div>
           </div>
-        </div>
-        </div>
-        }
+        )}
       </React.Fragment>
     );
   }

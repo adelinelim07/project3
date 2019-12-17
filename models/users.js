@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   lastName: String,
   image: String, //to put avatar
   email: String
-  //   trip: { type: Schema.Types.ObjectId, ref: "TripCards" }
+  // tripId: { type: mongoose.ObjectId, ref: "trip" }
 });
 
 const User = mongoose.model("user", userSchema);

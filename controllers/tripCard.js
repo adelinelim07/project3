@@ -1,14 +1,28 @@
 const express = require("express");
 const mainTrip = express.Router();
 const TripCards = require("../models/tripCard.js");
+const Users = require("../models/users.js");
+
+mainTrip.get("/:userId", (req, res) => {
+  TripCards.find({ userId: req.params.userId }, (err, userTripCards) => {
+    res.json(userTripCards);
+  });
+
+  // const user = await TripCards.find({})
+  //   // .findOne({ _id: req.params.userId })
+  //   .populate({ path: "user", match: req.params.userId })
+  //   .exec((err, story) => {
+  //     if (err) console.error(err);
+  //     console.log(story);
+  //     res.json(story);
+  //   });
+});
 
 mainTrip.get("/", (req, res) => {
   TripCards.find({}, (err, foundTripCards) => {
     res.json(foundTripCards);
   });
 });
-
-mainTrip.get("/userId", (req, res) => {});
 
 mainTrip.delete("/:id", (req, res) => {
   TripCards.findByIdAndRemove(req.params.id, (err, deletedTripCards) => {
