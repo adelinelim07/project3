@@ -36,7 +36,10 @@ class Accommodation extends React.Component {
   
             {/* DISPLAY ALL CARDS */}
             {this.props.ideaCards
-              ? this.props.ideaCards.filter(ideaCard=>ideaCard.category.includes("Accommodation") && ideaCard.trip.includes(this.props.trip)).map((ideaCard, index) => {
+              ? 
+              this.props.ideaCards
+              .filter(ideaCard => 
+                ideaCard.category.includes("Accommodation") && ideaCard.trip.includes(this.props.trip)).map((ideaCard, index) => {
                   return (
                     <div class="col-sm-4 py-2">
                       <div class="card h-100">
