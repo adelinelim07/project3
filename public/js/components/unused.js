@@ -271,3 +271,19 @@ class Trip extends React.Component {
     );
   }
 }
+
+
+showTrip =(id, index)=>{
+  fetch("/maindashboard/" + id)
+    .then(response => response.json())
+  this.setState({
+    mainTrips: [
+      ...this.state.mainTrips.slice(0, index),
+      {
+        ...this.state.mainTrips[index],
+        show: !this.state.mainTrips[index].show
+      },
+      ...this.state.mainTrips.slice(index + 1)
+    ]
+  })
+}

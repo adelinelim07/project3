@@ -1,3 +1,5 @@
+const { BrowserRouter, Link, Switch, Route, browserHistory } = ReactRouterDOM;
+
 class MainTrip extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +11,8 @@ class MainTrip extends React.Component {
       startDate: "",
       endDate: "",
       _id: "",
+      showDashboard: true,
+      showTrips: false,
       mainTrips: []
     };
     this.handleChange = this.handleChange.bind(this);
@@ -22,6 +26,17 @@ class MainTrip extends React.Component {
       });
     console.log("Data Refreshed");
   };
+
+  toggleView =(tripID,tripTitle)=>{
+    this.setState({
+      showDashboard: !this.state.showDashboard,
+      showTrips: !this.state.showTrips,
+      _id: tripID,
+      title: tripTitle
+    })
+    console.log(tripID);
+  }
+  
 
   deleteMainTrip = (id, index) => {
     fetch("/maindashboard/" + id, {
@@ -118,6 +133,9 @@ class MainTrip extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {this.state.showTrips && <Trip toggleView={this.toggleView} trip={this.state._id} tripTitle={this.state.title}/>}
+        {this.state.showDashboard && 
+        <div>
         <h1>Main Dashboard</h1>
         <button
           type="button"
@@ -127,7 +145,7 @@ class MainTrip extends React.Component {
         >
           Add New Trip
         </button>
-        {/* bootstrap card not working */}
+        
         {/* <div class="card" style="width: 18rem;">
           <img src="..." class="card-img-top" alt="..." />
           <div class="card-body">
@@ -149,7 +167,11 @@ class MainTrip extends React.Component {
             {this.state.mainTrips.map((mainTrips, index) => {
               return (
                 <tr>
-                  <td>{mainTrips.title}</td>
+                  <td><button 
+                    class="bg-transparent border-0"
+                    onClick={()=>this.toggleView(mainTrips._id,mainTrips.title)}
+                  >
+                    {mainTrips.title}</button></td>
                   <td>
                     <ButtonModal
                       trip={mainTrips}
@@ -172,6 +194,8 @@ class MainTrip extends React.Component {
             })}
           </tbody>
         </table>
+        
+        
 
         {/* NEW TRIP MODAL */}
         <div
@@ -218,6 +242,8 @@ class MainTrip extends React.Component {
             </div>
           </div>
         </div>
+        </div>
+        }
       </React.Fragment>
     );
   }
