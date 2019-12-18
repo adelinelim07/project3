@@ -99,10 +99,13 @@ class Login extends React.Component {
                   onChange={this.handleChange}
                   required
                 />
+
                 <p style={{ color: "red" }}>{this.state.message}</p>
                 <button class="btn btn-lg btn-danger btn-block" type="submit">
                   Sign in
                 </button>
+                <br />
+                <a href="/signup">Sign Up Now !</a>
                 <p class="mt-5 mb-3 text-muted">Travel Organiser &copy; 2019</p>
               </form>
             </div>

@@ -83,9 +83,9 @@ class MainTrip extends React.Component {
     this.setState({ [event.target.id]: event.target.value });
   };
 
-  // changeState = (key, value) => {
-  //   this.setState({ [key]: value });
-  // };
+  changeState = (key, value) => {
+    this.setState({ [key]: value });
+  };
 
   clearState = () => {
     this.setState({
