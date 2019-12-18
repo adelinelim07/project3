@@ -83,10 +83,20 @@ class MainTrip extends React.Component {
     this.setState({ [event.target.id]: event.target.value });
   };
 
-  changeState = (key, value) => {
-    this.setState({ [key]: value });
-  };
+  // changeState = (key, value) => {
+  //   this.setState({ [key]: value });
+  // };
 
+  clearState = () => {
+    this.setState({
+      title: "",
+      description: "",
+      country: "",
+      image: "",
+      startDate: "",
+      endDate: ""
+    });
+  };
   //create new tripData entry
   handleSubmit = event => {
     event.preventDefault();
@@ -129,7 +139,6 @@ class MainTrip extends React.Component {
   render() {
     return (
       <React.Fragment>
-        
         {this.state.showTrips && (
           <Trip
             toggleView={this.toggleView}
@@ -145,6 +154,7 @@ class MainTrip extends React.Component {
               class="btn btn-primary"
               data-toggle="modal"
               data-target="#newTripModal"
+              // onClick={this.clearState}
             >
               Add New Trip
             </button>
@@ -246,6 +256,7 @@ class MainTrip extends React.Component {
                         class="form-control"
                         placeholder="Title"
                         onChange={this.handleChange}
+                        value={this.state.title}
                         id="title"
                       />
                       <input
@@ -253,6 +264,7 @@ class MainTrip extends React.Component {
                         class="form-control"
                         placeholder="Description"
                         onChange={this.handleChange}
+                        value={this.state.description}
                         id="description"
                       />
                       <input
@@ -260,6 +272,7 @@ class MainTrip extends React.Component {
                         class="form-control"
                         placeholder="Country"
                         onChange={this.handleChange}
+                        value={this.state.country}
                         id="country"
                       />
                       <input
@@ -267,6 +280,7 @@ class MainTrip extends React.Component {
                         class="form-control"
                         placeholder="Image URL"
                         onChange={this.handleChange}
+                        value={this.state.image}
                         id="image"
                       />
                       <input
@@ -274,6 +288,7 @@ class MainTrip extends React.Component {
                         class="form-control"
                         placeholder="Start Date"
                         onChange={this.handleChange}
+                        value={this.state.startDate}
                         id="startDate"
                       />
                       <input
@@ -281,6 +296,7 @@ class MainTrip extends React.Component {
                         class="form-control"
                         placeholder="End Date"
                         onChange={this.handleChange}
+                        value={this.state.endDate}
                         id="endDate"
                       />
                     </div>
