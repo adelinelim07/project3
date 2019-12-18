@@ -34,8 +34,8 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
+        {/* <div style={{ height: "100vh", width: "100vw" }}> */}
         <div>
-          <hr />
           <Switch>
             <Route exact path="/">
               {this.state.currentUser ? (
@@ -45,7 +45,10 @@ class App extends React.Component {
               )}
             </Route>
             <Route path="/maindashboard">
-              <MainTrip currentUserId={this.state.currentUser._id} logout={this.logout} />
+              <MainTrip
+                currentUserId={this.state.currentUser._id}
+                logout={this.logout}
+              />
             </Route>
             <Route path="/signup">
               <Signup />
@@ -57,6 +60,7 @@ class App extends React.Component {
         </div>
 
         {/* <Trip/> */}
+        {/* </div> */}
       </BrowserRouter>
     );
   }
