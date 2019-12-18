@@ -39,9 +39,6 @@ class App extends React.Component {
             <li>
               <Link to="/maindashboard">Dashboard</Link>
             </li>
-            <li>
-              <Link to="/itinerary">Itinerary</Link>
-            </li>
           </ul>
           <hr />
           <Switch>
@@ -57,9 +54,6 @@ class App extends React.Component {
             </Route>
             <Route path="/signup">
               <Signup />
-            </Route>
-            <Route path="/itinerary">
-              <Itinerary />
             </Route>
           </Switch>
         </div>
