@@ -73,7 +73,7 @@ class Login extends React.Component {
 
         {this.state.mainPageView && 
         <div>
-        <h1>TRIPS</h1>
+        <h1>TRAVEL LAH!</h1>
         <p>A platform for travel khakis <br></br>to plan trips together :)</p>
         <button class="enterButton" onClick={()=>this.toggleView()}>ENTER</button>
         </div> }
@@ -82,7 +82,7 @@ class Login extends React.Component {
 
         <div id="loginBox" class="text-center">
           <img class="mb-4" alt="" width="50%" height="50%" />
-          <h2 class="h3 mb-3 font-weight-normal">Login Page</h2>
+          <h2>TRAVEL LAH!</h2>
           <div class="tab-content" id="myTabContent">
             <div
               class="tab-pane fade show active"
@@ -120,12 +120,12 @@ class Login extends React.Component {
                 />
 
                 <p style={{ color: "red" }}>{this.state.message}</p>
-                <button class="btn btn-lg btn-danger btn-block" type="submit">
-                  Sign in
+                <button id="loginButton" type="submit">
+                  Log In
                 </button>
                 <br />
                 <Link to= "/signup">
-                <a>Sign Up Now !</a>
+                <a id="signup">Sign Up Now !</a>
                 </Link>
                 <p class="mt-5 mb-3 text-muted">Travel Organiser &copy; 2019</p>
               </form>
