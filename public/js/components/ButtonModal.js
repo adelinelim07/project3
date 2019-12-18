@@ -12,6 +12,9 @@ class ButtonModal extends React.Component {
   updateTrip() {
     console.log(this.props);
     this.props.changeState("title", this.props.trip.title);
+    this.props.changeState("description", this.props.trip.description);
+    this.props.changeState("country", this.props.trip.country);
+    this.props.changeState("image", this.props.trip.image);
     this.props.changeState("_id", this.props.trip._id);
   }
 

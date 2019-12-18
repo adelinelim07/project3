@@ -57,7 +57,7 @@ class Signup extends React.Component {
       <React.Fragment>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
-          <label for="firstName">First Name:</label>
+          {/* <label for="firstName">First Name:</label>
           <input type="text" onChange={this.handleChange} name="firstName" />
           <br />
           <label for="lastName">Last Name:</label>
@@ -73,7 +73,61 @@ class Signup extends React.Component {
           <input type="password" onChange={this.handleChange} name="password" />
           <br />
 
-          <input type="submit" value="Sign Up!" />
+          <input type="submit" value="Sign Up!" /> */}
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="firstName"
+              // aria-describedby="emailHelp"
+              placeholder="First Name"
+              onChange={this.handleChange}
+            />
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="lastName"
+              // aria-describedby="emailHelp"
+              placeholder="Last Name"
+              onChange={this.handleChange}
+            />
+            <label for="email">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              name="email"
+              // aria-describedby="emailHelp"
+              placeholder="Email"
+              onChange={this.handleChange}
+            />
+            <label for="username">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              // aria-describedby="emailHelp"
+              placeholder="Username"
+              onChange={this.handleChange}
+            />
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              // aria-describedby="emailHelp"
+              placeholder="Password"
+              onChange={this.handleChange}
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            onclick="location.href='/'"
+          >
+            Sign Up!
+          </button>
         </form>
       </React.Fragment>
     );

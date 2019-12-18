@@ -7,6 +7,7 @@ class Login extends React.Component {
       currentUser: "",
       loginView: false,
       mainPageView: true,
+      message: ""
     };
   }
 
@@ -37,10 +38,21 @@ class Login extends React.Component {
         return loggedInUser.json();
       })
       .then(jsonedUser => {
-        this.setState({
-          currentUser: jsonedUser
-        });
-        console.log("Current User is:", this.state.currentUser);
+        if (jsonedUser.message === null) {
+          this.setState({
+            message: "User cannot be found"
+          });
+        } else if (jsonedUser.message === false) {
+          this.setState({
+            message: "Wrong Password"
+          });
+        } else {
+          console.log(jsonedUser);
+          this.setState({
+            currentUser: jsonedUser
+          });
+          console.log("Current User is:", this.state.currentUser);
+        }
       })
       .then(() => {
         this.props.userState(this.state.currentUser);
@@ -106,9 +118,13 @@ class Login extends React.Component {
                   onChange={this.handleChange}
                   required
                 />
+
+                <p style={{ color: "red" }}>{this.state.message}</p>
                 <button class="btn btn-lg btn-danger btn-block" type="submit">
                   Sign in
                 </button>
+                <br />
+                <a href="/signup">Sign Up Now !</a>
                 <p class="mt-5 mb-3 text-muted">Travel Organiser &copy; 2019</p>
               </form>
               </div>
