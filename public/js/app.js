@@ -14,6 +14,13 @@ class App extends React.Component {
       currentUser: ""
     };
   }
+
+  logout = () => {
+    this.setState({
+      currentUser: ""
+    });
+  };
+
   userState = user => {
     this.setState(
       {
@@ -53,7 +60,10 @@ class App extends React.Component {
               )}
             </Route>
             <Route path="/maindashboard">
-              <MainTrip currentUserId={this.state.currentUser._id} />
+              <MainTrip
+                currentUserId={this.state.currentUser._id}
+                logout={this.logout}
+              />
             </Route>
             <Route path="/signup">
               <Signup />

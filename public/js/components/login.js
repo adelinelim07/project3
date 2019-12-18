@@ -1,3 +1,12 @@
+const {
+  BrowserRouter,
+  Link,
+  Switch,
+  Route,
+  browserHistory,
+  Redirect
+} = ReactRouterDOM;
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -53,64 +62,76 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <head>
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="../../css/login-style.css"
-          />
-        </head>
+        <BrowserRouter>
+          <head>
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href="../../css/login-style.css"
+            />
+          </head>
 
-        <div class="text-center">
-          <img class="mb-4" alt="" width="50%" height="50%" />
-          <h1 class="h3 mb-3 font-weight-normal">Login Page</h1>
-          <div class="tab-content" id="myTabContent">
-            <div
-              class="tab-pane fade show active"
-              id="home"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-            >
-              <form class="form-signin" onSubmit={this.handleSubmit}>
-                <label for="inputEmail" class="sr-only">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  class="form-control"
-                  placeholder="Username"
-                  value={this.state.username}
-                  onChange={this.handleChange}
-                  required
-                  autofocus
-                />
-                <label for="inputPassword" class="sr-only">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                  required
-                />
+          <div class="text-center">
+            <img class="mb-4" alt="" width="50%" height="50%" />
+            <h1 class="h3 mb-3 font-weight-normal">Login Page</h1>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <form class="form-signin" onSubmit={this.handleSubmit}>
+                  <label for="inputEmail" class="sr-only">
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="form-control"
+                    placeholder="Username"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                    required
+                    autofocus
+                  />
+                  <label for="inputPassword" class="sr-only">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    required
+                  />
 
-                <p style={{ color: "red" }}>{this.state.message}</p>
-                <button class="btn btn-lg btn-danger btn-block" type="submit">
-                  Sign in
-                </button>
-                <br />
-                <a href="/signup">Sign Up Now !</a>
-                <p class="mt-5 mb-3 text-muted">Travel Organiser &copy; 2019</p>
-              </form>
+                  <p style={{ color: "red" }}>{this.state.message}</p>
+                  <button class="btn btn-lg btn-danger btn-block" type="submit">
+                    Sign in
+                  </button>
+                  <br />
+
+                  <div>
+                    <Link to="/signup">Sign Up Now!</Link>
+                  </div>
+                  <p class="mt-5 mb-3 text-muted">
+                    Travel Organiser &copy; 2019
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+          <Switch>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </React.Fragment>
     );
   }

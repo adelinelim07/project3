@@ -158,6 +158,11 @@ class MainTrip extends React.Component {
             >
               Add New Trip
             </button>
+            <Link to="/" onClick={this.props.logout}>
+              <button type="button" class="btn btn-primary">
+                Log Out
+              </button>
+            </Link>
 
             {/* <div class="card" style="width: 18rem;">
           <img src="..." class="card-img-top" alt="..." />
