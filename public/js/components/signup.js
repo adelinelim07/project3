@@ -57,23 +57,6 @@ class Signup extends React.Component {
       <React.Fragment>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
-          {/* <label for="firstName">First Name:</label>
-          <input type="text" onChange={this.handleChange} name="firstName" />
-          <br />
-          <label for="lastName">Last Name:</label>
-          <input type="text" onChange={this.handleChange} name="lastName" />
-          <br />
-          <label for="email">Email:</label>
-          <input type="email" onChange={this.handleChange} name="email" />
-          <br />
-          <label for="username">Username:</label>
-          <input type="text" onChange={this.handleChange} name="username" />
-          <br />
-          <label for="password">Password:</label>
-          <input type="password" onChange={this.handleChange} name="password" />
-          <br />
-
-          <input type="submit" value="Sign Up!" /> */}
           <div class="form-group">
             <label for="firstName">First Name</label>
             <input

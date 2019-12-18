@@ -25,24 +25,16 @@ class App extends React.Component {
     );
   };
 
+  logout = () => {
+    this.setState({
+      currentUser: ""
+    });
+  };
+
   render() {
     return (
       <BrowserRouter>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-            <li>
-              <Link to="/maindashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/itinerary">Itinerary</Link>
-            </li>
-          </ul>
           <hr />
           <Switch>
             <Route exact path="/">
@@ -53,7 +45,7 @@ class App extends React.Component {
               )}
             </Route>
             <Route path="/maindashboard">
-              <MainTrip currentUserId={this.state.currentUser._id} />
+              <MainTrip currentUserId={this.state.currentUser._id} logout={this.logout} />
             </Route>
             <Route path="/signup">
               <Signup />

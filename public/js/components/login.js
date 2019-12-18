@@ -124,7 +124,9 @@ class Login extends React.Component {
                   Sign in
                 </button>
                 <br />
-                <a href="/signup">Sign Up Now !</a>
+                <Link to= "/signup">
+                <a>Sign Up Now !</a>
+                </Link>
                 <p class="mt-5 mb-3 text-muted">Travel Organiser &copy; 2019</p>
               </form>
               </div>
