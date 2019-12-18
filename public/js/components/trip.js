@@ -29,7 +29,7 @@ class Trip extends React.Component {
     console.log("Data Refreshed");
   };
 
-  incrementLikes = ideaCard => {
+  incrementLikes=(ideaCard)=> {
     fetch("ideaCard/" + ideaCard._id, {
       body: JSON.stringify({
         title: ideaCard.title,
@@ -40,7 +40,7 @@ class Trip extends React.Component {
         comments: ideaCard.comments,
         contact: ideaCard.contact,
         category: ideaCard.category,
-        likeClicks: ideaCard.likeClicks + 1
+        likeClicks: ideaCard.likeClicks +1
       }),
       method: "PUT",
       headers: {
@@ -83,16 +83,15 @@ class Trip extends React.Component {
   deleteIdeaCard = (id, index) => {
     fetch("ideaCard/" + id, {
       method: "DELETE"
+    }).then(data => {
+      this.setState({
+        ideaCards: [
+          ...this.state.ideaCards.slice(0, index),
+          ...this.state.ideaCards.slice(index + 1)
+        ]
+      });
     })
-      .then(data => {
-        this.setState({
-          ideaCards: [
-            ...this.state.ideaCards.slice(0, index),
-            ...this.state.ideaCards.slice(index + 1)
-          ]
-        });
-      })
-      .then(responseJson => this.dataRefresh());
+    .then(responseJson => this.dataRefresh())
   };
 
   componentDidMount = () => {

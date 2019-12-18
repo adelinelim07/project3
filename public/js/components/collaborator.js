@@ -1,7 +1,7 @@
 class Collaborators extends React.Component {
     render() {
       return (
-        <div>
+        <div class="py-2">
           <button
             type="button"
             class="btn btn-primary"

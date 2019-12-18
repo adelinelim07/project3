@@ -1,4 +1,19 @@
-@import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+:root {
+  --white: #ffffff;
+  --black: #0B0C10;
+  --grey: #1F2833;
+  --lightgrey: #C5C6C7;
+  --brightteal: #66FCF1;
+  --teal: #45A29E;
+}
+
+h1 {
+  color: var(--teal);
+}
+
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
@@ -26,8 +41,8 @@
 }
 #cssmenu {
   width: auto;
-  border-bottom: 3px solid #47c9af;
-  font-family: Raleway, sans-serif;
+  border-bottom: 3px solid var(--brightteal);
+  font-family: 'Amatic SC', cursive;
   line-height: 1;
 }
 #cssmenu ul {
@@ -94,5 +109,5 @@
 #cssmenu > ul > li.active > a:after,
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after {
-  background: #47c9af;
+  background: var(--brightteal);
 }
