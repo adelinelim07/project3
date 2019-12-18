@@ -74,7 +74,9 @@ class MainTrip extends React.Component {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then(this.fetchTrips);
+    })
+    .then(this.fetchTrips)
+    .then(this.clearState)
 
     console.log("hihi, running async");
   };
