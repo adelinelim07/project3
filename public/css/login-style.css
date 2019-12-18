@@ -1,6 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+
 html,
 body {
   height: 100%;
+}
+
+:root {
+  --black: #0B0C10;
+  --grey: #1F2833;
+  --lightgrey: #C5C6C7;
+  --brightteal: #66FCF1;
+  --teal: #45A29E;
+}
+
+h1 {
+  color: var(--brightteal);
+  font-family: 'Amatic SC', cursive !important;
+  /* font-family: 'Oswald', sans-serif; */
+  font-size: 25vw;
+  font-weight: 550;
+  text-align: center;
+}
+
+p {
+  color: var(--lightgrey);
+  text-align: center;
+  font-family: 'Amatic SC', cursive !important;
+  font-size: 3vw;
+}
+
+.enterButton {
+  text-align: center;
+  background-color: var(--black);
+  color: var(--lightgrey);
+  border: 2px solid var(--brightteal);
+  margin:auto;
+  display:block;
+  margin-top: 50px;
+  font-family: 'Amatic SC', cursive;
+  font-size: 3vw;
+  
 }
 
 body {
@@ -54,7 +95,7 @@ body {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 3px 3px 7px grey;
-  background-color: white;
+  background-color: rgba(248, 240, 240, 0.7);
   margin-left: 70%;
   margin-right: 100px;
 }
@@ -67,7 +108,8 @@ body {
 }
 
 body {
-  background-image: url("https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-position: center;
   background-size: cover;
+  
 }

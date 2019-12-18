@@ -35,7 +35,7 @@ class ButtonModal extends React.Component {
           data-toggle="modal"
           data-target={"#modal" + this.props.index}
         >
-          UPDATE
+          <i class="material-icons">edit</i>
         </button>
 
         {/* UPDATE TRIP MODAL */}

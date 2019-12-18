@@ -216,7 +216,7 @@ class MainTrip extends React.Component {
                             this.deleteMainTrip(mainTrips._id, index)
                           }
                         >
-                          DELETE
+                          <i class="material-icons">delete</i>
                         </button>
                       </td>
                     </tr>

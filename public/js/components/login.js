@@ -5,8 +5,18 @@ class Login extends React.Component {
       username: "",
       password: "",
       currentUser: "",
+      loginView: false,
+      mainPageView: true,
       message: ""
     };
+  }
+
+  toggleView = ()=>{
+    console.log("toggling view")
+    this.setState({ 
+      loginView: !this.state.loginView,
+      mainPageView: !this.state.mainPageView,
+    })
   }
 
   // HandleChange & handleSubmit
@@ -61,9 +71,18 @@ class Login extends React.Component {
           />
         </head>
 
-        <div class="text-center">
+        {this.state.mainPageView && 
+        <div>
+        <h1>TRIPS</h1>
+        <p>A platform for travel khakis <br></br>to plan trips together :)</p>
+        <button class="enterButton" onClick={()=>this.toggleView()}>ENTER</button>
+        </div> }
+
+        {this.state.loginView && 
+
+        <div id="loginBox" class="text-center">
           <img class="mb-4" alt="" width="50%" height="50%" />
-          <h1 class="h3 mb-3 font-weight-normal">Login Page</h1>
+          <h2 class="h3 mb-3 font-weight-normal">Login Page</h2>
           <div class="tab-content" id="myTabContent">
             <div
               class="tab-pane fade show active"
@@ -108,9 +127,10 @@ class Login extends React.Component {
                 <a href="/signup">Sign Up Now !</a>
                 <p class="mt-5 mb-3 text-muted">Travel Organiser &copy; 2019</p>
               </form>
+              </div>
             </div>
           </div>
-        </div>
+          }
       </React.Fragment>
     );
   }
