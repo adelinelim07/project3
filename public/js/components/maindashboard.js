@@ -75,8 +75,8 @@ class MainTrip extends React.Component {
         "Content-Type": "application/json"
       }
     })
-    .then(this.fetchTrips)
-    .then(this.clearState)
+      .then(this.fetchTrips)
+      .then(this.clearState);
 
     console.log("hihi, running async");
   };
@@ -156,6 +156,7 @@ class MainTrip extends React.Component {
               class="btn btn-primary"
               data-toggle="modal"
               data-target="#newTripModal"
+              onClick={this.clearState}
             >
               Add New Trip
             </button>
