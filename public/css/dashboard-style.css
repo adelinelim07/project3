@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet');
-@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Oswald&display=swap");
 
 /*Globals*/
 
- :root {
+:root {
   --white: #ffffff;
-  --black: #0B0C10;
-  --grey: #1F2833;
-  --lightgrey: #C5C6C7;
-  --brightteal: #66FCF1;
-  --teal: #45A29E;
+  --black: #0b0c10;
+  --grey: #1f2833;
+  --lightgrey: #c5c6c7;
+  --brightteal: #66fcf1;
+  --teal: #45a29e;
 }
 
 /* Links */
@@ -50,9 +50,13 @@ body {
   -ms-flex-pack: center;
   -webkit-box-pack: center;
   justify-content: center;
-  color: #fff;
+  color: black;
   text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  color: white;
 }
 
 /* .cover-container {
@@ -69,7 +73,7 @@ body {
 .masthead-brand {
   margin-bottom: 0;
   color: var(--brightteal);
-  font-family: 'Amatic SC', cursive !important;
+  font-family: "Amatic SC", cursive !important;
 }
 
 .nav-masthead .nav-link {

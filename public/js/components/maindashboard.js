@@ -158,7 +158,7 @@ class MainTrip extends React.Component {
                 href="../../css/dashboard-style.css"
               />
             </head>
-            <MastHead logout={this.props.logout}/>
+            <MastHead logout={this.props.logout} />
 
             <h1>My Trips</h1>
             <button
@@ -191,6 +191,10 @@ class MainTrip extends React.Component {
                         {" "}
                         <button
                           class="bg-transparent border-0"
+                          style={{
+                            color: "white",
+                            textDecorationLine: "underline"
+                          }}
                           onClick={() =>
                             this.toggleView(mainTrips._id, mainTrips.title)
                           }
