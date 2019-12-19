@@ -40,6 +40,9 @@ app.use("/sessions", sessionsController);
 
 const mainTripController = require("./controllers/tripCard.js");
 app.use("/maindashboard", mainTripController);
+
+const planController = require("./controllers/plan.js");
+app.use("/itinerary", planController);
 //test route
 app.get("/", (req, res) => {
   res.send("Hello World");

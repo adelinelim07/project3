@@ -19,7 +19,7 @@ class Trip extends React.Component {
     console.log("Data Refreshed");
   };
 
-  incrementLikes=(ideaCard)=> {
+  incrementLikes = ideaCard => {
     fetch("ideaCard/" + ideaCard._id, {
       body: JSON.stringify({
         title: ideaCard.title,
@@ -30,7 +30,7 @@ class Trip extends React.Component {
         comments: ideaCard.comments,
         contact: ideaCard.contact,
         category: ideaCard.category,
-        likeClicks: ideaCard.likeClicks +1
+        likeClicks: ideaCard.likeClicks + 1
       }),
       method: "PUT",
       headers: {
@@ -73,15 +73,16 @@ class Trip extends React.Component {
   deleteIdeaCard = (id, index) => {
     fetch("ideaCard/" + id, {
       method: "DELETE"
-    }).then(data => {
-      this.setState({
-        ideaCards: [
-          ...this.state.ideaCards.slice(0, index),
-          ...this.state.ideaCards.slice(index + 1)
-        ]
-      });
     })
-    .then(responseJson => this.dataRefresh())
+      .then(data => {
+        this.setState({
+          ideaCards: [
+            ...this.state.ideaCards.slice(0, index),
+            ...this.state.ideaCards.slice(index + 1)
+          ]
+        });
+      })
+      .then(responseJson => this.dataRefresh());
   };
   
   componentDidMount = () => {
@@ -145,6 +146,15 @@ class Trip extends React.Component {
                   <i class="material-icons">beenhere</i>
                   <br></br>
                   <span></span>Places Of Interest
+                </Link>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <Link to="/itinerary">
+                  <i class="material-icons">map</i>
+                  <br></br>
+                  <span></span>Itinerary
                 </Link>
               </a>
             </li>
@@ -213,6 +223,9 @@ class Trip extends React.Component {
                 incrementLikes={this.incrementLikes}
                 dataRefresh={this.dataRefresh}
               />
+            </Route>
+            <Route exact path="/itinerary">
+              <Itinerary _id={this.state.trip} />
             </Route>
           </Switch>
       </BrowserRouter>
