@@ -306,6 +306,7 @@ class MainTrip extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.startDate}
                         id="startDate"
+                        required
                       />
                       <input
                         type="date"
@@ -314,6 +315,7 @@ class MainTrip extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.endDate}
                         id="endDate"
+                        required
                       />
                     </div>
                     <div class="modal-footer">
