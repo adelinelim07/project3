@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const session = require("express-session");
+const nodemailer = require('nodemailer');
 const db = mongoose.connection;
 
 // Environment Variables
@@ -30,6 +31,18 @@ app.use(
     saveUninitialized: false
   })
 );
+
+// app.use(
+//   nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//     user: 'travel.lah.sg@gmail.com',
+//     pass: 'travelLAH'
+//   }
+// })
+// );
+
+
 
 // Routes
 const usersController = require("./controllers/users.js");
