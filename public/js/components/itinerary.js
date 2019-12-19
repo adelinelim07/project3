@@ -8,62 +8,9 @@ class Itinerary extends React.Component {
         {
           day: 1,
           ideas: []
-        } //temporary values: days
-        // ,{
-        //   day: 2,
-        //   ideas: []
-        // },
-        // {
-        //   day: 3,
-        //   ideas: []
-        // }
+        }
       ],
-      ideaPool: [
-        //temporary values: ideas
-        // {
-        //   _id: "5df8bbef4495283f30a4d9df",
-        //   comments: [""],
-        //   title: "Accom1",
-        //   description: "desc123",
-        //   location: "",
-        //   image: "",
-        //   url: "",
-        //   contact: null,
-        //   category: "Accommodation",
-        //   likeClicks: 4,
-        //   trip: "5df8807f23d0e20cccfc5dff",
-        //   __v: 0
-        // },
-        // {
-        //   _id: "5df8bf9b7277f640d438efcb",
-        //   comments: [""],
-        //   title: "Titanic Voyage",
-        //   description: "description 123",
-        //   location: "",
-        //   image: "",
-        //   url: "",
-        //   contact: null,
-        //   category: "Transport",
-        //   likeClicks: 0,
-        //   trip: "5df8807f23d0e20cccfc5dff",
-        //   __v: 0
-        // },
-        // {
-        //   _id: "5df8bfae7277f640d438efcc",
-        //   comments: [""],
-        //   title: "Festival at the Beach",
-        //   description:
-        //     "Enter the futuristic year of 1984, an age where ducks run wild in a frantic battle for glory. Blast your friends with Shotguns, Net Guns, Mind Control Rays, Saxophones, Magnet Guns, and much, much more. This is DUCK GAME. Don't blink.",
-        //   location: "",
-        //   image: "",
-        //   url: "",
-        //   contact: 123456,
-        //   category: "Places Of Interest",
-        //   likeClicks: 0,
-        //   trip: "5df8807f23d0e20cccfc5dff",
-        //   __v: 0
-        // }
-      ]
+      ideaPool: []
     };
   }
 
@@ -76,6 +23,7 @@ class Itinerary extends React.Component {
       .then(fetchedIdeas => {
         if (fetchedIdeas) {
           // console.log("Itinerary already exists in the database.");
+          this.reloadIdeaPool();
           this.setState({
             _id: fetchedIdeas._id,
             trip: fetchedIdeas.trip,
@@ -85,17 +33,21 @@ class Itinerary extends React.Component {
           console.log(
             "no pre-existing Itinerary in database, creating new one."
           );
-          fetch("/ideaCard/filter/" + this.state.tripID)
-            .then(response => {
-              return response.json();
-            })
-            .then(jsonedResult => {
-              this.setState({
-                ideaPool: [...this.state.ideaPool, ...jsonedResult]
-              });
-              this.creationSpell();
-            });
+          this.reloadIdeaPool().then(this.creationSpell());
         }
+      });
+  };
+
+  reloadIdeaPool = () => {
+    // console.log("fetching ideas");
+    fetch("/ideaCard/filter/" + this.state.tripID)
+      .then(response => {
+        return response.json();
+      })
+      .then(jsonedResult => {
+        this.setState({
+          ideaPool: [...jsonedResult]
+        });
       });
   };
 
@@ -119,11 +71,12 @@ class Itinerary extends React.Component {
   };
 
   alterationSpell = () => {
-    fetch("/itinerary/edit/", {
+    fetch("/itinerary/edit/" + this.state._id, {
       body: JSON.stringify({
         tripID: this.state.tripID,
         trip: this.state.trip,
         ideaPool: this.state.ideaPool
+        //, currentDay: this.state.currentDay
       }),
       method: "PUT",
       headers: {
@@ -141,14 +94,17 @@ class Itinerary extends React.Component {
     this.fetchData();
   }
 
-  // componentDidUpdate() {
-  //   this.continuumShift();
-  // }
+  componentDidUpdate() {
+    this.alterationSpell();
+  }
 
   render() {
     return (
       <div class="row">
         <div class="col-md-3">
+          <button type="button" class="btn btn-primary btn-block btn-lg">
+            <i class="material-icons">speaker_notes</i>
+          </button>
           {this.state.trip.map((days, index) => {
             return (
               <button type="button" class="btn btn-lg btn-success btn-block">
@@ -156,7 +112,7 @@ class Itinerary extends React.Component {
               </button>
             );
           })}
-          <button type="button" class="btn btn-success btn-block btn-lg">
+          <button type="button" class="btn btn-basic btn-block btn-lg">
             <i class="material-icons">note_add</i>
           </button>
         </div>
