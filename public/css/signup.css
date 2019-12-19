@@ -9,6 +9,10 @@ body {
   background-size: cover;
 }
 
+h1 {
+  margin-bottom: 2%;
+}
+
 body {
   display: -ms-flexbox;
   display: -webkit-box;
