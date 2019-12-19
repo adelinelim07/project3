@@ -149,7 +149,30 @@ class MainTrip extends React.Component {
           />
         )}
         {this.state.showDashboard && (
-          <div>
+          <React.Fragment>
+            <head>
+              <link
+                rel="stylesheet"
+                type="text/css"
+                href="../../css/dashboard-style.css"
+              />
+            </head>
+            <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+              <header class="masthead mb-auto">
+                <div class="inner">
+                  <h3 class="masthead-brand">TRAVEL LAH!</h3>
+                  <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" href="#">
+                      Home
+                    </a>
+                    <Link class="nav-link" to="/" onClick={this.props.logout}>
+                      <a>LOG OUT</a>
+                    </Link>
+                  </nav>
+                </div>
+              </header>
+            </div>
+
             <h1>My Trips</h1>
             <button
               type="button"
@@ -160,11 +183,6 @@ class MainTrip extends React.Component {
             >
               Add New Trip
             </button>
-            <Link to="/" onClick={this.props.logout}>
-              <button type="button" class="btn btn-primary">
-                Log Out
-              </button>
-            </Link>
 
             <table class="table table-striped">
               <thead>
@@ -314,7 +332,7 @@ class MainTrip extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
+          </React.Fragment>
         )}
       </React.Fragment>
     );
