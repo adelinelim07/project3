@@ -93,8 +93,11 @@ class Trip extends React.Component {
     return (
       <BrowserRouter>
         <head>
-          <link rel="stylesheet" type="text/css" href="../../css/navbar.css" />
+          <link rel="stylesheet" type="text/css" href="../../css/tripPage.css" />
         </head>
+
+        <MastHead logout={this.props.logout}/>
+
         <div class="container">
           <div class="row">
             <div class="col-8">

@@ -8,7 +8,8 @@ class Signup extends React.Component {
       lastName: "",
       image: "",
       email: "",
-      users: []
+      users: [],
+      redirect: false
     };
   }
 
@@ -49,69 +50,103 @@ class Signup extends React.Component {
         });
         console.log(jsonedUser);
       })
+      .then(() => {
+        // to toggle to true to redirect
+        this.setState({
+          redirect: true
+        });
+      })
       .catch(error => console.log(error));
   };
 
   render() {
+    if (this.state.redirect === true) {
+      return <Redirect to="/" />;
+    }
     return (
       <React.Fragment>
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="firstName"
-              // aria-describedby="emailHelp"
-              placeholder="First Name"
-              onChange={this.handleChange}
-            />
-            <label for="lastName">Last Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="lastName"
-              // aria-describedby="emailHelp"
-              placeholder="Last Name"
-              onChange={this.handleChange}
-            />
-            <label for="email">Email</label>
-            <input
-              type="text"
-              class="form-control"
-              name="email"
-              // aria-describedby="emailHelp"
-              placeholder="Email"
-              onChange={this.handleChange}
-            />
-            <label for="username">Username</label>
-            <input
-              type="text"
-              class="form-control"
-              name="username"
-              // aria-describedby="emailHelp"
-              placeholder="Username"
-              onChange={this.handleChange}
-            />
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              // aria-describedby="emailHelp"
-              placeholder="Password"
-              onChange={this.handleChange}
-            />
+        <head>
+          <link rel="stylesheet" type="text/css" href="../../css/signup.css" />
+        </head>
+        <div>
+          <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+              <div class="inner">
+                <h3 class="masthead-brand">TRAVEL LAH!</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                  <Link class="nav-link active" to="/">
+                    <a>BACK TO HOME</a>
+                  </Link>
+                </nav>
+              </div>
+            </header>
           </div>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            onclick="location.href='/'"
-          >
-            Sign Up!
-          </button>
-        </form>
+          <h1>Sign Up</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div class="form-group col-md-4">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="firstName"
+                  // aria-describedby="emailHelp"
+                  placeholder="First Name"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="lastName"
+                  // aria-describedby="emailHelp"
+                  placeholder="Last Name"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="email"
+                  // aria-describedby="emailHelp"
+                  placeholder="Email"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="username"
+                  // aria-describedby="emailHelp"
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  // aria-describedby="emailHelp"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
+            {/* <Link to="/"> */}
+            <button type="submit" class="btn btn-primary">
+              Sign Up!
+            </button>
+            {/* </Link> */}
+          </form>
+        </div>
       </React.Fragment>
     );
   }
