@@ -94,6 +94,22 @@ class ButtonModal extends React.Component {
                     placeholder="Country"
                     id="country"
                   />
+                  <input
+                    type="date"
+                    class="form-control"
+                    defaultValue={this.props.trip.startDate}
+                    onChange={this.changeInput}
+                    placeholder="Start Date"
+                    id="startDate"
+                  />
+                  <input
+                    type="date"
+                    class="form-control"
+                    defaultValue={this.props.trip.endDate}
+                    onChange={this.changeInput}
+                    placeholder="End Date"
+                    id="endDate"
+                  />
                   {/* <input
                     type="text"
                     class="form-control"
