@@ -1,41 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet');
-@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
-
-/*Globals*/
-
- :root {
-  --white: #ffffff;
-  --black: #0B0C10;
-  --grey: #1F2833;
-  --lightgrey: #C5C6C7;
-  --brightteal: #66FCF1;
-  --teal: #45A29E;
-}
-
-/* Links */
-a,
-a:focus,
-a:hover {
-  color: #fff;
-}
-
-/* Custom default button */
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-  border: 0.05rem solid #fff;
-}
-
-/*
- * Base structure
- */
-
-html,
 body {
+  /* margin-top: 5%; */
   height: 100%;
+  color: white;
   /* background-color: #333; */
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
@@ -55,10 +21,6 @@ body {
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
 
-/* .cover-container {
-  max-width: 42em;
-} */
-
 /*
  * Header
  */
@@ -68,8 +30,6 @@ body {
 
 .masthead-brand {
   margin-bottom: 0;
-  color: var(--brightteal);
-  font-family: 'Amatic SC', cursive !important;
 }
 
 .nav-masthead .nav-link {
@@ -101,22 +61,4 @@ body {
   .nav-masthead {
     float: right;
   }
-}
-
-/*
- * Cover
- */
-.cover {
-  padding: 0 1.5rem;
-}
-.cover .btn-lg {
-  padding: 0.75rem 1.25rem;
-  font-weight: 700;
-}
-
-/*
- * Footer
- */
-.mastfoot {
-  color: rgba(255, 255, 255, 0.5);
 }

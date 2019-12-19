@@ -200,8 +200,8 @@ class MainTrip extends React.Component {
                       </td>
                       <td>{mainTrips.description}</td>
                       <td>{mainTrips.country}</td>
-                      <td>{mainTrips.startDate}</td>
-                      <td>{mainTrips.endDate}</td>
+                      <td>{mainTrips.startDate.slice(0, 10)}</td>
+                      <td>{mainTrips.endDate.slice(0, 10)}</td>
                       <td></td>
                       <td>
                         <ButtonModal
