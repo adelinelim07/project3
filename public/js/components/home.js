@@ -1,3 +1,9 @@
-const Home = () => {
-    return <h1>Home</h1>;
-  };
+class Home extends React.Component {
+  render() {
+    return (
+      <div>
+        <Trip />
+      </div>
+    );
+  }
+}

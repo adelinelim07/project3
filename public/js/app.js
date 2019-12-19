@@ -1,35 +1,69 @@
-const { BrowserRouter, Link, Switch, Route, browserHistory } = ReactRouterDOM;
+const {
+  BrowserRouter,
+  Link,
+  Switch,
+  Route,
+  browserHistory,
+  Redirect
+} = ReactRouterDOM;
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: ""
+    };
+  }
+  userState = user => {
+    this.setState(
+      {
+        currentUser: user
+      },
+      () => {
+        console.log("user logged in");
+      }
+    );
+  };
+
+  logout = () => {
+    this.setState({
+      currentUser: ""
+    });
+  };
+
   render() {
     return (
-      // <React.Fragment>
-      //   <h1>Hello World</h1>
-      // </React.Fragment>
       <BrowserRouter>
+        {/* <div style={{ height: "100vh", width: "100vw" }}> */}
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-          <hr />
           <Switch>
             <Route exact path="/">
-              <Home />
+              {this.state.currentUser ? (
+                <Redirect to={"/maindashboard/" + this.state.currentUser._id} />
+              ) : (
+                <Login userState={this.userState} />
+              )}
             </Route>
-            <Route path="/login">
-              <Login />
+            <Route path="/maindashboard">
+              <MainTrip
+                currentUserId={this.state.currentUser._id}
+                logout={this.logout}
+              />
+            </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+            <Route path="/itinerary">
+              <Itinerary />
             </Route>
           </Switch>
         </div>
+
+        {/* <Trip/> */}
+        {/* </div> */}
       </BrowserRouter>
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.querySelector(".container"));

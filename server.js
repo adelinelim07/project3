@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const session = require("express-session");
 const db = mongoose.connection;
 
 // Environment Variables
@@ -20,23 +21,39 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 
 // Middleware
 app.use(express.json()); // returns middleware that only parses JSON
-
 app.use(express.static("public"));
 
+app.use(
+  session({
+    secret: "mutusamy chen",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+// Routes
+const usersController = require("./controllers/users.js");
+app.use("/users", usersController);
+
+const sessionsController = require("./controllers/sessions.js");
+app.use("/sessions", sessionsController);
+
+const mainTripController = require("./controllers/tripCard.js");
+app.use("/maindashboard", mainTripController);
 //test route
-app.get('/', (req, res) =>{
-    res.send('Hello World');
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
 // Routes
-// const bookmarksController = require("./controllers/bookmarks.js");
-// app.use("/bookmarks", bookmarksController);
+const ideaCardController = require("./controllers/ideaCard.js");
+app.use("/ideaCard", ideaCardController);
 
 // this will catch any route that doesn't exist
 app.get("*", (req, res) => {
-  res.status(404).json("Sorry, page not found");
+  res.status(404).json("Sorry, page not found"); // to be replaced with a nicer looking 404 page.
 });
 
 app.listen(PORT, () => {
-  console.log("Let's get things done on port", PORT);
+  console.log("Let's get things done on port ", PORT);
 });
