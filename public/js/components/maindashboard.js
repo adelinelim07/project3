@@ -187,7 +187,7 @@ class MainTrip extends React.Component {
                 {this.state.mainTrips.map((mainTrips, index) => {
                   return (
                     <tr>
-                      <td>
+                      <td class="align-middle">
                         {" "}
                         <button
                           class="bg-transparent border-0"
@@ -202,10 +202,14 @@ class MainTrip extends React.Component {
                           {mainTrips.title}
                         </button>
                       </td>
-                      <td>{mainTrips.description}</td>
-                      <td>{mainTrips.country}</td>
-                      <td>{mainTrips.startDate.slice(0, 10)}</td>
-                      <td>{mainTrips.endDate.slice(0, 10)}</td>
+                      <td class="align-middle">{mainTrips.description}</td>
+                      <td class="align-middle">{mainTrips.country}</td>
+                      <td class="align-middle">
+                        {mainTrips.startDate.slice(0, 10)}
+                      </td>
+                      <td class="align-middle">
+                        {mainTrips.endDate.slice(0, 10)}
+                      </td>
                       <td></td>
                       <td>
                         <ButtonModal
@@ -267,6 +271,7 @@ class MainTrip extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.title}
                         id="title"
+                        required
                       />
                       <input
                         type="text"

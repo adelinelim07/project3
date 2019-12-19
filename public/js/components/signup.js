@@ -140,7 +140,11 @@ class Signup extends React.Component {
                 />
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style={{ marginLeft: 14 }}
+            >
               Sign Up!
             </button>
           </form>
