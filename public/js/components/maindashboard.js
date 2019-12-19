@@ -146,6 +146,7 @@ class MainTrip extends React.Component {
             toggleView={this.toggleView}
             trip={this.state._id}
             tripTitle={this.state.title}
+            logout={this.props.logout}
           />
         )}
         {this.state.showDashboard && (
@@ -157,21 +158,7 @@ class MainTrip extends React.Component {
                 href="../../css/dashboard-style.css"
               />
             </head>
-            <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-              <header class="masthead mb-auto">
-                <div class="inner">
-                  <h3 class="masthead-brand">TRAVEL LAH!</h3>
-                  <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="#">
-                      Home
-                    </a>
-                    <Link class="nav-link" to="/" onClick={this.props.logout}>
-                      <a>LOG OUT</a>
-                    </Link>
-                  </nav>
-                </div>
-              </header>
-            </div>
+            <MastHead logout={this.props.logout}/>
 
             <h1>My Trips</h1>
             <button
