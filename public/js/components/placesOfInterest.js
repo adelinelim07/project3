@@ -19,7 +19,7 @@ class PlacesOfInterest extends React.Component {
       <div>
         <div class="row">
           <div class="col-sm-3 py-2">
-            <div class="card text-center h-100">
+            <div class="card border-0 text-center h-100">
               <button
                 type="button"
                 class="btn btn-primary h-100"
@@ -45,7 +45,7 @@ class PlacesOfInterest extends React.Component {
                 .map((ideaCard, index) => {
                   return (
                     <div class="col-sm-3 py-2">
-                      <div class="card h-100">
+                      <div class="card border-0 h-100">
                         <button
                           type="button"
                           class="btn bg-transparent h-100"
