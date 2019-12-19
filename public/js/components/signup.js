@@ -140,11 +140,9 @@ class Signup extends React.Component {
                 />
               </div>
             </div>
-            {/* <Link to="/"> */}
             <button type="submit" class="btn btn-primary">
               Sign Up!
             </button>
-            {/* </Link> */}
           </form>
         </div>
       </React.Fragment>

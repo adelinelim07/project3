@@ -158,7 +158,7 @@ class MainTrip extends React.Component {
                 href="../../css/dashboard-style.css"
               />
             </head>
-            <MastHead logout={this.props.logout}/>
+            <MastHead logout={this.props.logout} />
 
             <h1>My Trips</h1>
             <button
@@ -167,11 +167,11 @@ class MainTrip extends React.Component {
               data-toggle="modal"
               data-target="#newTripModal"
               onClick={this.clearState}
+              id="newTripButton"
             >
               Add New Trip
             </button>
-
-            <table class="table table-striped">
+            <table class="table table-striped table-dark">
               <thead>
                 <tr>
                   <th scope="col">Trip Title</th>
@@ -191,6 +191,10 @@ class MainTrip extends React.Component {
                         {" "}
                         <button
                           class="bg-transparent border-0"
+                          style={{
+                            color: "white",
+                            textDecorationLine: "underline"
+                          }}
                           onClick={() =>
                             this.toggleView(mainTrips._id, mainTrips.title)
                           }
@@ -243,6 +247,7 @@ class MainTrip extends React.Component {
                     <h5 class="modal-title" id="exampleModalLabel">
                       Add New Trip
                     </h5>
+
                     <button
                       type="button"
                       class="close"
@@ -252,6 +257,7 @@ class MainTrip extends React.Component {
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+
                   <form onSubmit={this.handleSubmit}>
                     <div class="modal-body form-group">
                       <input
