@@ -7,7 +7,7 @@ class MainTrip extends React.Component {
       title: "",
       description: "",
       country: "",
-      image: "",
+      // image: "",
       startDate: "",
       endDate: "",
       _id: "",
@@ -66,7 +66,7 @@ class MainTrip extends React.Component {
         title: this.state.title,
         description: this.state.description,
         country: this.state.country,
-        image: this.state.image,
+        // image: this.state.image,
         startDate: this.state.startDate,
         endDate: this.state.endDate
       }),
@@ -94,7 +94,7 @@ class MainTrip extends React.Component {
       title: "",
       description: "",
       country: "",
-      image: "",
+      // image: "",
       startDate: "",
       endDate: ""
     });
@@ -107,7 +107,7 @@ class MainTrip extends React.Component {
         title: this.state.title,
         description: this.state.description,
         country: this.state.country,
-        image: this.state.image,
+        // image: this.state.image,
         startDate: this.state.startDate,
         endDate: this.state.endDate,
         userId: this.props.currentUserId
@@ -128,7 +128,7 @@ class MainTrip extends React.Component {
           title: "",
           description: "",
           country: "",
-          image: "",
+          // image: "",
           startDate: "",
           endDate: "",
           mainTrips: [...this.state.mainTrips, jsonedMainTrip]
@@ -289,14 +289,14 @@ class MainTrip extends React.Component {
                         value={this.state.country}
                         id="country"
                       />
-                      <input
+                      {/* <input
                         type="text"
                         class="form-control"
                         placeholder="Image URL"
                         onChange={this.handleChange}
                         value={this.state.image}
                         id="image"
-                      />
+                      /> */}
                       <input
                         type="date"
                         class="form-control"
