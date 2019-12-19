@@ -34,7 +34,6 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        {/* <div style={{ height: "100vh", width: "100vw" }}> */}
         <div>
           <Switch>
             <Route exact path="/">
@@ -53,14 +52,8 @@ class App extends React.Component {
             <Route path="/signup">
               <Signup />
             </Route>
-            <Route path="/itinerary">
-              <Itinerary />
-            </Route>
           </Switch>
         </div>
-
-        {/* <Trip/> */}
-        {/* </div> */}
       </BrowserRouter>
     );
   }

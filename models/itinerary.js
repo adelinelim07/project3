@@ -1,22 +1,35 @@
 const mongoose = require("mongoose");
 
 const itinerarySchema = new mongoose.Schema({
-  trip: { type: Schema.Types.ObjectId, ref: "TripCards" },
-  ideaCard: { type: Schema.Types.ObjectId, ref: "IdeaCards" }
+  tripID: String,
+  trip: [{ day: Number, ideas: [String] }],
+  ideaPool: []
 });
 
 const Itineraries = mongoose.model("itinerary", itinerarySchema);
 
 module.exports = Itineraries;
 
-// {"_id":"5df3c4bec82e88055a170624",
-// "comments":[""],
-// "title":"IDEA",
+// LET TRIP =
+// {"_id":"5df8807f23d0e20cccfc5dff",
+// "title":"Titanic Voyage",
 // "description":"",
+// "country":"",
+// "image":"",
+// "startDate":null,
+// "endDate":null,
+// "__v":0}
+
+// LET IDEA_CARD =
+// {"_id":"5df8bbef4495283f30a4d9df",
+// "comments":[""],
+// "title":"Accom1",
+// "description":"desc123",
 // "location":"",
 // "image":"",
 // "url":"",
-// "contact":123456,
-// "category":"Transport",
-// "likeClicks":0,
+// "contact":null,
+// "category":"Accommodation",
+// "likeClicks":5,
+// "trip":"5df8807f23d0e20cccfc5dff",
 // "__v":0}
