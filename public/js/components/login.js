@@ -1,3 +1,27 @@
+class Home extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <head>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../css/login-style.css"
+          />
+        </head>
+
+        <h1>TRAVEL LAH!</h1>
+        <p>
+          A platform for travel khakis <br></br>to plan trips together :)
+        </p>
+        <button class="enterButton" onClick={() => this.props.toggleView()}>
+          ENTER
+        </button>
+      </React.Fragment>
+    );
+  }
+}
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -71,17 +95,7 @@ class Login extends React.Component {
           />
         </head>
 
-        {this.state.mainPageView && (
-          <div>
-            <h1>TRAVEL LAH!</h1>
-            <p>
-              A platform for travel khakis <br></br>to plan trips together :)
-            </p>
-            <button class="enterButton" onClick={() => this.toggleView()}>
-              ENTER
-            </button>
-          </div>
-        )}
+        {this.state.mainPageView && <Home toggleView={this.toggleView}/>}
 
         {this.state.loginView && (
           <div id="loginBox" class="text-center">

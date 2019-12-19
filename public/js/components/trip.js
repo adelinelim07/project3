@@ -4,18 +4,8 @@ class Trip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      description: "",
-      location: "",
-      image: "",
-      url: "",
-      comments: [""],
-      contact: "",
-      category: "",
-      likeClicks: 0,
       trip: this.props.trip,
       tripTitle: this.props.tripTitle,
-      // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
       ideaCards: []
     };
   }
@@ -93,58 +83,9 @@ class Trip extends React.Component {
     })
     .then(responseJson => this.dataRefresh())
   };
-
+  
   componentDidMount = () => {
     this.dataRefresh();
-  };
-
-  handleChange = event => {
-    this.setState({ [event.target.id]: event.target.value });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    fetch("/ideaCard", {
-      body: JSON.stringify({
-        title: this.state.title,
-        description: this.state.description,
-        location: this.state.location,
-        image: this.state.image,
-        url: this.state.url,
-        comments: this.state.comments,
-        contact: this.state.contact,
-        category: this.state.category,
-        likeClicks: 0,
-        trip: this.state.trip
-      }),
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(createdIdeaCard => {
-        console.log(createdIdeaCard);
-        return createdIdeaCard.json();
-      })
-      .then(jsonedIdeaCard => {
-        console.log(jsonedIdeaCard);
-        // reset the form
-        this.setState({
-          title: "",
-          description: "",
-          location: "",
-          image: "",
-          url: "",
-          comments: [""],
-          contact: 123456,
-          category: "",
-          // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
-          ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
-        });
-        console.log(this.state);
-      })
-      .catch(error => console.log(error));
   };
 
   render() {
@@ -230,6 +171,7 @@ class Trip extends React.Component {
                 addComments={this.addComments}
                 deleteIdeaCard={this.deleteIdeaCard}
                 incrementLikes={this.incrementLikes}
+                dataRefresh={this.dataRefresh}
               />
             </Route>
             <Route path="/transport">
@@ -249,6 +191,7 @@ class Trip extends React.Component {
                 addComments={this.addComments}
                 deleteIdeaCard={this.deleteIdeaCard}
                 incrementLikes={this.incrementLikes}
+                dataRefresh={this.dataRefresh}
               />
             </Route>
             <Route path="/placesOfInterest">
@@ -268,6 +211,7 @@ class Trip extends React.Component {
                 addComments={this.addComments}
                 deleteIdeaCard={this.deleteIdeaCard}
                 incrementLikes={this.incrementLikes}
+                dataRefresh={this.dataRefresh}
               />
             </Route>
           </Switch>

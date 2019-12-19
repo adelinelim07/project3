@@ -5,7 +5,7 @@ class Accommodation extends React.Component {
             ideaCardClicked: {},
             indexClicked: -1,
             comments: [],
-            // category: "Accommodation"
+            category: "Accommodation"
         }
     }
 
@@ -79,15 +79,10 @@ class Accommodation extends React.Component {
           </div>
   
           <AddModal  
-            title={this.props.title} 
-            description={this.props.description}
-            location={this.props.location}
-            image={this.props.image}
-            url={this.props.url}
-            comments={this.props.comments}
-            handleSubmit = {this.props.handleSubmit}
-            handleChange={this.props.handleChange}
             category={this.state.category}
+            dataRefresh={this.props.dataRefresh}
+            trip={this.props.trip}
+            tripTitle={this.props.tripTitle}
             />
 
            <ShowModal
