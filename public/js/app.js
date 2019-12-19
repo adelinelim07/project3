@@ -26,6 +26,7 @@ class App extends React.Component {
   };
 
   logout = () => {
+    console.log("logging out")
     this.setState({
       currentUser: ""
     });
