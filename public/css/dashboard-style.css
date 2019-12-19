@@ -1,6 +1,16 @@
-/*
- * Globals
- */
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+/*Globals*/
+
+ :root {
+  --white: #ffffff;
+  --black: #0B0C10;
+  --grey: #1F2833;
+  --lightgrey: #C5C6C7;
+  --brightteal: #66FCF1;
+  --teal: #45A29E;
+}
 
 /* Links */
 a,
@@ -58,6 +68,8 @@ body {
 
 .masthead-brand {
   margin-bottom: 0;
+  color: var(--brightteal);
+  font-family: 'Amatic SC', cursive !important;
 }
 
 .nav-masthead .nav-link {
