@@ -23,7 +23,6 @@ mainPlan.delete("/delete/:id", (req, res) => {
 });
 
 mainPlan.post("/", (req, res) => {
-  console.log("posting iti");
   Itineraries.create(req.body, (err, createdPlans) => {
     res.json(createdPlans);
   });
