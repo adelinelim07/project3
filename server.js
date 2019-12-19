@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const session = require("express-session");
+const nodemailer = require('nodemailer');
 const db = mongoose.connection;
 
 // Environment Variables
@@ -31,6 +32,18 @@ app.use(
   })
 );
 
+// app.use(
+//   nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//     user: 'travel.lah.sg@gmail.com',
+//     pass: 'travelLAH'
+//   }
+// })
+// );
+
+
+
 // Routes
 const usersController = require("./controllers/users.js");
 app.use("/users", usersController);
@@ -40,6 +53,9 @@ app.use("/sessions", sessionsController);
 
 const mainTripController = require("./controllers/tripCard.js");
 app.use("/maindashboard", mainTripController);
+
+const planController = require("./controllers/plan.js");
+app.use("/itinerary", planController);
 //test route
 app.get("/", (req, res) => {
   res.send("Hello World");

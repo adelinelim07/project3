@@ -26,7 +26,9 @@ class ShowModal extends React.Component {
     if(this.props.ideaCard !== prevProps.ideaCard) {
       this.setState({
         ideaCard: this.props.ideaCard,
-        comments: this.props.comments
+        comments: this.props.comments,
+        likeClicks: this.props.likeClicks,
+        likeClickState: false,
       })
     }
   }
@@ -86,6 +88,7 @@ class ShowModal extends React.Component {
                         <i class="material-icons md-18">favorite_border</i>}
                       </button>
                     </td>
+                    <td>{this.state.likeClicks}</td>
                   </tr>
                 </table>
               <button
