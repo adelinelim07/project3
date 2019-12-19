@@ -55,63 +55,68 @@ class Signup extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="firstName"
-              // aria-describedby="emailHelp"
-              placeholder="First Name"
-              onChange={this.handleChange}
-            />
-            <label for="lastName">Last Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="lastName"
-              // aria-describedby="emailHelp"
-              placeholder="Last Name"
-              onChange={this.handleChange}
-            />
-            <label for="email">Email</label>
-            <input
-              type="text"
-              class="form-control"
-              name="email"
-              // aria-describedby="emailHelp"
-              placeholder="Email"
-              onChange={this.handleChange}
-            />
-            <label for="username">Username</label>
-            <input
-              type="text"
-              class="form-control"
-              name="username"
-              // aria-describedby="emailHelp"
-              placeholder="Username"
-              onChange={this.handleChange}
-            />
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              // aria-describedby="emailHelp"
-              placeholder="Password"
-              onChange={this.handleChange}
-            />
-          </div>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            onclick="location.href='/'"
-          >
-            Sign Up!
-          </button>
-        </form>
+        <head>
+          <link rel="stylesheet" type="text/css" href="../../css/signup.css" />
+        </head>
+        <div>
+          <h1>Sign Up</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="firstName"
+                // aria-describedby="emailHelp"
+                placeholder="First Name"
+                onChange={this.handleChange}
+              />
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="lastName"
+                // aria-describedby="emailHelp"
+                placeholder="Last Name"
+                onChange={this.handleChange}
+              />
+              <label for="email">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                // aria-describedby="emailHelp"
+                placeholder="Email"
+                onChange={this.handleChange}
+              />
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                // aria-describedby="emailHelp"
+                placeholder="Username"
+                onChange={this.handleChange}
+              />
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                // aria-describedby="emailHelp"
+                placeholder="Password"
+                onChange={this.handleChange}
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              onclick="location.href='/'"
+            >
+              Sign Up!
+            </button>
+          </form>
+        </div>
       </React.Fragment>
     );
   }
