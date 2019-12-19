@@ -95,7 +95,7 @@ class Login extends React.Component {
           />
         </head>
 
-        {this.state.mainPageView && <Home toggleView={this.toggleView}/>}
+        {this.state.mainPageView && <Home toggleView={this.toggleView} />}
 
         {this.state.loginView && (
           <div id="loginBox" class="text-center">
