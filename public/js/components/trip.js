@@ -6,7 +6,8 @@ class Trip extends React.Component {
     this.state = {
       trip: this.props.trip,
       tripTitle: this.props.tripTitle,
-      ideaCards: []
+      ideaCards: [],
+      logout: false,
     };
   }
 
@@ -89,6 +90,14 @@ class Trip extends React.Component {
     this.dataRefresh();
   };
 
+  triplogout=()=>{
+    this.props.logout()
+    this.setState({
+      logout: true,
+
+    })
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -96,7 +105,7 @@ class Trip extends React.Component {
           <link rel="stylesheet" type="text/css" href="../../css/tripPage.css" />
         </head>
 
-        <MastHead logout={this.props.logout}/>
+        <MastHead logout={this.triplogout}/>
 
         <div class="container">
           <div class="row">
@@ -229,6 +238,9 @@ class Trip extends React.Component {
             </Route>
             <Route exact path="/itinerary">
               <Itinerary _id={this.state.trip} />
+            </Route>
+            <Route exact path="/">
+            { this.state.logout && (window.location.href = "/")}
             </Route>
           </Switch>
       </BrowserRouter>

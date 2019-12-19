@@ -158,7 +158,7 @@ class MainTrip extends React.Component {
                 href="../../css/dashboard-style.css"
               />
             </head>
-            <MastHead logout={this.props.logout}/>
+            <MastHead logout={this.props.logout} />
 
             <h1>My Trips</h1>
             <button
@@ -167,11 +167,11 @@ class MainTrip extends React.Component {
               data-toggle="modal"
               data-target="#newTripModal"
               onClick={this.clearState}
+              id="newTripButton"
             >
               Add New Trip
             </button>
-
-            <table class="table table-striped">
+            <table class="table table-striped table-dark">
               <thead>
                 <tr>
                   <th scope="col">Trip Title</th>
@@ -187,10 +187,14 @@ class MainTrip extends React.Component {
                 {this.state.mainTrips.map((mainTrips, index) => {
                   return (
                     <tr>
-                      <td>
+                      <td class="align-middle">
                         {" "}
                         <button
                           class="bg-transparent border-0"
+                          style={{
+                            color: "white",
+                            textDecorationLine: "underline"
+                          }}
                           onClick={() =>
                             this.toggleView(mainTrips._id, mainTrips.title)
                           }
@@ -198,10 +202,14 @@ class MainTrip extends React.Component {
                           {mainTrips.title}
                         </button>
                       </td>
-                      <td>{mainTrips.description}</td>
-                      <td>{mainTrips.country}</td>
-                      <td>{mainTrips.startDate.slice(0, 10)}</td>
-                      <td>{mainTrips.endDate.slice(0, 10)}</td>
+                      <td class="align-middle">{mainTrips.description}</td>
+                      <td class="align-middle">{mainTrips.country}</td>
+                      <td class="align-middle">
+                        {mainTrips.startDate.slice(0, 10)}
+                      </td>
+                      <td class="align-middle">
+                        {mainTrips.endDate.slice(0, 10)}
+                      </td>
                       <td></td>
                       <td>
                         <ButtonModal
@@ -243,6 +251,7 @@ class MainTrip extends React.Component {
                     <h5 class="modal-title" id="exampleModalLabel">
                       Add New Trip
                     </h5>
+
                     <button
                       type="button"
                       class="close"
@@ -252,6 +261,7 @@ class MainTrip extends React.Component {
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+
                   <form onSubmit={this.handleSubmit}>
                     <div class="modal-body form-group">
                       <input
@@ -261,6 +271,7 @@ class MainTrip extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.title}
                         id="title"
+                        required
                       />
                       <input
                         type="text"

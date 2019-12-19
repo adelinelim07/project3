@@ -50,7 +50,11 @@ class ButtonModal extends React.Component {
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="updateTripModalLabel">
+                <h5
+                  class="modal-title"
+                  id="updateTripModalLabel"
+                  style={{ color: "black" }}
+                >
                   Update Trip
                 </h5>
                 <button
