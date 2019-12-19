@@ -93,6 +93,7 @@ class Signup extends React.Component {
                   // aria-describedby="emailHelp"
                   placeholder="First Name"
                   onChange={this.handleChange}
+                  required
                 />
               </div>
               <div class="form-group">
@@ -104,6 +105,7 @@ class Signup extends React.Component {
                   // aria-describedby="emailHelp"
                   placeholder="Last Name"
                   onChange={this.handleChange}
+                  required
                 />
               </div>
               <div class="form-group">
@@ -126,6 +128,7 @@ class Signup extends React.Component {
                   // aria-describedby="emailHelp"
                   placeholder="Username"
                   onChange={this.handleChange}
+                  required
                 />
               </div>
               <div class="form-group">
@@ -137,6 +140,7 @@ class Signup extends React.Component {
                   // aria-describedby="emailHelp"
                   placeholder="Password"
                   onChange={this.handleChange}
+                  required
                 />
               </div>
             </div>
