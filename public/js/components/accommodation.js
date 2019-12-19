@@ -18,7 +18,7 @@ class Accommodation extends React.Component {
       return (
         <div>
           <div class="row">
-            <div class="col-sm-4 py-2">
+            <div class="col-sm-3 py-2">
               <div class="card text-center h-100">
                 <button
                   type="button"
@@ -41,7 +41,7 @@ class Accommodation extends React.Component {
               .filter(ideaCard => 
                 ideaCard.category.includes("Accommodation") && ideaCard.trip.includes(this.props.trip)).map((ideaCard, index) => {
                   return (
-                    <div class="col-sm-4 py-2">
+                    <div class="col-sm-3 py-2">
                       <div class="card h-100">
                         <button
                           type="button"
