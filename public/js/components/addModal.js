@@ -64,6 +64,7 @@ class AddModal extends React.Component {
       })
       .then(this.props.dataRefresh())
       .catch(error => console.log(error));
+    $("#addModal").modal("hide");
   };
 
   render() {
@@ -142,7 +143,6 @@ class AddModal extends React.Component {
                   onChange={this.handleChange}
                   id="comments"
                 />
-
               </div>
               <div class="modal-footer">
                 <button

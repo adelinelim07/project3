@@ -14,10 +14,14 @@ class MastHead extends React.Component {
             <div class="inner">
               <h3 class="masthead-brand">TRAVEL LAH!</h3>
               <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">
+                {/* <a class="nav-link active" href="#">
                   Home
-                </a>
-                <Link to="/" class="nav-link" onClick={()=>this.props.logout()}>
+                </a> */}
+                <Link
+                  to="/"
+                  class="nav-link active"
+                  onClick={() => this.props.logout()}
+                >
                   <a>LOG OUT</a>
                 </Link>
               </nav>
