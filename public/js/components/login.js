@@ -139,7 +139,7 @@ class Login extends React.Component {
               <Link to="/signup">
                 <a id="signup">Create an account</a>
               </Link>
-              <p class="mt-5 mb-3 text-muted">Travel Organiser &copy; 2019</p>
+              <p class="mt-5 mb-3 text-muted">Travel Lah! &copy; 2019</p>
             </form>
           </div>
         )}

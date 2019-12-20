@@ -1,10 +1,15 @@
+html,
 body {
   /* margin-top: 5%; */
   height: 100%;
   color: white;
   /* background-color: #333; */
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    /* scenery */
+      /* url("https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
+      /* scenery 2 */
+      url("https://images.pexels.com/photos/847483/pexels-photo-847483.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+
   background-position: center;
   background-size: cover;
 }
