@@ -113,6 +113,20 @@ class Itinerary extends React.Component {
     });
   };
 
+  eliminate = () => {
+    let mirror = [...this.state.trip];
+    if (mirror.length != 0) {
+      mirror.splice(this.state.trip.length - 1, 1);
+    }
+    if (
+      this.state.currentDay == this.state.trip.length &&
+      this.state.currentDay != 0
+    ) {
+      this.setState({ currentDay: this.state.currentDay - 1 });
+    }
+    this.setState({ trip: mirror });
+  };
+
   render() {
     return (
       <div class="row">
@@ -145,7 +159,18 @@ class Itinerary extends React.Component {
         </div>
 
         <div class="col-md-9">
-          {/* Insert buttons here that allow CRUD functionality for this pseudotab */}
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-7">
+              <button
+                type="button"
+                className="btn btn-lg btn-block btn-danger"
+                onClick={this.eliminate}
+              >
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </div>
           {this.state.currentDay == 0
             ? this.state.ideaPool.map((idea, index) => {
                 return (
