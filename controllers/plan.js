@@ -2,12 +2,6 @@ const express = require("express");
 const mainPlan = express.Router();
 const Itineraries = require("../models/itinerary.js");
 
-const createPlan = plan => {
-  return Itineraries.create(plan).then(docPlan => {
-    return docPlan;
-  });
-};
-
 mainPlan.get("/:tripID", (req, res) => {
   Itineraries.findOne({ tripID: req.params.tripID.toString() }).then(
     foundPlan => {

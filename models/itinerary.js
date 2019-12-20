@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const itinerarySchema = new mongoose.Schema({
   tripID: String,
-  trip: [{ day: Number, ideas: [String] }],
+  trip: [{ day: Number, ideas: [{}] }],
   ideaPool: [],
   currentDay: Number
 });

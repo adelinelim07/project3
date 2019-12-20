@@ -22,7 +22,8 @@ class Itinerary extends React.Component {
           this.setState({
             _id: fetchedIdeas._id,
             trip: fetchedIdeas.trip,
-            ideaPool: fetchedIdeas.ideaPool
+            ideaPool: fetchedIdeas.ideaPool,
+            currentDay: fetchedIdeas.currentDay
           });
         } else {
           // IF Itinerary DOES NOT exist inside database yet
@@ -62,6 +63,7 @@ class Itinerary extends React.Component {
       }
     })
       .then(createdPlan => {
+        this.fetchData();
         return createdPlan.json();
       })
       .catch(error => console.log(error));
@@ -143,23 +145,33 @@ class Itinerary extends React.Component {
         </div>
 
         <div class="col-md-9">
-          {this.state.ideaPool.length ? (
-            this.state.ideaPool.map((idea, index) => {
-              return (
-                <button
-                  type="button"
-                  className="btn btn-lg btn-block btn-success"
-                >
-                  {idea.title}
-                </button>
-              );
-            })
-          ) : (
-            <button
-              type="button"
-              class="btn btn-lg btn-block btn-danger"
-            ></button>
-          )}
+          {/* Insert buttons here that allow CRUD functionality for this pseudotab */}
+          {this.state.currentDay == 0
+            ? this.state.ideaPool.map((idea, index) => {
+                return (
+                  <button
+                    type="button"
+                    className="btn btn-lg btn-block btn-success"
+                  >
+                    {idea.title}
+                  </button>
+                );
+              })
+            : // this.state.trip[this.state.currentDay - 1].ideas.length?
+              this.state.trip[this.state.currentDay - 1].ideas.map(
+                (idea, index) => {
+                  return (
+                    <button
+                      type="button"
+                      className="btn btn-lg btn-block btn-success"
+                    >
+                      {idea.title}
+                    </button>
+                  );
+                }
+              )
+          // : ""
+          }
         </div>
       </div>
     );
@@ -175,12 +187,6 @@ class DayButton extends React.Component {
     };
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.currentDay !== this.props.currentDay) {
-  //     console.log("current day has changed.");
-  //   }
-  // }
-
   render() {
     return (
       <React.Fragment>
@@ -194,12 +200,6 @@ class DayButton extends React.Component {
           onClick={() => this.props.daySelector(this.props.day)}
         >
           {this.props.content}
-          {/* {console.log(
-            this.state.content,
-            this.state.currentDay,
-            this.state.day,
-            this.state.currentDay == this.state.day ? "primary" : "secondary"
-          )} */}
         </button>
       </React.Fragment>
     );
