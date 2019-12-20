@@ -14,8 +14,10 @@ class ButtonModal extends React.Component {
     this.props.changeState("title", this.props.trip.title);
     this.props.changeState("description", this.props.trip.description);
     this.props.changeState("country", this.props.trip.country);
-    this.props.changeState("image", this.props.trip.image);
+    // this.props.changeState("image", this.props.trip.image);
     this.props.changeState("_id", this.props.trip._id);
+    this.props.changeState("startDate", this.props.trip.startDate);
+    this.props.changeState("endDate", this.props.trip.endDate);
   }
 
   submitUpdatedMainTrip = event => {
@@ -31,7 +33,7 @@ class ButtonModal extends React.Component {
         <button
           onClick={this.updateTrip}
           type="button"
-          class="btn btn-primary"
+          class="bg-transparent border-0 text-white"
           data-toggle="modal"
           data-target={"#modal" + this.props.index}
         >
@@ -50,7 +52,11 @@ class ButtonModal extends React.Component {
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="updateTripModalLabel">
+                <h5
+                  class="modal-title"
+                  id="updateTripModalLabel"
+                  style={{ color: "black" }}
+                >
                   Update Trip
                 </h5>
                 <button
@@ -89,13 +95,29 @@ class ButtonModal extends React.Component {
                     id="country"
                   />
                   <input
+                    type="date"
+                    class="form-control"
+                    defaultValue={this.props.trip.startDate}
+                    onChange={this.changeInput}
+                    placeholder="Start Date"
+                    id="startDate"
+                  />
+                  <input
+                    type="date"
+                    class="form-control"
+                    defaultValue={this.props.trip.endDate}
+                    onChange={this.changeInput}
+                    placeholder="End Date"
+                    id="endDate"
+                  />
+                  {/* <input
                     type="text"
                     class="form-control"
                     defaultValue={this.props.trip.image}
                     onChange={this.changeInput}
                     placeholder="Image URL"
                     id="image"
-                  />
+                  /> */}
                 </div>
                 <div class="modal-footer">
                   <button

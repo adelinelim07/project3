@@ -117,6 +117,6 @@ This should bring you to the landing page.
 
 ## Acknowledgments
 
-- Thank you to our Team [Norman](https://github.com/norman87) and [Farhan](https://github.com/Hantasmagoria) for collaborating on this project.
+- Thank you to our Team [Adeline](https://github.com/adelinelim07), [Norman](https://github.com/norman87) and [Farhan](https://github.com/Hantasmagoria) for collaborating on this project.
 - Thank you to Herda, Henry and Bryan for helping us out when we had bugs we could not fix.
 - etc

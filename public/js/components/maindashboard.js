@@ -7,7 +7,7 @@ class MainTrip extends React.Component {
       title: "",
       description: "",
       country: "",
-      image: "",
+      // image: "",
       startDate: "",
       endDate: "",
       _id: "",
@@ -66,7 +66,7 @@ class MainTrip extends React.Component {
         title: this.state.title,
         description: this.state.description,
         country: this.state.country,
-        image: this.state.image,
+        // image: this.state.image,
         startDate: this.state.startDate,
         endDate: this.state.endDate
       }),
@@ -94,7 +94,7 @@ class MainTrip extends React.Component {
       title: "",
       description: "",
       country: "",
-      image: "",
+      // image: "",
       startDate: "",
       endDate: ""
     });
@@ -102,12 +102,13 @@ class MainTrip extends React.Component {
   //create new tripData entry
   handleSubmit = event => {
     event.preventDefault();
+
     fetch("/maindashboard", {
       body: JSON.stringify({
         title: this.state.title,
         description: this.state.description,
         country: this.state.country,
-        image: this.state.image,
+        // image: this.state.image,
         startDate: this.state.startDate,
         endDate: this.state.endDate,
         userId: this.props.currentUserId
@@ -128,7 +129,7 @@ class MainTrip extends React.Component {
           title: "",
           description: "",
           country: "",
-          image: "",
+          // image: "",
           startDate: "",
           endDate: "",
           mainTrips: [...this.state.mainTrips, jsonedMainTrip]
@@ -136,6 +137,7 @@ class MainTrip extends React.Component {
         console.log(jsonedMainTrip);
       })
       .catch(error => console.log(error));
+    $("#newTripModal").modal("hide");
   };
 
   render() {
@@ -146,10 +148,20 @@ class MainTrip extends React.Component {
             toggleView={this.toggleView}
             trip={this.state._id}
             tripTitle={this.state.title}
+            logout={this.props.logout}
           />
         )}
         {this.state.showDashboard && (
-          <div>
+          <React.Fragment>
+            <head>
+              <link
+                rel="stylesheet"
+                type="text/css"
+                href="../../css/dashboard-style.css"
+              />
+            </head>
+            <MastHead logout={this.props.logout} />
+
             <h1>My Trips</h1>
             <button
               type="button"
@@ -157,16 +169,11 @@ class MainTrip extends React.Component {
               data-toggle="modal"
               data-target="#newTripModal"
               onClick={this.clearState}
+              id="newTripButton"
             >
               Add New Trip
             </button>
-            <Link to="/" onClick={this.props.logout}>
-              <button type="button" class="btn btn-primary">
-                Log Out
-              </button>
-            </Link>
-
-            <table class="table table-striped">
+            <table class="table table-striped table-dark table-hover table-borderless">
               <thead>
                 <tr>
                   <th scope="col">Trip Title</th>
@@ -182,10 +189,14 @@ class MainTrip extends React.Component {
                 {this.state.mainTrips.map((mainTrips, index) => {
                   return (
                     <tr>
-                      <td>
+                      <td class="align-middle">
                         {" "}
                         <button
                           class="bg-transparent border-0"
+                          style={{
+                            color: "white",
+                            textDecorationLine: "underline"
+                          }}
                           onClick={() =>
                             this.toggleView(mainTrips._id, mainTrips.title)
                           }
@@ -193,10 +204,14 @@ class MainTrip extends React.Component {
                           {mainTrips.title}
                         </button>
                       </td>
-                      <td>{mainTrips.description}</td>
-                      <td>{mainTrips.country}</td>
-                      <td>{mainTrips.startDate}</td>
-                      <td>{mainTrips.endDate}</td>
+                      <td class="align-middle">{mainTrips.description}</td>
+                      <td class="align-middle">{mainTrips.country}</td>
+                      <td class="align-middle">
+                        {mainTrips.startDate.slice(0, 10)}
+                      </td>
+                      <td class="align-middle">
+                        {mainTrips.endDate.slice(0, 10)}
+                      </td>
                       <td></td>
                       <td>
                         <ButtonModal
@@ -209,7 +224,7 @@ class MainTrip extends React.Component {
                       </td>
                       <td>
                         <button
-                          class="btn btn-danger"
+                          class="bg-transparent border-0 text-white"
                           onClick={() =>
                             this.deleteMainTrip(mainTrips._id, index)
                           }
@@ -224,6 +239,7 @@ class MainTrip extends React.Component {
             </table>
 
             {/* NEW TRIP MODAL */}
+
             <div
               class="modal fade"
               id="newTripModal"
@@ -238,6 +254,7 @@ class MainTrip extends React.Component {
                     <h5 class="modal-title" id="exampleModalLabel">
                       Add New Trip
                     </h5>
+
                     <button
                       type="button"
                       class="close"
@@ -247,6 +264,7 @@ class MainTrip extends React.Component {
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+
                   <form onSubmit={this.handleSubmit}>
                     <div class="modal-body form-group">
                       <input
@@ -256,6 +274,7 @@ class MainTrip extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.title}
                         id="title"
+                        required
                       />
                       <input
                         type="text"
@@ -273,14 +292,14 @@ class MainTrip extends React.Component {
                         value={this.state.country}
                         id="country"
                       />
-                      <input
+                      {/* <input
                         type="text"
                         class="form-control"
                         placeholder="Image URL"
                         onChange={this.handleChange}
                         value={this.state.image}
                         id="image"
-                      />
+                      /> */}
                       <input
                         type="date"
                         class="form-control"
@@ -288,6 +307,7 @@ class MainTrip extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.startDate}
                         id="startDate"
+                        required
                       />
                       <input
                         type="date"
@@ -296,6 +316,7 @@ class MainTrip extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.endDate}
                         id="endDate"
+                        required
                       />
                     </div>
                     <div class="modal-footer">
@@ -314,7 +335,7 @@ class MainTrip extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
+          </React.Fragment>
         )}
       </React.Fragment>
     );

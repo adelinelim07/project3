@@ -4,19 +4,10 @@ class Trip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      description: "",
-      location: "",
-      image: "",
-      url: "",
-      comments: [""],
-      contact: "",
-      category: "",
-      likeClicks: 0,
       trip: this.props.trip,
       tripTitle: this.props.tripTitle,
-      // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
-      ideaCards: []
+      ideaCards: [],
+      logout: false,
     };
   }
 
@@ -29,7 +20,7 @@ class Trip extends React.Component {
     console.log("Data Refreshed");
   };
 
-  incrementLikes=(ideaCard)=> {
+  incrementLikes = ideaCard => {
     fetch("ideaCard/" + ideaCard._id, {
       body: JSON.stringify({
         title: ideaCard.title,
@@ -40,7 +31,7 @@ class Trip extends React.Component {
         comments: ideaCard.comments,
         contact: ideaCard.contact,
         category: ideaCard.category,
-        likeClicks: ideaCard.likeClicks +1
+        likeClicks: ideaCard.likeClicks + 1
       }),
       method: "PUT",
       headers: {
@@ -83,92 +74,49 @@ class Trip extends React.Component {
   deleteIdeaCard = (id, index) => {
     fetch("ideaCard/" + id, {
       method: "DELETE"
-    }).then(data => {
-      this.setState({
-        ideaCards: [
-          ...this.state.ideaCards.slice(0, index),
-          ...this.state.ideaCards.slice(index + 1)
-        ]
-      });
     })
-    .then(responseJson => this.dataRefresh())
+      .then(data => {
+        this.setState({
+          ideaCards: [
+            ...this.state.ideaCards.slice(0, index),
+            ...this.state.ideaCards.slice(index + 1)
+          ]
+        });
+      })
+      .then(responseJson => this.dataRefresh());
   };
-
+  
   componentDidMount = () => {
     this.dataRefresh();
   };
 
-  handleChange = event => {
-    this.setState({ [event.target.id]: event.target.value });
-  };
+  triplogout=()=>{
+    this.props.logout()
+    this.setState({
+      logout: true,
 
-  handleSubmit = event => {
-    event.preventDefault();
-    fetch("/ideaCard", {
-      body: JSON.stringify({
-        title: this.state.title,
-        description: this.state.description,
-        location: this.state.location,
-        image: this.state.image,
-        url: this.state.url,
-        comments: this.state.comments,
-        contact: this.state.contact,
-        category: this.state.category,
-        likeClicks: 0,
-        trip: this.state.trip
-      }),
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json"
-      }
     })
-      .then(createdIdeaCard => {
-        console.log(createdIdeaCard);
-        return createdIdeaCard.json();
-      })
-      .then(jsonedIdeaCard => {
-        console.log(jsonedIdeaCard);
-        // reset the form
-        this.setState({
-          title: "",
-          description: "",
-          location: "",
-          image: "",
-          url: "",
-          comments: [""],
-          contact: 123456,
-          category: "",
-          // trip: { type: Schema.Types.ObjectId, ref:"TripCards" },
-          ideaCards: [jsonedIdeaCard, ...this.state.ideaCards]
-        });
-        console.log(this.state);
-      })
-      .catch(error => console.log(error));
-  };
+  }
 
   render() {
     return (
       <BrowserRouter>
         <head>
-          <link rel="stylesheet" type="text/css" href="../../css/navbar.css" />
+          <link rel="stylesheet" type="text/css" href="../../css/tripPage.css" />
         </head>
-        <div class="container">
-          <div class="row">
-            <div class="col-8">
+
+        <MastHead logout={this.triplogout}/>
+
               <h1>{this.state.tripTitle}</h1>
-            </div>
-            <div class="col-md-auto">
+
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-primary"
                 onClick={() => this.props.toggleView()}
               >
                 Return to trips dashboard
               </button>
-            </div>
-          </div>
-        </div>
+
         <div id="cssmenu">
           <ul>
             <li>
@@ -207,6 +155,15 @@ class Trip extends React.Component {
                 </Link>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <Link to="/itinerary">
+                  <i class="material-icons">map</i>
+                  <br></br>
+                  <span></span>Itinerary
+                </Link>
+              </a>
+            </li>
           </ul>
           </div>
           <Switch>
@@ -230,6 +187,7 @@ class Trip extends React.Component {
                 addComments={this.addComments}
                 deleteIdeaCard={this.deleteIdeaCard}
                 incrementLikes={this.incrementLikes}
+                dataRefresh={this.dataRefresh}
               />
             </Route>
             <Route path="/transport">
@@ -249,6 +207,7 @@ class Trip extends React.Component {
                 addComments={this.addComments}
                 deleteIdeaCard={this.deleteIdeaCard}
                 incrementLikes={this.incrementLikes}
+                dataRefresh={this.dataRefresh}
               />
             </Route>
             <Route path="/placesOfInterest">
@@ -268,7 +227,14 @@ class Trip extends React.Component {
                 addComments={this.addComments}
                 deleteIdeaCard={this.deleteIdeaCard}
                 incrementLikes={this.incrementLikes}
+                dataRefresh={this.dataRefresh}
               />
+            </Route>
+            <Route exact path="/itinerary">
+              <Itinerary _id={this.state.trip} />
+            </Route>
+            <Route exact path="/">
+            { this.state.logout && (window.location.href = "/")}
             </Route>
           </Switch>
       </BrowserRouter>
