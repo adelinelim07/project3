@@ -81,7 +81,7 @@ class Signup extends React.Component {
               </div>
             </header>
           </div>
-          <h1>Sign Up</h1>
+          <h1 style={{ marginLeft: 14 }}>Sign Up</h1>
           <form onSubmit={this.handleSubmit}>
             <div class="form-group col-md-4">
               <div class="form-group">
@@ -147,7 +147,7 @@ class Signup extends React.Component {
             <button
               type="submit"
               class="btn btn-primary"
-              style={{ marginLeft: 14 }}
+              style={{ marginLeft: 15, marginTop: 12 }}
             >
               Sign Up!
             </button>
