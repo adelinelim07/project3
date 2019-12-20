@@ -47,7 +47,7 @@ body {
 #cssmenu ul,
 #cssmenu ul li,
 #cssmenu ul li a {
-  color: grey;
+  color: var(--lightgrey);
   margin: 0;
   padding: 0;
   border: 0;
@@ -139,4 +139,5 @@ body {
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after {
   background: var(--brightteal);
+  color: var(--black) !important;
 }
