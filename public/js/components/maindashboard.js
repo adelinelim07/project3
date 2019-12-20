@@ -102,6 +102,7 @@ class MainTrip extends React.Component {
   //create new tripData entry
   handleSubmit = event => {
     event.preventDefault();
+
     fetch("/maindashboard", {
       body: JSON.stringify({
         title: this.state.title,
@@ -136,6 +137,7 @@ class MainTrip extends React.Component {
         console.log(jsonedMainTrip);
       })
       .catch(error => console.log(error));
+    $("#newTripModal").modal("hide");
   };
 
   render() {
@@ -237,6 +239,7 @@ class MainTrip extends React.Component {
             </table>
 
             {/* NEW TRIP MODAL */}
+
             <div
               class="modal fade"
               id="newTripModal"
