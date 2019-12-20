@@ -173,7 +173,7 @@ class MainTrip extends React.Component {
             >
               Add New Trip
             </button>
-            <table class="table table-striped table-dark">
+            <table class="table table-striped table-dark table-hover table-borderless">
               <thead>
                 <tr>
                   <th scope="col">Trip Title</th>
