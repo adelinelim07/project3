@@ -33,7 +33,7 @@ class ButtonModal extends React.Component {
         <button
           onClick={this.updateTrip}
           type="button"
-          class="btn btn-primary"
+          class="bg-transparent border-0 text-white"
           data-toggle="modal"
           data-target={"#modal" + this.props.index}
         >
