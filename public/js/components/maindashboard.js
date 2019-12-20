@@ -224,7 +224,7 @@ class MainTrip extends React.Component {
                       </td>
                       <td>
                         <button
-                          class="btn btn-danger"
+                          class="bg-transparent border-0"
                           onClick={() =>
                             this.deleteMainTrip(mainTrips._id, index)
                           }
