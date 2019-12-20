@@ -107,22 +107,16 @@ class Trip extends React.Component {
 
         <MastHead logout={this.triplogout}/>
 
-        <div class="container">
-          <div class="row">
-            <div class="col-8">
               <h1>{this.state.tripTitle}</h1>
-            </div>
-            <div class="col-md-auto">
+
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-primary"
                 onClick={() => this.props.toggleView()}
               >
                 Return to trips dashboard
               </button>
-            </div>
-          </div>
-        </div>
+
         <div id="cssmenu">
           <ul>
             <li>
