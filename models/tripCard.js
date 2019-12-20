@@ -5,7 +5,7 @@ const tripCardSchema = new mongoose.Schema({
   title: String,
   description: String,
   country: String,
-  image: String,
+  // image: String,
   startDate: Date,
   endDate: Date,
   userId: { type: Schema.Types.ObjectID, ref: "user" }
