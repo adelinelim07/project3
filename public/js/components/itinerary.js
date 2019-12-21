@@ -6,7 +6,8 @@ class Itinerary extends React.Component {
       tripID: this.props._id,
       trip: [{ day: 1, ideas: [] }],
       ideaPool: [],
-      currentDay: 0
+      currentDay: 0,
+      selectedIdea: undefined
     };
   }
 
@@ -36,7 +37,6 @@ class Itinerary extends React.Component {
   };
 
   reloadIdeaPool = async () => {
-    // console.log("fetching ideas");
     return fetch("/ideaCard/filter/" + this.state.tripID)
       .then(response => {
         return response.json();
@@ -83,7 +83,6 @@ class Itinerary extends React.Component {
       }
     })
       .then(createdPlan => {
-        // console.log(createdPlan);
         return createdPlan.json();
       })
       .catch(error => console.log(error));
@@ -127,6 +126,23 @@ class Itinerary extends React.Component {
     this.setState({ trip: mirror });
   };
 
+  toDay = (day, operation, idea) => {
+    let tempDay = this.state.currentDay;
+    this.daySelector(0);
+    $("#ITModal").modal("hide");
+    fetch("/").then(() => {
+      if (!operation) {
+        let mirror = [...this.state.trip];
+        mirror[day].ideas.push(this.state.ideaPool[idea]);
+        this.setState({ trip: mirror });
+      } else {
+        let mirror = [...this.state.trip];
+        mirror[tempDay - 1].ideas.splice(idea, 1);
+        this.setState({ trip: mirror });
+      }
+    });
+  };
+
   render() {
     return (
       <div class="row">
@@ -168,6 +184,7 @@ class Itinerary extends React.Component {
                 onClick={this.eliminate}
               >
                 <i class="material-icons">delete</i>
+                <p class="card-text">Click to remove a day</p>
               </button>
             </div>
           </div>
@@ -177,27 +194,50 @@ class Itinerary extends React.Component {
                   <button
                     type="button"
                     className="btn btn-lg btn-block btn-success"
+                    data-toggle="modal"
+                    data-target="#ITModal"
+                    onClick={() => {
+                      this.setState({
+                        selectedIdea: index
+                      });
+                    }}
                   >
                     {idea.title}
                   </button>
                 );
               })
-            : // this.state.trip[this.state.currentDay - 1].ideas.length?
-              this.state.trip[this.state.currentDay - 1].ideas.map(
+            : this.state.trip[this.state.currentDay - 1].ideas.map(
                 (idea, index) => {
                   return (
                     <button
                       type="button"
                       className="btn btn-lg btn-block btn-success"
+                      data-toggle="modal"
+                      data-target="#ITModal"
+                      onClick={() => {
+                        this.setState({
+                          selectedIdea: index
+                        });
+                      }}
                     >
                       {idea.title}
                     </button>
                   );
                 }
-              )
-          // : ""
-          }
+              )}
         </div>
+        <ITModal
+          ideaList={
+            this.state.currentDay == 0
+              ? this.state.ideaPool
+              : this.state.trip[this.state.currentDay - 1].ideas
+          }
+          currentDay={this.state.currentDay}
+          trip={this.state.trip}
+          selectedIdea={this.state.selectedIdea}
+          alterationSpell={this.alterationSpell}
+          toDay={this.toDay}
+        />
       </div>
     );
   }
@@ -227,6 +267,120 @@ class DayButton extends React.Component {
           {this.props.content}
         </button>
       </React.Fragment>
+    );
+  }
+}
+
+class ITModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ideaList: this.props.ideaList,
+      currentDay: this.props.currentDay,
+      trip: this.props.trip,
+      selectedIdea: this.props.selectedIdea,
+      selectedDay: 0,
+      tempIdea: undefined
+    };
+  }
+
+  handleChange = event => {
+    this.setState({ selectedDay: parseInt(event.target.value) });
+  };
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.ideaList == [] &&
+      prevProps.ideaList !== this.props.ideaList
+    ) {
+      this.setState({
+        ideaList: this.props.ideaList
+      });
+    }
+    if (
+      prevProps.ideaList !== this.props.ideaList &&
+      this.props.ideaList !== []
+    ) {
+      this.setState({ ideaList: this.props.ideaList });
+    }
+    if (prevProps.currentDay !== this.props.currentDay) {
+      this.setState({ currentDay: this.props.currentDay });
+    }
+    if (prevProps.trip !== this.props.trip) {
+      this.setState({ trip: this.props.trip });
+    }
+    if (prevProps.selectedIdea !== this.props.selectedIdea) {
+      this.setState({ selectedIdea: this.props.selectedIdea });
+    }
+  }
+
+  toDay = () => {
+    this.props.toDay(
+      this.state.selectedDay,
+      this.state.currentDay ? true : false,
+      this.state.ideaList.indexOf(this.state.ideaList[this.state.selectedIdea])
+    );
+    this.props.alterationSpell();
+  };
+
+  render() {
+    return (
+      <div
+        class="modal fade"
+        id="ITModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="ITModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ITModalLabel">
+                Details for "
+                {this.state.selectedIdea != undefined
+                  ? this.state.ideaList[this.state.selectedIdea].title || //DEBUG
+                    undefined
+                  : "Placeholder"}
+                "
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <button
+              type="button"
+              className={
+                this.state.currentDay
+                  ? "btn btn-lg btn-block btn-danger"
+                  : "btn btn-lg btn-block btn-warning"
+              }
+              onClick={this.toDay}
+            >
+              <i class="material-icons">
+                {this.state.currentDay ? "label_off" : "label"}
+              </i>
+            </button>
+            {this.state.currentDay ? (
+              undefined
+            ) : (
+              <select
+                value={this.state.selectedDay}
+                onChange={this.handleChange}
+              >
+                {this.state.trip.map((day, index) => {
+                  return <option value={index}>Day {day.day}</option>;
+                })}
+              </select>
+            )}
+          </div>
+        </div>
+      </div>
     );
   }
 }

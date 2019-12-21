@@ -1,6 +1,6 @@
-# Project 3 (PLACEHOLDER: The Best Travel Organiser App)
+# Project 3 (Travel Lah!: The Best Travel Organiser App)
 
-> (PLACEHOLDER: Project Name) is an app we came up with for (PLACEHOLDER: Project Description)
+> Travel Lah! is an app we came up with to act as a platform for travel enthusiasts to efficiently plan trips together.
 
 Team Members: Adeline, Farhan, Norman
 
@@ -27,7 +27,13 @@ Team Members: Adeline, Farhan, Norman
 
 ## Built With
 
-(PLACEHOLDER: [shields/badges](https://shields.io/) or any dependencies, and then technologies used.)
+![node](https://img.shields.io/npm/v/npm)
+![node](https://img.shields.io/node/v/passport?label=node.passport)
+![node](https://img.shields.io/node/v/mongoose?label=mongoose)
+![node](https://img.shields.io/node/v/bcrypt?label=bcrypt)
+![node](https://img.shields.io/node/v/react?label=reactjs)
+
+<!-- (PLACEHOLDER: [shields/badges](https://shields.io/) or any dependencies, and then technologies used.) -->
 
 <!---
 * [ReactJS](http://rubyonrails.org/) - The front-end used
@@ -47,7 +53,7 @@ you will need the following to run this app
 
 ```
 - NodeJS
-- ...
+- MongoDB
 ```
 
 download/clone the repo by accessing your CLI and entering the following
