@@ -337,12 +337,7 @@ class ITModal extends React.Component {
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="ITModalLabel">
-                Details for "
-                {this.state.selectedIdea != undefined
-                  ? this.state.ideaList[this.state.selectedIdea].title || //DEBUG
-                    undefined
-                  : "Placeholder"}
-                "
+                Details
               </h5>
               <button
                 type="button"
